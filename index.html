@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dimension Cleaning</title>
+    <!-- Import Montserrat font for consistent branding -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Hero section -->
+    <header class="hero">
+        <div class="hero-inner">
+            <img src="images/dc_logo_full.png" alt="Dimension Cleaning logo" class="logo">
+            <div class="tagline">ONE SUPPLIER FOR ALL YOUR CLEANING NEEDS</div>
+            <h1>DIMENSION CLEANING</h1>
+            <div class="hero-sub">INTERIOR • EXTERIOR • SPECIALIST</div>
+            <a href="#contact" class="btn">BOOK YOUR QUOTE</a>
+            <!-- Gallery of service imagery aligned with flyer design -->
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="images/interior.jpg" alt="Interior cleaning example">
+                    <span>INTERIOR</span>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/exterior.jpg" alt="Exterior cleaning example">
+                    <span>EXTERIOR</span>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/specialist.jpg" alt="Specialist cleaning example">
+                    <span>SPECIALIST</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Services section -->
+    <section class="services">
+        <h2>OUR SERVICES</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <img src="images/interior.jpg" alt="Interior cleaning" class="service-img">
+                <ul>
+                    <li>OFFICES</li>
+                    <li>WAREHOUSES</li>
+                    <li>CARE HOMES</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <img src="images/exterior.jpg" alt="Exterior cleaning" class="service-img">
+                <ul>
+                    <li>WINDOWS</li>
+                    <li>GUTTERS</li>
+                    <li>ROOFS</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <img src="images/specialist.jpg" alt="Specialist cleaning" class="service-img">
+                <ul>
+                    <li>BIN STORES</li>
+                    <li>FLEET VEHICLES</li>
+                    <li>CARPETS</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages / Benefits section -->
+    <section class="packages">
+        <div class="section-title">CLEANING PACKAGES DESIGNED FOR YOU</div>
+        <div class="packages-grid">
+            <div class="package-card">
+                <h3>STREAMLINED MANAGEMENT</h3>
+                <p>No more juggling multiple invoices.</p>
+            </div>
+            <div class="package-card">
+                <h3>TRUSTED PROFESSIONALS</h3>
+                <p>Pre-vetted &amp; fully insured contractors.</p>
+            </div>
+            <div class="package-card">
+                <h3>DEDICATED SUPPORT</h3>
+                <p>Your personal account manager.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact section with form -->
+    <section id="contact" class="contact-section">
+        <div class="section-title light">BOOK YOUR FREE QUOTE TODAY!</div>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <p class="contact-line">☎️ <a href="tel:+441144573009">0114&nbsp;457&nbsp;3009</a></p>
+                <p class="contact-line">✉️ <a href="mailto:enquiries@dimensioncleaning.co.uk">enquiries@dimensioncleaning.co.uk</a></p>
+                <p class="contact-copy">One point of contact • Trusted contractors • Fully managed</p>
+            </div>
+            <form class="contact-form" action="mailto:enquiries@dimensioncleaning.co.uk" method="post" enctype="text/plain">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="Name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="Email" required>
+
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="Phone">
+
+                <label for="message">Services required</label>
+                <textarea id="message" name="Details" rows="4" placeholder="Describe the site and what you need cleaning..."></textarea>
+
+                <button type="submit" class="btn submit-btn">SEND REQUEST</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© <span id="year"></span> Dimension Cleaning. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Update the footer year dynamically
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
