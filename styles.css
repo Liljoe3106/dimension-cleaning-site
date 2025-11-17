@@ -1,6 +1,7 @@
 /* Colour palette derived from the provided flyer */
 :root {
-    --bg-dark: #050816;
+    /* Update main background colour to match the dark navy behind the logo */
+    --bg-dark: #1b2230;
     --bg-panel: #101726;
     --bg-strip: #d1d5db;
     --text-light: #f9fafb;
