@@ -39,7 +39,9 @@ body {
 .logo {
     width: 180px;
     height: auto;
-    margin-bottom: 1.5rem;
+    /* Center the logo horizontally across all breakpoints */
+    display: block;
+    margin: 0 auto 1.5rem;
 }
 
 .tagline {
@@ -162,8 +164,9 @@ h1 {
 
 .service-img {
     width: 100%;
+    /* Keep a consistent height for service images while showing the full image */
     height: 150px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 8px;
     margin-bottom: 1rem;
 }
