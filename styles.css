@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 /* Colour palette derived from the provided flyer */
 :root {
     /* Update main background colour to match the dark navy behind the logo */
@@ -89,37 +93,6 @@ h1 {
     color: #111827;
 }
 
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.gallery-item {
-    background-color: var(--bg-panel);
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--outline);
-    box-shadow: 0 20px 30px rgba(0,0,0,0.4);
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-}
-
-.gallery-item span {
-    display: block;
-    padding: 0.6rem 1rem;
-    font-size: 0.75rem;
-    letter-spacing: 0.15rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-}
-
 /* Services section */
 .services {
     padding: 4rem 1rem;
@@ -149,6 +122,12 @@ h1 {
     padding: 2rem 1.5rem;
     border: 1px solid var(--outline);
     box-shadow: 0 16px 24px rgba(0,0,0,0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 36px rgba(0,0,0,0.5);
 }
 
 /* Title styling for each service type */
@@ -164,9 +143,8 @@ h1 {
 
 .service-img {
     width: 100%;
-    /* Keep a consistent height for service images while showing the full image */
     height: 150px;
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 8px;
     margin-bottom: 1rem;
 }
@@ -183,6 +161,16 @@ h1 {
     color: var(--text-muted);
     letter-spacing: 0.08rem;
     text-transform: uppercase;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.service-card li::before {
+    content: '—';
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+    font-weight: 700;
 }
 
 /* Packages section */
@@ -226,6 +214,12 @@ h1 {
     border: 1px solid var(--outline);
     box-shadow: 0 16px 24px rgba(0,0,0,0.35);
     text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.package-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 36px rgba(0,0,0,0.5);
 }
 
 .package-card h3 {
@@ -268,7 +262,11 @@ h1 {
 }
 
 .contact-line a {
-    color: var(--text-muted);
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.contact-line a:hover {
     text-decoration: underline;
 }
 
@@ -345,9 +343,6 @@ h1 {
 
 /* Responsive adjustments */
 @media (max-width: 900px) {
-    .gallery {
-        grid-template-columns: 1fr 1fr;
-    }
     .services-grid {
         grid-template-columns: 1fr 1fr;
     }
@@ -360,8 +355,8 @@ h1 {
 }
 
 @media (max-width: 600px) {
-    .gallery {
-        grid-template-columns: 1fr;
+    h1 {
+        font-size: 2rem;
     }
     .services-grid {
         grid-template-columns: 1fr;
