@@ -16,13 +16,15 @@ body {
 .container {
   width: 90%;
   max-width: 1200px;
-  margin: 0 auto;
+
+  
   padding: 2rem 0;
 }
 
 /* Hero section */
 .hero {
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  background: #0f2027;
+  
   color: #fff;
   text-align: center;
   padding: 6rem 0;
@@ -218,7 +220,10 @@ body {
   background-color: #00887a;
 }
 
-/* Footer */
+h1, h2, h3 {
+  text-align: center;
+}
+* Footer */
 .footer {
   background-color: #0f2027;
   color: #ffffff;
