@@ -226,6 +226,13 @@ body {
   padding: 2rem 0;
 }
 
+
+
+.logo {
+  max-width: 200px;
+  margin: 0 auto 1rem;
+  display: block;
+}
 .footer a {
   color: #00a99d;
   text-decoration: none;
