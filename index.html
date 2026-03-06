@@ -1,118 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dimension Cleaning</title>
-    <!-- Import Montserrat font for consistent branding -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-        <!-- Enforce HTTPS by upgrading insecure requests -->
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <!-- Hero section -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dimension Cleaning – Exterior Maintenance Plans</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
     <header class="hero">
-        <div class="hero-inner">
-            <img src="dc_logo_full.png" alt="Dimension Cleaning logo" class="logo">
-            <div class="tagline">ONE SUPPLIER FOR ALL YOUR CLEANING NEEDS</div>
-            <h1>DIMENSION CLEANING</h1>
-            <div class="hero-sub">INTERIOR • EXTERIOR • SPECIALIST</div>
-            <a href="#contact" class="btn">BOOK YOUR QUOTE</a>
-            <!-- Removed gallery to avoid duplication with services section -->
-        </div>
+      <div class="container">
+        <h1>Exterior Maintenance for Commercial Properties</h1>
+        <p class="subtitle">
+          Windows, gutters and exterior cleaning managed under one maintenance plan
+        </p>
+        <a href="#contact" class="cta-button">Request a Site Assessment</a>
+      </div>
     </header>
 
-    <!-- Services section -->
-    <section class="services">
-        <h2>OUR SERVICES</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <!-- Title for the interior service -->
-                <h3 class="service-title">INTERIOR CLEANING</h3>
-                <img src="interior.jpg" alt="Interior cleaning" class="service-img">
-                <ul>
-                    <li>OFFICES</li>
-                    <li>WAREHOUSES</li>
-                    <li>CARE HOMES</li>
-                </ul>
-            </div>
-            <div class="service-card">
-                <!-- Title for the exterior service -->
-                <h3 class="service-title">EXTERIOR CLEANING</h3>
-                <img src="exterior.jpg" alt="Exterior cleaning" class="service-img">
-                <ul>
-                    <li>WINDOWS</li>
-                    <li>GUTTERS</li>
-                    <li>ROOFS</li>
-                </ul>
-            </div>
-            <div class="service-card">
-                <!-- Title for the specialist service -->
-                <h3 class="service-title">SPECIALIST CLEANING</h3>
-                <img src="specialist.jpg" alt="Specialist cleaning" class="service-img">
-                <ul>
-                    <li>BIN STORES</li>
-                    <li>FLEET VEHICLES</li>
-                    <li>CARPETS</li>
-                </ul>
-            </div>
+    <main>
+      <!-- Problem Section -->
+      <section id="problem" class="section dark">
+        <div class="container">
+          <h2>Multiple Contractors Create Friction</h2>
+          <p>
+            Most commercial sites juggle several cleaning suppliers: one for windows,
+            another for gutter clearance and a third for pressure washing. This leads
+            to multiple invoices, inconsistent standards and no single point of
+            accountability.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- Packages / Benefits section -->
-    <section class="packages">
-        <div class="section-title">CLEANING PACKAGES DESIGNED FOR YOU</div>
-        <div class="packages-grid">
-            <div class="package-card">
-                <h3>STREAMLINED MANAGEMENT</h3>
-                <p>No more juggling multiple invoices.</p>
+      <!-- Solution Section -->
+      <section id="solution" class="section light">
+        <div class="container">
+          <h2>The Exterior Maintenance Plan</h2>
+          <p>
+            Dimension Cleaning manages all exterior upkeep under one contract so you
+            only deal with one supplier and one monthly invoice.
+          </p>
+          <div class="plan-includes">
+            <div class="plan-item">
+              <h3>Monthly Window Cleaning</h3>
+              <p>Keep your building presentable year‑round.</p>
             </div>
-            <div class="package-card">
-                <h3>TRUSTED PROFESSIONALS</h3>
-                <p>Pre-vetted &amp; fully insured contractors.</p>
+            <div class="plan-item">
+              <h3>Annual Gutter Clearance</h3>
+              <p>Prevent blockages and water damage.</p>
             </div>
-            <div class="package-card">
-                <h3>DEDICATED SUPPORT</h3>
-                <p>Your personal account manager.</p>
+            <div class="plan-item">
+              <h3>Annual Exterior Wash</h3>
+              <p>Remove algae, dirt and staining.</p>
             </div>
+            <div class="plan-item">
+              <h3>Roofline Maintenance Certificate</h3>
+              <p>Documented confirmation that gutters and downpipes are clear.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Annual Exterior Condition Report</h3>
+              <p>Highlights any issues before they become costly repairs.</p>
+            </div>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- Contact section with form -->
-    <section id="contact" class="contact-section">
-        <div class="section-title light">BOOK YOUR FREE QUOTE TODAY!</div>
-        <div class="contact-grid">
-            <div class="contact-info">
-                <p class="contact-line">☎️ <a href="tel:+441144573009">0114&nbsp;457&nbsp;3009</a></p>
-                <p class="contact-line">✉️ <a href="mailto:enquiries@dimensioncleaning.co.uk">enquiries@dimensioncleaning.co.uk</a></p>
-                <p class="contact-copy">One point of contact • Trusted contractors • Fully managed</p>
-            </div>
-            <form class="contact-form" action="mailto:enquiries@dimensioncleaning.co.uk" method="post" enctype="text/plain">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="Name" required>
-
-                <label for="email">Email</label>
-                <input type="email" id="email" name="Email" required>
-
-                <label for="phone">Phone</label>
-                <input type="tel" id="phone" name="Phone">
-
-                <label for="message">Services required</label>
-                <textarea id="message" name="Details" rows="4" placeholder="Describe the site and what you need cleaning..."></textarea>
-
-                <button type="submit" class="btn submit-btn">SEND REQUEST</button>
-            </form>
+      <!-- How It Works Section -->
+      <section id="how" class="section dark">
+        <div class="container">
+          <h2>How It Works</h2>
+          <ol class="steps">
+            <li><strong>Site assessment:</strong> we visit to understand your property and needs.</li>
+            <li><strong>Plan creation:</strong> we build a tailored maintenance plan for your site.</li>
+            <li><strong>Scheduled services:</strong> visits are organised throughout the year.</li>
+            <li><strong>One monthly invoice:</strong> simple, predictable billing.</li>
+          </ol>
         </div>
-    </section>
+      </section>
+
+      <!-- Who It's For Section -->
+      <section id="who" class="section light">
+        <div class="container">
+          <h2>Who We Work With</h2>
+          <p>
+            Our exterior maintenance plans suit a range of commercial properties.
+          </p>
+          <ul class="clients">
+            <li>Care homes</li>
+            <li>Warehouses</li>
+            <li>Industrial estates</li>
+            <li>Office buildings</li>
+            <li>Property managers</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Why Choose Section -->
+      <section id="why" class="section dark">
+        <div class="container">
+          <h2>Why Dimension Cleaning?</h2>
+          <ul class="benefits">
+            <li><strong>One contract</strong> instead of multiple suppliers</li>
+            <li><strong>Fully managed</strong> service by vetted contractors</li>
+            <li><strong>Predictable costs</strong> with one monthly invoice</li>
+            <li><strong>Professional documentation</strong> for maintenance records</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Additional Services Section -->
+      <section id="extras" class="section light">
+        <div class="container">
+          <h2>Additional Services</h2>
+          <p>
+            Repairs and specialist work can be arranged and quoted separately:
+          </p>
+          <ul class="services-list">
+            <li>Gutter repairs and downpipe replacement</li>
+            <li>Roof tile replacement and roofline repairs</li>
+            <li>Sealant repairs and external painting</li>
+            <li>Moss and algae removal</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="section dark">
+        <div class="container">
+          <h2>Request a Site Assessment</h2>
+          <p>
+            Provide a few details about your property and we’ll arrange a site visit
+            to prepare your exterior maintenance plan.
+          </p>
+          <form class="contact-form" action="mailto:info@dimensioncleaning.co.uk" method="post" enctype="text/plain">
+            <div class="form-row">
+              <input type="text" name="name" placeholder="Name" required />
+              <input type="text" name="company" placeholder="Company" />
+            </div>
+            <div class="form-row">
+              <input type="email" name="email" placeholder="Email" required />
+              <input type="tel" name="phone" placeholder="Phone" />
+            </div>
+            <div class="form-row">
+              <input type="text" name="postcode" placeholder="Postcode" />
+              <input type="text" name="property_type" placeholder="Property type" />
+            </div>
+            <textarea name="message" placeholder="Tell us about your site..." rows="4"></textarea>
+            <button type="submit" class="cta-button">Submit</button>
+          </form>
+        </div>
+      </section>
+    </main>
 
     <footer class="footer">
-        <p>© <span id="year"></span> Dimension Cleaning. All rights reserved.</p>
+      <div class="container">
+        <p>&copy; 2026 Dimension Cleaning Ltd. All rights reserved.</p>
+        <p>
+          Service area: South Yorkshire and surrounding areas &nbsp;|&nbsp;
+          Contact: <a href="mailto:info@dimensioncleaning.co.uk">info@dimensioncleaning.co.uk</a>
+        </p>
+      </div>
     </footer>
-
-    <script>
-        // Update the footer year dynamically
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
-</body>
+  </body>
 </html>
