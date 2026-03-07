@@ -253,3 +253,11 @@ h1, h2, h3 {
     flex-direction: column;
   }
 }
+/* Center text in lists */
+.clients li,
+.benefits li,
+.services-list li,
+.steps li {
+  text-align: center;
+}
+
