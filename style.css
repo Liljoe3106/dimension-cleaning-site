@@ -261,3 +261,15 @@ h1, h2, h3 {
   text-align: center;
 }
 
+
+/* Benefits list - new line after strong text */
+.benefits li strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+/* Left align text in How It Works section */
+#how p,
+#how .steps li {
+  text-align: left;
+}
