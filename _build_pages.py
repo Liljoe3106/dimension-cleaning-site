@@ -147,7 +147,7 @@ def page(title, description, nav_id, body, *, schema=False, canonical="/", crumb
   <meta name="description" content="{description}">
   <link rel="canonical" href="https://dimensioncleaning.co.uk{canonical}">
   <meta name="theme-color" content="#ffffff">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=photos3">{schema_block}
+  <link rel="stylesheet" href="/assets/css/styles.css?v=photos4">{schema_block}
 </head>
 <body>
 {header}

@@ -572,7 +572,7 @@ table.pricing .highlight .price { color: var(--teal-dark); }
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 .gallery-card {
-  aspect-ratio: 4/3;
+  aspect-ratio: 1 / 1;
   background: var(--gray-100);
   border: 1px dashed var(--gray-200);
   border-radius: var(--radius);
@@ -606,18 +606,26 @@ table.pricing .highlight .price { color: var(--teal-dark); }
 .gallery-card--photo img {
   display: block;
   width: 100%;
-  height: auto;
   object-fit: cover;
+  object-position: center;
+}
+.gallery-card--photo picture {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+.gallery-card--photo img {
+  height: 100%;
 }
 .gallery-card--photo > picture,
 .gallery-card--photo > img {
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   min-height: 0;
 }
 .gallery-card--photo img {
-  aspect-ratio: 3/4;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
-  max-height: 22rem;
+  object-position: center;
+  max-height: none;
 }
 .gallery-card--photo figcaption {
   padding: 0.65rem 0.85rem;
@@ -631,9 +639,12 @@ table.pricing .highlight .price { color: var(--teal-dark); }
   color: var(--navy);
   font-weight: 600;
 }
+.gallery-card--pair {
+  aspect-ratio: auto;
+}
 .gallery-card--pair .pair-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 2px;
   background: var(--gray-100);
 }
@@ -642,10 +653,15 @@ table.pricing .highlight .price { color: var(--teal-dark); }
   width: 100%;
   height: 100%;
 }
+.gallery-card--pair .pair-grid picture {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
 .gallery-card--pair .pair-grid img {
-  aspect-ratio: 3/4;
-  max-height: 18rem;
+  aspect-ratio: 1 / 1;
+  max-height: none;
   object-fit: cover;
+  object-position: center;
 }
 
 /* Labeled proof figure (single prominent image) */
@@ -662,7 +678,15 @@ table.pricing .highlight .price { color: var(--teal-dark); }
 .proof-figure img {
   display: block;
   width: 100%;
-  height: auto;
+  object-fit: cover;
+  object-position: center;
+}
+.proof-figure picture {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+.proof-figure img {
+  height: 100%;
 }
 .proof-figure figcaption {
   padding: 0.75rem 1rem;
@@ -687,7 +711,15 @@ table.pricing .highlight .price { color: var(--teal-dark); }
 .flyer-proof img {
   display: block;
   width: 100%;
-  height: auto;
+  object-fit: cover;
+  object-position: center;
+}
+.flyer-proof picture {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+.flyer-proof img {
+  height: 100%;
 }
 
 /* Area list */
