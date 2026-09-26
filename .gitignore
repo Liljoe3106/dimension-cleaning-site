@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 preview-shots/
 .DS_Store
+# Keep huge masters out of publish tree if added later
+assets/images/*-master.*
+assets/images/originals/

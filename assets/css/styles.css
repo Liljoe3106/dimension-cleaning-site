@@ -562,11 +562,14 @@ table.pricing .highlight .price { color: var(--teal-dark); }
   margin-bottom: 0.65rem;
 }
 
-/* Before/after placeholders */
+/* Before/after gallery */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 1rem;
+}
+.gallery--proof {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 .gallery-card {
   aspect-ratio: 4/3;
@@ -581,12 +584,110 @@ table.pricing .highlight .price { color: var(--teal-dark); }
   padding: 1rem;
   color: var(--gray-500);
   font-size: 0.875rem;
+  overflow: hidden;
 }
 .gallery-card span {
   font-weight: 600;
   color: var(--gray-600);
   display: block;
   margin-bottom: 0.25rem;
+}
+.gallery-card--photo {
+  padding: 0;
+  border: 1px solid var(--gray-100);
+  background: var(--white);
+  color: inherit;
+  aspect-ratio: auto;
+  align-items: stretch;
+  justify-content: flex-start;
+  box-shadow: var(--shadow);
+}
+.gallery-card--photo picture,
+.gallery-card--photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.gallery-card--photo > picture,
+.gallery-card--photo > img {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.gallery-card--photo img {
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  max-height: 22rem;
+}
+.gallery-card--photo figcaption {
+  padding: 0.65rem 0.85rem;
+  background: var(--white);
+  border-top: 1px solid var(--gray-100);
+  text-align: center;
+  font-size: 0.875rem;
+}
+.gallery-card--photo figcaption span {
+  margin: 0;
+  color: var(--navy);
+  font-weight: 600;
+}
+.gallery-card--pair .pair-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--gray-100);
+}
+.gallery-card--pair .pair-grid picture,
+.gallery-card--pair .pair-grid img {
+  width: 100%;
+  height: 100%;
+}
+.gallery-card--pair .pair-grid img {
+  aspect-ratio: 3/4;
+  max-height: 18rem;
+  object-fit: cover;
+}
+
+/* Labeled proof figure (single prominent image) */
+.proof-figure {
+  margin: 0 auto;
+  max-width: 36rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--gray-100);
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+.proof-figure picture,
+.proof-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.proof-figure figcaption {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--navy);
+  border-top: 1px solid var(--gray-100);
+}
+
+/* Services flyer (About) */
+.flyer-proof {
+  margin: 0 auto;
+  max-width: 32rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--gray-100);
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+.flyer-proof picture,
+.flyer-proof img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 /* Area list */
