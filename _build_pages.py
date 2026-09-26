@@ -147,7 +147,7 @@ def page(title, description, nav_id, body, *, schema=False, canonical="/", crumb
   <meta name="description" content="{description}">
   <link rel="canonical" href="https://dimensioncleaning.co.uk{canonical}">
   <meta name="theme-color" content="#ffffff">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=photos2">{schema_block}
+  <link rel="stylesheet" href="/assets/css/styles.css?v=photos3">{schema_block}
 </head>
 <body>
 {header}
@@ -261,6 +261,7 @@ home_body = f'''    <section class="page-hero">
           {gallery_pair("drive-before", "drive-after", "Driveway", "Dirty herringbone driveway before cleaning", "Cleaned herringbone driveway after pressure washing", 1200, 1600)}
           {gallery_pair("conservatory-before", "conservatory-after", "Conservatory", "Conservatory roof before cleaning, algae on polycarbonate panels", "Conservatory roof after cleaning, clear polycarbonate panels", 1600, 1200)}
           {gallery_photo("roof-scrape", "Roof", "Moss scrape on a terracotta roof", 1200, 1600)}
+          {gallery_photo("roof-softwash", "Softwash", "Softwash foam on a pantile roof", 1200, 1600)}
         </div>
       </div>
     </section>
@@ -486,9 +487,10 @@ roof_body = f'''    <section class="page-hero">
     <section class="section section-alt">
       <div class="container">
         <h2>Proof</h2>
-        <p class="muted mb-2">Moss scrape on a terracotta roof. Softwash follows the scrape.</p>
+        <p class="muted mb-2">Moss scrape and softwash on a terracotta roof.</p>
         <div class="gallery gallery--proof">
-          {gallery_photo("roof-scrape", "Roof", "Moss scrape on a terracotta roof", 1200, 1600)}
+          {gallery_photo("roof-scrape", "Roof scrape", "Moss scrape on a terracotta roof", 1200, 1600)}
+          {gallery_photo("roof-softwash", "Softwash", "Softwash foam on a pantile roof", 1200, 1600)}
         </div>
       </div>
     </section>
