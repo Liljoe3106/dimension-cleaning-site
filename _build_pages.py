@@ -178,7 +178,8 @@ def page(title, description, nav_id, body, *, schema=False, canonical="/", crumb
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <meta name="theme-color" content="#ffffff">
   <meta name="color-scheme" content="light only">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=light1">{schema_block}
+  <meta name="supported-color-schemes" content="light">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=light2">{schema_block}
 </head>
 <body>
 {header}

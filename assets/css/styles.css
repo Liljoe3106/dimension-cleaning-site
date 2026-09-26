@@ -1162,3 +1162,78 @@ table.pricing .highlight .price { color: var(--teal-dark); }
   margin-bottom: 0.5rem;
   background: var(--white);
 }
+
+
+/* —— Brave light-mode lock —— */
+/* Keep the page light even when Brave's automatic darkening is enabled. */
+html,
+body {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #1e293b !important;
+  filter: none !important;
+}
+
+html { color-scheme: only light !important; }
+main {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  filter: none !important;
+}
+
+.site-header {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #1a2744 !important;
+}
+.breadcrumb,
+.page-hero,
+.section,
+.card,
+.table-wrap,
+.steps li,
+.gallery-card--photo,
+.proof-figure,
+.flyer-proof,
+.area-list li,
+.form-group input,
+.form-group select,
+.form-group textarea,
+.quote-panel,
+.quote-totals-panel,
+.drive-surface {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+}
+
+.section-alt,
+.trust-strip,
+.cta-band {
+  background: #f8fafc !important;
+  background-color: #f8fafc !important;
+}
+
+.callout,
+.callout-plain,
+.form-success,
+.house-size-grid .quote-radio,
+.quote-nested,
+.care-tag {
+  background: #ccfbf1 !important;
+  background-color: #ccfbf1 !important;
+}
+
+.site-footer,
+.mobile-bar {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+}
+
+.site-footer { color: #475569 !important; }
+.mobile-bar { color: #1e293b !important; }
+
+table.pricing th {
+  background: #1a2744 !important;
+  background-color: #1a2744 !important;
+  color: #ffffff !important;
+}
