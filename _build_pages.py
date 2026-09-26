@@ -96,20 +96,37 @@ FOOTER = f'''  <footer class="site-footer">
   </nav>
   <script src="/assets/js/main.js" defer></script>'''
 
+SITE_ORIGIN = "http://dimensioncleaning.co.uk"
+OG_IMAGE = f"{SITE_ORIGIN}/assets/images/path-after.jpg"
+LOGO_IMAGE = f"{SITE_ORIGIN}/assets/images/path-after.jpg"
+
 LOCAL_BUSINESS_SCHEMA = f'''{{
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
+  "@id": "{SITE_ORIGIN}/#business",
   "name": "Dimension Exterior Cleaning",
   "description": "Gutter cleaning and exterior cleaning in Sheffield and South Yorkshire. Clear band prices, roof softwash, and a care plan that saves money.",
-  "url": "https://dimensioncleaning.co.uk/",
+  "url": "{SITE_ORIGIN}/",
   "telephone": "{PHONE_TEL}",
   "email": "{EMAIL}",
+  "image": "{LOGO_IMAGE}",
+  "address": {{
+    "@type": "PostalAddress",
+    "addressLocality": "Sheffield",
+    "addressRegion": "South Yorkshire",
+    "addressCountry": "GB"
+  }},
   "areaServed": [
     {{"@type": "City", "name": "Sheffield"}},
     {{"@type": "AdministrativeArea", "name": "South Yorkshire"}},
     "Worksop", "Dinnington", "Aston", "Mosborough", "Doncaster"
   ],
   "priceRange": "££",
+  "makesOffer": [
+    {{"@type": "Offer", "itemOffered": {{"@type": "Service", "name": "Gutter cleaning", "url": "{SITE_ORIGIN}/gutter-cleaning/"}}}},
+    {{"@type": "Offer", "itemOffered": {{"@type": "Service", "name": "Drive and patio cleaning", "url": "{SITE_ORIGIN}/drive-patio/"}}}},
+    {{"@type": "Offer", "itemOffered": {{"@type": "Service", "name": "Roof cleaning", "url": "{SITE_ORIGIN}/roof-cleaning/"}}}}
+  ],
   "openingHoursSpecification": {{
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
@@ -138,6 +155,7 @@ def page(title, description, nav_id, body, *, schema=False, canonical="/", crumb
             '    </nav>\n'
         )
     scripts = extra_scripts or ""
+    abs_url = f"{SITE_ORIGIN}{canonical}"
     return f'''<!DOCTYPE html>
 <html lang="en-GB">
 <head>
@@ -145,9 +163,21 @@ def page(title, description, nav_id, body, *, schema=False, canonical="/", crumb
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{title}</title>
   <meta name="description" content="{description}">
-  <link rel="canonical" href="https://dimensioncleaning.co.uk{canonical}">
+  <link rel="canonical" href="{abs_url}">
+  <meta property="og:title" content="{title}">
+  <meta property="og:description" content="{description}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{abs_url}">
+  <meta property="og:image" content="{OG_IMAGE}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{title}">
+  <meta name="twitter:description" content="{description}">
+  <meta name="twitter:image" content="{OG_IMAGE}">
+  <link rel="icon" href="/assets/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <meta name="theme-color" content="#ffffff">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=photos4">{schema_block}
+  <link rel="stylesheet" href="/assets/css/styles.css?v=seo1">{schema_block}
 </head>
 <body>
 {header}
@@ -274,8 +304,8 @@ home_body = f'''    <section class="page-hero">
     </section>'''
 
 write("index.html", page(
-    "Gutter cleaning Sheffield | Dimension Exterior Cleaning",
-    "Clear prices. Proper roof softwash. A care plan that actually saves you money. Gutter cleaning and exterior cleaning in Sheffield.",
+    "Exterior cleaning Sheffield | Dimension Exterior Cleaning",
+    "Gutter, roof, driveway and patio cleaning in Sheffield and South Yorkshire. Clear prices, on-site measures and 15% off with the care plan.",
     "home",
     home_body,
     schema=True,
@@ -292,7 +322,11 @@ gutter_body = f'''    <section class="page-hero">
 
     <section class="section">
       <div class="container prose">
-        <p>Blocked gutters overflow into walls, fascia, and foundations. We vac the run, clear the outlets, and check the first two downpipes are included in the price.</p>
+        <p>A gutter can look fine from the ground and still be packed with moss, leaves and roof grit. The warning signs are easy to spot: water spilling over the front edge in rain, damp marks below the gutter, staining on the fascia, or a downpipe that stays quiet when the gutter is full. Left alone, overflow can run down brickwork and collect around the base of the house.</p>
+        <p>Joe clears the gutter run with a high-reach vacuum, working along the full length rather than just scooping out the worst bit. The vacuum keeps the debris contained and means there is less mess around windows, paths and flower beds. Once the run is clear, he checks the outlets and the first two downpipes included in the standard price. If a downpipe is slow or blocked, he will tell you what he found before any extra work is done.</p>
+        <p>This is useful on the tree-lined streets of Sheffield, where autumn leaves can fill a run quickly. We regularly work around S8, S10, S13, S20, S2 and S9, as well as Aston, Mosborough and nearby South Yorkshire homes. The same practical clean works for a terrace, a two-storey semi or a larger detached property. The price is based on the home size and the number of extras, rather than a vague price that changes when we arrive.</p>
+        <p>As a guide, standard gutter cleans start at £50 for a small terrace, £70 for a medium semi, £100 for a larger detached home and £150 for an XL property. A conservatory or extension is £15, and extra downpipes after the first two are £10 each. The <a href="/get-a-quote/">quote builder</a> gives you the right price band once you enter your property details. You can also email <a href="mailto:joe@dimensioncleaning.co.uk">joe@dimensioncleaning.co.uk</a> or call <a href="tel:+447494503865">07494 503865</a>.</p>
+        <p>If your gutters need attention twice a year, the care plan keeps it simple. You get two gutter visits, six months apart, and 15% off other exterior cleaning while the plan is active. It suits homes with trees nearby or owners who would rather prevent the overflow than wait for the next heavy downpour.</p>
       </div>
     </section>
 
@@ -345,7 +379,7 @@ gutter_body = f'''    <section class="page-hero">
     </section>'''
 
 write("gutter-cleaning/index.html", page(
-    "Gutter cleaning Sheffield | Dimension Exterior Cleaning",
+    "Gutter vac cleaning Sheffield | Dimension Exterior Cleaning",
     "Cleared gutters and downpipes. Clear band prices from £50. No hidden call-for-a-quote games on a standard house.",
     "gutter-cleaning",
     gutter_body,
@@ -398,7 +432,7 @@ soffits_body = f'''    <section class="page-hero">
     </section>'''
 
 write("soffits-fascias/index.html", page(
-    "Soffits & fascias cleaning Sheffield | Dimension Exterior Cleaning",
+    "Soffits & fascias Sheffield | Dimension Exterior Cleaning",
     "Usually done with the gutters. Optional windows on the same visit. Guide prices from £100.",
     "soffits-fascias",
     soffits_body,
@@ -412,6 +446,16 @@ drive_body = f'''    <section class="page-hero">
       <div class="container">
         <h1>Drive and patio cleaning</h1>
         <p class="sub">Price from the surface and the size. Quotes held 30 days after we measure.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <p>A clean drive or patio starts with the surface, not a one-size-fits-all setting. Joe checks the paving, joints, edges and drainage before washing. That matters because block paving, concrete, resin, tarmac and natural stone all respond differently to water pressure and cleaning products. The aim is a cleaner, more even finish without needlessly disturbing sound joints.</p>
+        <p>Block paving is washed and the joints are refilled with kiln-dried sand where needed. A patio clean removes the green film, dirt and general weathering from the slabs. If the joints have failed, patio re-grouting is available at £7 per square metre and that price includes cleaning the patio first. You are not paying for a separate clean on top of the re-grout.</p>
+        <p>White spots can be left behind when salts or residue dry on paving. Lichen can grip the edges and shaded areas, especially where a patio stays damp. Joe will point out what is likely to lift during the clean and what may remain as a mark in the material. That gives you a realistic result before the work starts, rather than promising that every old stain will disappear.</p>
+        <p>A narrow path usually needs a different approach from a block-paved drive. Paths have tighter edges, steps, walls and planting to protect, while a drive often needs more attention to jointing and sand loss. The quote reflects the actual surface and access. Drive and patio work can be combined on one visit, with one £200 minimum for the wash visit. Sealing is separate and is normally done after the joints have dried, usually 24 to 48 hours later.</p>
+        <p>Send a postcode, a rough size or a photo for a guide price. Joe measures the area on site before confirming the locked quote, so awkward corners, borders and changes between surfaces are included properly. Care plan customers receive 15% off wash and seal work. To arrange a measure, use the <a href="/get-a-quote/">quote builder</a>, email <a href="mailto:joe@dimensioncleaning.co.uk">joe@dimensioncleaning.co.uk</a> or call <a href="tel:+447494503865">07494 503865</a>.</p>
       </div>
     </section>
 
@@ -478,9 +522,11 @@ roof_body = f'''    <section class="page-hero">
     <section class="section">
       <div class="container prose">
         <h2>How we clean roofs</h2>
-        <p>Moss and lichen hold moisture on the tiles. We scrape the growth off first, then softwash the roof so the roots go as well. That leaves the granules where they belong and keeps water from getting forced under the tiles.</p>
-        <p class="mt-2">Guide price is <strong>£12/m²</strong>, with a floor of <strong>£500</strong>. We measure the pitched roof face on site. If the roof is steep, slate, or needs scaffold, we confirm any extras when we visit.</p>
-        <p class="mt-1">Care plan members get <strong>15% off</strong>.</p>
+        <p>Moss is more than a change of colour on a roof. It holds moisture against the tiles, grows through laps and can keep gutters full of loose debris. Lichen can leave a hard crust on the surface, while shaded roof faces often stay damp for longer. A roof clean is worth considering when moss is spreading across the tiles, growth is falling into the gutters or the roof looks heavily weathered from the street.</p>
+        <p>Joe starts by scraping the moss from the roof by hand and with suitable tools. The loose growth is collected and cleared from the gutters and surrounding area. He then softwashes the tiles to deal with the remaining organic growth and residue. The two stages matter: scraping removes the heavy layer, while the treatment reaches the roots and helps the roof stay clearer for longer.</p>
+        <p>Safety comes first on every roof. Joe assesses the pitch, access, tile condition and working area before agreeing the job. He uses the access and equipment suited to the property, protects nearby surfaces where needed and explains any issue that could affect the clean. Steep roofs, fragile slate, difficult access or scaffold requirements are discussed at the visit, so they are not hidden inside a guess made from a street photo.</p>
+        <p>The guide rate is £12 per square metre, with a roof floor from £500 where that applies to the job. Joe measures the pitched roof face on site rather than relying on the footprint of the house. The final price takes account of the roof size, pitch, access and condition. A photo and postcode can produce a useful starting guide, but the on-site measure is what makes the quote accurate.</p>
+        <p>There is no pressure to book during the measure. You get a clear explanation of what needs doing, what can wait and whether roof cleaning is sensible for the tiles. Care plan customers receive 15% off while the plan is active. To ask about a roof in Sheffield or South Yorkshire, use the <a href="/get-a-quote/">quote builder</a>, email <a href="mailto:joe@dimensioncleaning.co.uk">joe@dimensioncleaning.co.uk</a> or call <a href="tel:+447494503865">07494 503865</a>.</p>
       </div>
     </section>
 
@@ -595,7 +641,15 @@ areas_body = f'''    <section class="page-hero">
           <li>Doncaster fringe (DN4, DN11)</li>
           <li>Retford area (by arrangement)</li>
         </ul>
-        <p class="mt-3 prose">Further out? Email the postcode. If the route works that month, we’ll say yes.</p>
+        <div class="prose mt-3">
+          <p>Dimension Exterior Cleaning is based around Sheffield and takes on exterior cleaning work across South Yorkshire and nearby North Nottinghamshire. Joe plans jobs by route, which keeps the visit practical and helps customers get a straightforward answer on availability. Send the postcode before booking and he will confirm whether the property sits within the current run.</p>
+          <p><strong>Sheffield</strong> is the main service area, including S8, S10, S13, S20, S2 and S9, plus nearby postcodes. The city has a mix of terraces, semis, steep gardens and larger detached homes, so the job is priced around the property rather than just the postcode. Gutter vacuum cleaning, driveways, patios, roof work, soffits and fascias can all be discussed in the same visit where access and timing make sense.</p>
+          <p><strong>Aston and Mosborough</strong>, including S26, are regular parts of the route. Homes here often have larger drives, rear paths and roof areas than a typical city terrace. Joe can measure a drive or roof on site, while gutter cleaning is usually placed into a clear home-size price band.</p>
+          <p><strong>Dinnington and Worksop</strong>, including S25 and S80, are covered on planned route days. This area includes older properties, newer estates and homes with mature trees, so the work can range from a seasonal gutter clean to a full patio or roof clean. A postcode and a couple of photos are enough to start the conversation, with the measure done at the property where the surface or roof needs it.</p>
+          <p><strong>Doncaster fringe</strong>, including DN4 and DN11, is also within the area we already serve. These jobs are grouped sensibly with nearby work where possible, but the service stays personal rather than being passed to a call centre. Joe will confirm the route, then explain the price and next step in plain English.</p>
+          <p><strong>Retford and further out</strong> may be possible by arrangement. It depends on the route that month and the size of the job, so it is better to ask than assume. Email <a href="mailto:joe@dimensioncleaning.co.uk">joe@dimensioncleaning.co.uk</a> with your postcode and service, or call <a href="tel:+447494503865">07494 503865</a>. If the location works, you will get a clear reply before any booking is made.</p>
+          <p>For properties across the area, gutter cleans use clear home-size bands, while driveways, patios and roofs are measured where the surface or access makes that necessary. The care plan is available for regular gutter visits and includes 15% off other exterior cleaning while it is active. Use the <a href="/get-a-quote/">quote builder</a> to send the basics and get the right next step.</p>
+        </div>
       </div>
     </section>
 
@@ -976,5 +1030,37 @@ write("privacy/index.html", page(
     canonical="/privacy/",
     crumb="Privacy",
 ))
+
+# —— robots.txt + sitemap.xml ——
+ROBOTS = """User-agent: *
+Allow: /
+
+Sitemap: http://dimensioncleaning.co.uk/sitemap.xml
+"""
+write("robots.txt", ROBOTS)
+
+SITEMAP_PATHS = [
+    "/",
+    "/gutter-cleaning/",
+    "/drive-patio/",
+    "/roof-cleaning/",
+    "/soffits-fascias/",
+    "/care-plan/",
+    "/about/",
+    "/areas/",
+    "/get-a-quote/",
+    "/contact/",
+    "/faq/",
+    "/privacy/",
+]
+sitemap_urls = "\n".join(
+    f"  <url>\n    <loc>{SITE_ORIGIN}{p}</loc>\n  </url>" for p in SITEMAP_PATHS
+)
+SITEMAP = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{sitemap_urls}
+</urlset>
+"""
+write("sitemap.xml", SITEMAP)
 
 print("Done.")

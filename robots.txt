@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: http://dimensioncleaning.co.uk/sitemap.xml
