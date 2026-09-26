@@ -1,5 +1,6 @@
 /* Dimension Exterior Cleaning — shared styles */
 :root {
+  color-scheme: only light;
   --navy: #1a2744;
   --navy-dark: #0f1829;
   --slate: #2c3e5a;
@@ -327,40 +328,11 @@ li + li { margin-top: 0.35rem; }
 }
 
 /* —— Hero —— */
-.hero {
-  background: linear-gradient(145deg, var(--navy-dark) 0%, var(--navy) 55%, var(--slate) 100%);
-  color: var(--white);
-  padding: 2.75rem 0 3rem;
-}
-.hero h1 {
-  font-size: clamp(1.75rem, 4vw, 2.35rem);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  margin-bottom: 0.75rem;
-  max-width: 28ch;
-}
-.hero .sub {
-  font-size: 1.1rem;
-  color: rgba(255,255,255,0.85);
-  max-width: 38rem;
-  margin-bottom: 1.5rem;
-}
 .hero-ctas {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
 }
-.hero .btn-secondary {
-  color: var(--white);
-  border-color: rgba(255,255,255,0.55);
-}
-.hero .btn-secondary:hover {
-  background: rgba(255,255,255,0.12);
-  color: var(--white);
-}
-
-
 /* —— Breadcrumb —— */
 .breadcrumb {
   background: var(--white);
