@@ -252,7 +252,7 @@ home_body = f'''    <section class="page-hero">
 
     <section class="section section-alt">
       <div class="container">
-        <h2>Pricing teaser</h2>
+        <h2>Instant Estimate</h2>
         <div class="table-wrap">
           <table class="pricing">
             <thead>
@@ -287,6 +287,7 @@ home_body = f'''    <section class="page-hero">
           <li>Tell us the job and postcode.</li>
           <li>We confirm a price band or measure on site for drive/roof.</li>
           <li>We turn up, do the work, leave it looking sorted.</li>
+          <li>Pay by cash, card or transfer.</li>
         </ol>
       </div>
     </section>
