@@ -43,6 +43,7 @@ PHONE_DISPLAY = "07494 503865"
 PHONE_TEL = "+447494503865"
 PHONE_WA = "447494503865"
 EMAIL = "joe@dimensioncleaning.co.uk"
+GOOGLE_REVIEWS_URL = "https://share.google/9QR0ZfozypxOPySyf"
 
 HEADER = '''  <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
@@ -270,6 +271,16 @@ home_body = f'''    <section class="page-hero">
           <li>We turn up, do the work, leave it looking sorted.</li>
           <li>Pay by cash, card or transfer.</li>
         </ol>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="callout">
+          <h2>Google reviews</h2>
+          <p>See what customers say about Dimension Exterior Cleaning.</p>
+          <a class="btn btn-primary" href="{GOOGLE_REVIEWS_URL}" target="_blank" rel="noopener noreferrer">See our Google reviews →</a>
+        </div>
       </div>
     </section>
 
