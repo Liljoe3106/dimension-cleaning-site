@@ -238,7 +238,7 @@ home_body = f'''    <section class="page-hero">
           </article>
           <article class="card">
             <h3>Care plan</h3>
-            <p>Two gutter visits a year. 15% off the rest of the house.</p>
+            <p>Two gutter visits a year. 15% off other services.</p>
             <p class="mt-1"><a href="/care-plan/">Care plan →</a></p>
           </article>
           <article class="card">
@@ -273,7 +273,7 @@ home_body = f'''    <section class="page-hero">
     <section class="section">
       <div class="container">
         <div class="callout">
-          <h2>Pay once. Two gutter visits. 15% off the rest of the house.</h2>
+          <h2>Pay once. Two gutter visits. 15% off other services.</h2>
           <p>Most semis: <span class="price-em">£98 a year.</span></p>
           <a class="btn btn-primary" href="/care-plan/">See how the care plan works →</a>
         </div>
@@ -574,7 +574,7 @@ write("roof-cleaning/index.html", page(
 # —— CARE PLAN ——
 care_body = f'''    <section class="page-hero">
       <div class="container">
-        <h1>Pay once. Two gutter visits. 15% off the rest of the house.</h1>
+        <h1>Pay once. Two gutter visits. 15% off other services.</h1>
         <p class="sub">Annual care plan. Most semis: <strong>£98 a year</strong>.</p>
         <p class="mt-2"><a class="btn btn-primary btn-lg" href="/contact/">Ask to join the care plan</a></p>
       </div>
@@ -627,7 +627,7 @@ care_body = f'''    <section class="page-hero">
 
 write("care-plan/index.html", page(
     "Care plan Sheffield | Dimension Exterior Cleaning",
-    "Pay once. Two gutter visits. 15% off the rest of the house. Most semis: £98 a year.",
+    "Pay once. Two gutter visits. 15% off other services. Most semis: £98 a year.",
     "care-plan",
     care_body,
     schema=True,
