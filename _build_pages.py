@@ -96,7 +96,7 @@ FOOTER = f'''  <footer class="site-footer">
   </nav>
   <script src="/assets/js/main.js" defer></script>'''
 
-SITE_ORIGIN = "http://dimensioncleaning.co.uk"
+SITE_ORIGIN = "https://dimensioncleaning.co.uk"
 OG_IMAGE = f"{SITE_ORIGIN}/assets/images/path-after.jpg"
 LOGO_IMAGE = f"{SITE_ORIGIN}/assets/images/path-after.jpg"
 
@@ -1037,7 +1037,7 @@ write("privacy/index.html", page(
 ROBOTS = """User-agent: *
 Allow: /
 
-Sitemap: http://dimensioncleaning.co.uk/sitemap.xml
+Sitemap: https://dimensioncleaning.co.uk/sitemap.xml
 """
 write("robots.txt", ROBOTS)
 
