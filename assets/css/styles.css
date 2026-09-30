@@ -68,6 +68,38 @@ li + li { margin-top: 0.35rem; }
 
 /* —— Header —— */
 .site-header {
+  background: var(--navy-dark);
+  color: var(--navy);
+  z-index: 100;
+}
+
+/* Full-width brand banner (scrolls away; nav bar sticks) */
+.brand-banner {
+  display: block;
+  width: 100%;
+  background: var(--navy-dark);
+  line-height: 0;
+  text-decoration: none;
+}
+.brand-banner picture,
+.brand-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  background: var(--navy-dark);
+  /* Defeat Brave/auto dark-mode filters on the brand art */
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+.brand-banner:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: -2px;
+}
+
+/* Sticky nav row only (banner does not stick) */
+.site-nav-bar {
   background: var(--white);
   color: var(--navy);
   position: sticky;
@@ -84,6 +116,11 @@ li + li { margin-top: 0.35rem; }
   gap: 1rem;
   padding: 0.75rem 0;
   flex-wrap: wrap;
+}
+
+/* Banner already shows the name; on wide screens keep location tag only */
+@media (min-width: 901px) {
+  .brand-name { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 }
 
 .brand {
@@ -1201,9 +1238,22 @@ main {
 }
 
 .site-header {
+  background: #0f1829 !important;
+  background-color: #0f1829 !important;
+  color: #1a2744 !important;
+}
+.site-nav-bar {
   background: #ffffff !important;
   background-color: #ffffff !important;
   color: #1a2744 !important;
+}
+.brand-banner,
+.brand-banner picture,
+.brand-banner img {
+  background: #0f1829 !important;
+  background-color: #0f1829 !important;
+  filter: none !important;
+  -webkit-filter: none !important;
 }
 .breadcrumb,
 .page-hero,
