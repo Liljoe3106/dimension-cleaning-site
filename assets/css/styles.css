@@ -537,11 +537,20 @@ table.pricing .highlight .price { color: var(--teal-dark); }
 /* Before/after gallery */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 1rem;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
 }
 .gallery--proof {
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: 1fr;
+}
+@media (min-width: 641px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+  }
+  .gallery--proof {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
 }
 .gallery-card {
   aspect-ratio: 1 / 1;
@@ -600,11 +609,21 @@ table.pricing .highlight .price { color: var(--teal-dark); }
   max-height: none;
 }
 .gallery-card--photo figcaption {
-  padding: 0.65rem 0.85rem;
+  padding: 0.85rem 1rem;
   background: var(--white);
   border-top: 1px solid var(--gray-100);
   text-align: center;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
+  line-height: 1.35;
+}
+@media (max-width: 640px) {
+  .gallery-card--photo figcaption {
+    padding: 0.95rem 1.1rem;
+    font-size: 1rem;
+  }
+  .gallery-card--pair .pair-grid {
+    gap: 3px;
+  }
 }
 .gallery-card--photo figcaption span {
   margin: 0;

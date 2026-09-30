@@ -179,7 +179,7 @@ def page(title, description, nav_id, body, *, schema=False, canonical="/", crumb
   <meta name="theme-color" content="#ffffff">
   <meta name="color-scheme" content="light only">
   <meta name="supported-color-schemes" content="light">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=light2">{schema_block}
+  <link rel="stylesheet" href="/assets/css/styles.css?v=min1">{schema_block}
 </head>
 <body>
 {header}
@@ -478,7 +478,7 @@ drive_body = f'''    <section class="page-hero">
         </div>
         <p class="muted mt-1">Re-grout price includes cleaning the patio first.</p>
         <div class="prose">
-          <p><strong>Minimum:</strong> Wash quotes floor at <strong>£200</strong>. Drive + patio same visit = one £200 floor. Seal is separate. We seal once joints are dry, usually 24 to 48 hours later. Seal-only trip also floors at £200. Block + seal = £9/m².</p>
+          <p><strong>Pressure washing / drive &amp; patio wash:</strong> from £3/m² (patio, tarmac, concrete, resin) or £5/m² (block paving + resand), <strong>£200 minimum charge</strong>. Drive + patio on the same visit share one £200 minimum. Seal is separate at £5/m² with its own £200 minimum. We seal once joints are dry, usually 24 to 48 hours later. Block + seal = £9/m².</p>
           <p class="mt-2">Care plan: <strong>15% off</strong> wash and seal.</p>
         </div>
       </div>
@@ -505,7 +505,7 @@ drive_body = f'''    <section class="page-hero">
 
 write("drive-patio/index.html", page(
     "Drive & patio cleaning Sheffield | Dimension Exterior Cleaning",
-    "Price from the surface and the size. Quotes held 30 days after we measure. Wash quotes floor at £200.",
+    "Price from the surface and the size. Quotes held 30 days after we measure. £200 minimum charge on wash quotes.",
     "drive-patio",
     drive_body,
     schema=True,
@@ -527,7 +527,7 @@ roof_body = f'''    <section class="page-hero">
         <p>Moss is more than a change of colour on a roof. It holds moisture against the tiles, grows through laps and can keep gutters full of loose debris. Lichen can leave a hard crust on the surface, while shaded roof faces often stay damp for longer. A roof clean is worth considering when moss is spreading across the tiles, growth is falling into the gutters or the roof looks heavily weathered from the street.</p>
         <p>Joe starts by scraping the moss from the roof by hand and with suitable tools. The loose growth is collected and cleared from the gutters and surrounding area. He then softwashes the tiles to deal with the remaining organic growth and residue. The two stages matter: scraping removes the heavy layer, while the treatment reaches the roots and helps the roof stay clearer for longer.</p>
         <p>Safety comes first on every roof. Joe assesses the pitch, access, tile condition and working area before agreeing the job. He uses the access and equipment suited to the property, protects nearby surfaces where needed and explains any issue that could affect the clean. Steep roofs, fragile slate, difficult access or scaffold requirements are discussed at the visit, so they are not hidden inside a guess made from a street photo.</p>
-        <p>The guide rate is £12 per square metre, with a roof floor from £500 where that applies to the job. Joe measures the pitched roof face on site rather than relying on the footprint of the house. The final price takes account of the roof size, pitch, access and condition. A photo and postcode can produce a useful starting guide, but the on-site measure is what makes the quote accurate.</p>
+        <p>The guide rate is £12 per square metre, with a minimum charge of £500 where that applies to the job. Joe measures the pitched roof face on site rather than relying on the footprint of the house. The final price takes account of the roof size, pitch, access and condition. A photo and postcode can produce a useful starting guide, but the on-site measure is what makes the quote accurate.</p>
         <p>There is no pressure to book during the measure. You get a clear explanation of what needs doing, what can wait and whether roof cleaning is sensible for the tiles. Care plan customers receive 15% off while the plan is active. To ask about a roof in Sheffield or South Yorkshire, use the <a href="/get-a-quote/">quote builder</a>, email <a href="mailto:joe@dimensioncleaning.co.uk">joe@dimensioncleaning.co.uk</a> or call <a href="tel:+447494503865">07494 503865</a>.</p>
       </div>
     </section>
@@ -554,7 +554,7 @@ roof_body = f'''    <section class="page-hero">
 
 write("roof-cleaning/index.html", page(
     "Roof cleaning Sheffield | Dimension Exterior Cleaning",
-    "Roof scrape and softwash in Sheffield. Guide price from £12/m², floor £500. We measure on site.",
+    "Roof scrape and softwash in Sheffield. Guide price from £12/m², £500 minimum. We measure on site.",
     "roof-cleaning",
     roof_body,
     schema=True,
@@ -724,7 +724,7 @@ faq_items = [
     ("How do you clean roofs?",
      "We scrape the moss first, then softwash the roof. That clears growth at the root and leaves the tiles in better shape."),
     ("Why is there a £200 minimum on drives and patios?",
-     "Small jobs still need setup, water, and time. The per-m² rate applies above that floor."),
+     "Small jobs still need setup, water, and time. The per-m² rate applies above that minimum."),
     ("When do you seal?",
      "After the wash has dried, usually 24 to 48 hours later. We seal once joints are dry."),
     ("Can I pay half now?",
@@ -899,7 +899,7 @@ quote_body = f'''    <section class="page-hero">
               </div>
 
               <h3>Drive / patio</h3>
-              <p class="quote-helper">Add m² for a guide price. Leave blank if you want us to measure on site.</p>
+              <p class="quote-helper">Add m² for a guide price. Leave blank if you want us to measure on site. Pressure washing / wash has a £200 minimum charge (drive + patio same visit share one minimum). Seal has its own £200 minimum.</p>
 
               <div class="drive-surface">
                 <label class="quote-check"><input type="checkbox" id="drive-block"> Block paving + resand (£5/m²)</label>
@@ -939,7 +939,7 @@ quote_body = f'''    <section class="page-hero">
               </div>
 
               <h3>Roof softwash</h3>
-              <label class="quote-check"><input type="checkbox" id="svc-roof" name="svc_roof"> Roof softwash (£12/m², floor £500)</label>
+              <label class="quote-check"><input type="checkbox" id="svc-roof" name="svc_roof"> Roof softwash (£12/m², £500 minimum)</label>
               <div id="roof-options" class="quote-nested" hidden>
                 <div class="m2-row" style="margin-left:0">
                   <label for="m2-roof">Pitched roof face m²</label>
