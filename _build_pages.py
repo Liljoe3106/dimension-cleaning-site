@@ -250,25 +250,6 @@ home_body = f'''    <section class="page-hero">
       </div>
     </section>
 
-    <section class="section section-alt">
-      <div class="container">
-        <h2>Instant Estimate</h2>
-        <div class="table-wrap">
-          <table class="pricing">
-            <thead>
-              <tr><th>Home size</th><th>Gutters</th><th>Care plan (year)</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Small (terrace 1-2 bed)</td><td class="price">£50</td><td class="price">£70</td></tr>
-              <tr class="highlight"><td>Medium (semi 2-3 bed)</td><td class="price">£70</td><td class="price">£98</td></tr>
-              <tr><td>Large (detached 3-4)</td><td class="price">£100</td><td class="price">£140</td></tr>
-              <tr><td>XL (detached 5+)</td><td class="price">£150</td><td class="price">£210</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="muted">Full prices on each service page.</p>
-      </div>
-    </section>
 
     <section class="section">
       <div class="container">
