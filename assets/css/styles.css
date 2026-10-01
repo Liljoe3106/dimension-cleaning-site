@@ -1520,3 +1520,174 @@ table.pricing th {
 .testimonials-links a:hover {
   text-decoration: underline;
 }
+
+
+/* Gallery zoom affordance */
+.gallery-zoom {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: inherit;
+  font: inherit;
+  color: inherit;
+}
+.gallery-zoom:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+.gallery-card--photo .gallery-zoom picture,
+.gallery-card--photo .gallery-zoom img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.gallery-card--photo .gallery-zoom > picture,
+.gallery-card--photo .gallery-zoom > img {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+.gallery-card--pair .gallery-zoom .pair-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px;
+  background: var(--gray-100);
+}
+
+/* Lightbox */
+body.lightbox-open {
+  overflow: hidden;
+}
+.lightbox[hidden] {
+  display: none !important;
+}
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.82);
+}
+.lightbox__panel {
+  position: relative;
+  z-index: 1;
+  max-width: min(1100px, 100%);
+  max-height: calc(100vh - 2rem);
+  width: 100%;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1rem 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  overflow: auto;
+}
+.lightbox__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--gray-100);
+  color: var(--navy);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.lightbox__close:hover,
+.lightbox__close:focus-visible {
+  background: var(--teal);
+  color: var(--white);
+  outline: none;
+}
+.lightbox__media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 40vh;
+  margin-top: 1.5rem;
+}
+.lightbox__media img {
+  max-width: 100%;
+  max-height: min(70vh, 820px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: calc(var(--radius) - 2px);
+  background: var(--gray-100);
+}
+.lightbox__media--pair img {
+  max-width: calc(50% - 0.4rem);
+}
+@media (max-width: 700px) {
+  .lightbox__media--pair {
+    flex-direction: column;
+  }
+  .lightbox__media--pair img {
+    max-width: 100%;
+  }
+}
+.lightbox__caption {
+  margin: 0;
+  text-align: center;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+/* Area town cards */
+.area-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0 0.5rem;
+}
+.area-card {
+  display: block;
+  padding: 1.1rem 1.15rem;
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.area-card:hover,
+.area-card:focus-visible {
+  border-color: var(--teal);
+  outline: none;
+  transform: translateY(-1px);
+}
+.area-card h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  color: var(--navy);
+}
+.area-card .muted {
+  margin: 0;
+  font-size: 0.9rem;
+}
+.nap-block {
+  padding: 1rem 1.1rem;
+  border-left: 3px solid var(--teal);
+  background: var(--gray-100);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.nap-block p {
+  margin: 0.15rem 0;
+}

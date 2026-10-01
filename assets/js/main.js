@@ -242,9 +242,115 @@
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initGallerySliders);
-  } else {
+// Gallery lightbox
+  function initGalleryLightbox() {
+    var overlay = null;
+    var lastFocus = null;
+
+    function ensureOverlay() {
+      if (overlay) return overlay;
+      overlay = document.createElement('div');
+      overlay.className = 'lightbox';
+      overlay.hidden = true;
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+      overlay.setAttribute('aria-label', 'Photo viewer');
+      overlay.innerHTML =
+        '<div class="lightbox__backdrop" data-lightbox-close></div>' +
+        '<div class="lightbox__panel" role="document">' +
+        '<button type="button" class="lightbox__close" aria-label="Close photo" data-lightbox-close>&times;</button>' +
+        '<div class="lightbox__media"></div>' +
+        '<p class="lightbox__caption"></p>' +
+        '</div>';
+      document.body.appendChild(overlay);
+      overlay.addEventListener('click', function (e) {
+        if (e.target.closest('[data-lightbox-close]')) closeLightbox();
+      });
+      return overlay;
+    }
+
+    function trapFocus(e) {
+      if (!overlay || overlay.hidden || e.key !== 'Tab') return;
+      var focusables = overlay.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      if (!focusables.length) return;
+      var first = focusables[0];
+      var last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
+    function closeLightbox() {
+      if (!overlay || overlay.hidden) return;
+      overlay.hidden = true;
+      document.body.classList.remove('lightbox-open');
+      document.removeEventListener('keydown', onKey);
+      if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+      lastFocus = null;
+    }
+
+    function onKey(e) {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeLightbox();
+        return;
+      }
+      trapFocus(e);
+    }
+
+    function openFromButton(btn) {
+      var figure = btn.closest('figure');
+      var captionEl = figure ? figure.querySelector('figcaption span, figcaption') : null;
+      var caption = captionEl ? captionEl.textContent.trim() : (btn.getAttribute('aria-label') || '');
+      var pictures = btn.querySelectorAll('picture, img');
+      var media = ensureOverlay().querySelector('.lightbox__media');
+      var cap = overlay.querySelector('.lightbox__caption');
+      media.innerHTML = '';
+      media.className = 'lightbox__media' + (pictures.length > 1 ? ' lightbox__media--pair' : '');
+
+      function addImg(node) {
+        var img = node.tagName === 'IMG' ? node : node.querySelector('img');
+        if (!img) return;
+        var clone = document.createElement('img');
+        clone.src = img.currentSrc || img.src;
+        clone.alt = img.alt || caption;
+        clone.loading = 'eager';
+        media.appendChild(clone);
+      }
+
+      if (pictures.length) {
+        pictures.forEach(addImg);
+      }
+      cap.textContent = caption;
+      lastFocus = document.activeElement;
+      overlay.hidden = false;
+      document.body.classList.add('lightbox-open');
+      document.addEventListener('keydown', onKey);
+      var closeBtn = overlay.querySelector('.lightbox__close');
+      if (closeBtn) closeBtn.focus();
+    }
+
+    document.querySelectorAll('.gallery-zoom').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        // Avoid fighting slider swipe: ignore if moved a lot after pointerdown
+        e.preventDefault();
+        openFromButton(btn);
+      });
+    });
+  }
+
+  function boot() {
     initGallerySliders();
+    initGalleryLightbox();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
   }
 })();

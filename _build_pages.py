@@ -21,22 +21,28 @@ def picture(stem, alt, width, height, class_name=""):
 
 
 def gallery_photo(stem, label, alt, width, height):
+    safe_label = html.escape(label)
     return (
         f'<figure class="gallery-card gallery-card--photo">'
+        f'<button type="button" class="gallery-zoom" aria-label="View larger: {safe_label}">'
         f'{picture(stem, alt, width, height)}'
-        f'<figcaption><span>{label}</span></figcaption>'
+        f'</button>'
+        f'<figcaption><span>{safe_label}</span></figcaption>'
         f'</figure>'
     )
 
 
 def gallery_pair(stem_a, stem_b, label, alt_a, alt_b, width, height):
+    safe_label = html.escape(label)
     return (
         f'<figure class="gallery-card gallery-card--photo gallery-card--pair">'
+        f'<button type="button" class="gallery-zoom" aria-label="View larger: {safe_label}">'
         f'<div class="pair-grid">'
         f'{picture(stem_a, alt_a, width, height)}'
         f'{picture(stem_b, alt_b, width, height)}'
         f'</div>'
-        f'<figcaption><span>{label}</span></figcaption>'
+        f'</button>'
+        f'<figcaption><span>{safe_label}</span></figcaption>'
         f'</figure>'
     )
 
@@ -181,7 +187,7 @@ FOOTER = f'''  <footer class="site-footer">
     <a class="mb-wa" href="https://wa.me/{PHONE_WA}" target="_blank" rel="noopener">WhatsApp</a>
     <a class="mb-quote" href="/get-a-quote/">Get a quote</a>
   </nav>
-  <script src="/assets/js/main.js?v=galcats1" defer></script>'''
+  <script src="/assets/js/main.js?v=imp1" defer></script>'''
 
 SITE_ORIGIN = "https://dimensioncleaning.co.uk"
 OG_IMAGE = f"{SITE_ORIGIN}/assets/images/path-after.jpg"
@@ -223,20 +229,30 @@ LOCAL_BUSINESS_SCHEMA = f'''{{
 }}'''
 
 
-def page(title, description, nav_id, body, *, schema=False, canonical="/", crumb=None, extra_scripts=""):
+def page(title, description, nav_id, body, *, schema=False, schema_json=None, canonical="/", crumb=None, crumb_parent=None, extra_scripts=""):
     schema_block = ""
-    if schema:
+    if schema_json:
+        schema_block = f'\n  <script type="application/ld+json">\n{schema_json}\n  </script>'
+    elif schema:
         schema_block = f'\n  <script type="application/ld+json">\n{LOCAL_BUSINESS_SCHEMA}\n  </script>'
     header = HEADER
     if nav_id:
         header = header.replace(f'data-nav="{nav_id}"', f'data-nav="{nav_id}" aria-current="page"')
     crumb_html = ""
     if crumb:
+        mid = ""
+        if crumb_parent:
+            parent_href, parent_label = crumb_parent
+            mid = (
+                f'        <a href="{html.escape(parent_href)}">{html.escape(parent_label)}</a>\n'
+                '        <span class="bc-sep" aria-hidden="true">/</span>\n'
+            )
         crumb_html = (
             '    <nav class="breadcrumb" aria-label="Breadcrumb">\n'
             '      <div class="container">\n'
             '        <a href="/">Home</a>\n'
             '        <span class="bc-sep" aria-hidden="true">/</span>\n'
+            f'{mid}'
             f'        <span aria-current="page">{crumb}</span>\n'
             '      </div>\n'
             '    </nav>\n'
@@ -266,7 +282,7 @@ def page(title, description, nav_id, body, *, schema=False, canonical="/", crumb
   <meta name="theme-color" content="#ffffff">
   <meta name="color-scheme" content="light only">
   <meta name="supported-color-schemes" content="light">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=galcats1">{schema_block}
+  <link rel="stylesheet" href="/assets/css/styles.css?v=imp1">{schema_block}
 </head>
 <body>
 {header}
@@ -359,11 +375,11 @@ home_body = f'''    <section class="page-hero">
           {gallery_category(
             "Gutter cleaning",
             [
-              gallery_pair("gutter-before", "gutter-after", "Gutters", "Gutter before cleaning, full of moss and debris", "Gutter after vac cleaning, clear and tidy", 1400, 1866),
-              gallery_photo("gutter-process", "Gutter vac", "Gutter vac in use with high-reach pole and debris collection bag", 1078, 1078),
-              gallery_photo("gutter-ba", "White gutter", "White gutter before and after vac cleaning on a slate roof", 1200, 1200),
-              gallery_photo("downpipe-blocked", "Downpipe", "Blocked downpipe packed with leaves and sludge", 1200, 1600),
-              gallery_photo("downpipe-block", "Downpipe plug", "Square downpipe opened with a solid debris plug pulled out", 1200, 1200),
+              gallery_pair("gutter-before", "gutter-after", "Gutters - before and after", "Gutter before cleaning, full of moss and debris", "Gutter after vac cleaning, clear and tidy", 1400, 1866),
+              gallery_photo("gutter-process", "Gutter vac - process", "Gutter vac in use with high-reach pole and debris collection bag", 1078, 1078),
+              gallery_photo("gutter-ba", "White gutter - before and after", "White gutter before and after vac cleaning on a slate roof", 1200, 1200),
+              gallery_photo("downpipe-blocked", "Downpipe - blockage", "Blocked downpipe packed with leaves and sludge", 1200, 1600),
+              gallery_photo("downpipe-block", "Downpipe - blockage", "Square downpipe opened with a solid debris plug pulled out", 1200, 1200),
             ],
             href="/gutter-cleaning/",
             link_text="Gutter cleaning →",
@@ -372,9 +388,9 @@ home_body = f'''    <section class="page-hero">
           {gallery_category(
             "Drive & patio",
             [
-              gallery_photo("path-ba", "Path", "Flagstone path before and after pressure washing", 1076, 1076),
-              gallery_photo("drive-ba", "Driveway", "Herringbone driveway before and after pressure washing, job 285", 1200, 1200),
-              gallery_photo("patio-before-after", "Patio", "Patio slabs before and after pressure washing", 1200, 1200),
+              gallery_photo("path-ba", "Path - before and after", "Flagstone path before and after pressure washing", 1076, 1076),
+              gallery_photo("drive-ba", "Driveway - before and after", "Herringbone driveway before and after pressure washing, job 285", 1200, 1200),
+              gallery_photo("patio-before-after", "Patio - before and after", "Patio slabs before and after pressure washing", 1200, 1200),
             ],
             href="/drive-patio/",
             link_text="Drive & patio →",
@@ -383,10 +399,10 @@ home_body = f'''    <section class="page-hero">
           {gallery_category(
             "Roof & softwash",
             [
-              gallery_photo("roof-scrape", "Roof", "Moss scrape on a terracotta roof", 1200, 1600),
-              gallery_photo("roof-softwash", "Softwash", "Softwash foam on a pantile roof", 1200, 1600),
-              gallery_photo("render-before-after", "Render", "Rendered wall before and after softwash cleaning", 1200, 1200),
-              gallery_pair("conservatory-before", "conservatory-after", "Conservatory", "Conservatory roof before cleaning, algae on polycarbonate panels", "Conservatory roof after cleaning, clear polycarbonate panels", 1600, 1200),
+              gallery_photo("roof-scrape", "Roof scrape", "Moss scrape on a terracotta roof", 1200, 1600),
+              gallery_photo("roof-softwash", "Roof softwash", "Softwash foam on a pantile roof", 1200, 1600),
+              gallery_photo("render-before-after", "Render - before and after", "Rendered wall before and after softwash cleaning", 1200, 1200),
+              gallery_pair("conservatory-before", "conservatory-after", "Conservatory roof - before and after", "Conservatory roof before cleaning, algae on polycarbonate panels", "Conservatory roof after cleaning, clear polycarbonate panels", 1600, 1200),
             ],
             href="/roof-cleaning/",
             link_text="Roof cleaning →",
@@ -480,10 +496,10 @@ gutter_body = f'''    <section class="page-hero">
         {gallery_slider([
           gallery_photo("gutter-before", "Before", "Gutter before cleaning, full of moss and debris", 1400, 1866),
           gallery_photo("gutter-after", "After", "Gutter after vac cleaning, clear and tidy", 1400, 1866),
-          gallery_photo("gutter-process", "Gutter vac", "Gutter vac in use with high-reach pole and debris collection bag", 1078, 1078),
-          gallery_photo("gutter-ba", "White gutter", "White gutter before and after vac cleaning on a slate roof", 1200, 1200),
-          gallery_photo("downpipe-blocked", "Blocked downpipe", "Blocked downpipe packed with leaves and sludge", 1200, 1600),
-          gallery_photo("downpipe-block", "Downpipe plug", "Square downpipe opened with a solid debris plug pulled out", 1200, 1200),
+          gallery_photo("gutter-process", "Gutter vac - process", "Gutter vac in use with high-reach pole and debris collection bag", 1078, 1078),
+          gallery_photo("gutter-ba", "White gutter - before and after", "White gutter before and after vac cleaning on a slate roof", 1200, 1200),
+          gallery_photo("downpipe-blocked", "Downpipe - blockage", "Blocked downpipe packed with leaves and sludge", 1200, 1600),
+          gallery_photo("downpipe-block", "Downpipe - blockage", "Square downpipe opened with a solid debris plug pulled out", 1200, 1200),
         ], label="Gutter cleaning photos")}
       </div>
     </section>
@@ -605,9 +621,9 @@ drive_body = f'''    <section class="page-hero">
         <h2>Before &amp; after</h2>
         <p class="muted mb-2">Path, driveway and patio cleans on real jobs. Dry after is what your neighbours will see.</p>
         {gallery_slider([
-          gallery_photo("path-ba", "Path", "Flagstone path before and after pressure washing", 1076, 1076),
-          gallery_photo("drive-ba", "Driveway", "Herringbone driveway before and after pressure washing, job 285", 1200, 1200),
-          gallery_photo("patio-before-after", "Patio", "Patio slabs before and after pressure washing", 1200, 1200),
+          gallery_photo("path-ba", "Path - before and after", "Flagstone path before and after pressure washing", 1076, 1076),
+          gallery_photo("drive-ba", "Driveway - before and after", "Herringbone driveway before and after pressure washing, job 285", 1200, 1200),
+          gallery_photo("patio-before-after", "Patio - before and after", "Patio slabs before and after pressure washing", 1200, 1200),
         ], label="Drive and patio photos")}
       </div>
     </section>
@@ -655,9 +671,9 @@ roof_body = f'''    <section class="page-hero">
         <p class="muted mb-2">Moss scrape, softwash, render and conservatory on real jobs.</p>
         {gallery_slider([
           gallery_photo("roof-scrape", "Roof scrape", "Moss scrape on a terracotta roof", 1200, 1600),
-          gallery_photo("roof-softwash", "Softwash", "Softwash foam on a pantile roof", 1200, 1600),
-          gallery_photo("render-before-after", "Render", "Rendered wall before and after softwash cleaning", 1200, 1200),
-          gallery_pair("conservatory-before", "conservatory-after", "Conservatory", "Conservatory roof before cleaning, algae on polycarbonate panels", "Conservatory roof after cleaning, clear polycarbonate panels", 1600, 1200),
+          gallery_photo("roof-softwash", "Roof softwash", "Softwash foam on a pantile roof", 1200, 1600),
+          gallery_photo("render-before-after", "Render - before and after", "Rendered wall before and after softwash cleaning", 1200, 1200),
+          gallery_pair("conservatory-before", "conservatory-after", "Conservatory roof - before and after", "Conservatory roof before cleaning, algae on polycarbonate panels", "Conservatory roof after cleaning, clear polycarbonate panels", 1600, 1200),
         ], label="Roof and softwash photos")}
       </div>
     </section>
@@ -747,41 +763,110 @@ write("care-plan/index.html", page(
 ))
 
 # —— AREAS ——
-areas_body = f'''    <section class="page-hero">
-      <div class="container">
-        <h1>Sheffield, South Yorkshire, and nearby</h1>
-      </div>
-    </section>
+AREA_TOWNS = [
+    {
+        "slug": "sheffield",
+        "name": "Sheffield",
+        "postcodes": "S8, S10, S13, S20, S2, S9 and nearby",
+        "title": "Exterior cleaning in Sheffield | Dimension Exterior Cleaning",
+        "description": "Gutter, drive, patio and roof cleaning in Sheffield (S8, S10, S13, S20, S2, S9). Clear band prices. Call 07494 503865.",
+        "h1": "Exterior cleaning in Sheffield",
+        "intro": "<p>Sheffield is the main service area for Dimension Exterior Cleaning, including S8, S10, S13, S20, S2 and S9, plus nearby postcodes. The city has a mix of terraces, semis, steep gardens and larger detached homes, so the job is priced around the property rather than just the postcode. Gutter vacuum cleaning, driveways, patios, roof work, soffits and fascias can all be discussed in the same visit where access and timing make sense.</p><p>Joe plans jobs by route across Sheffield and South Yorkshire. Send your postcode before booking and he will confirm whether the property sits within the current run.</p>",
+    },
+    {
+        "slug": "aston-mosborough",
+        "name": "Aston & Mosborough",
+        "postcodes": "S26",
+        "title": "Exterior cleaning in Aston & Mosborough | Dimension Exterior Cleaning",
+        "description": "Gutter and exterior cleaning in Aston and Mosborough (S26). Drive, patio and roof work available. Call 07494 503865.",
+        "h1": "Exterior cleaning in Aston & Mosborough",
+        "intro": "<p>Aston and Mosborough, including S26, are regular parts of the Dimension Exterior Cleaning route. Homes here often have larger drives, rear paths and roof areas than a typical city terrace. Joe can measure a drive or roof on site, while gutter cleaning is usually placed into a clear home-size price band.</p><p>Send a postcode and the service you need for a straightforward reply on availability and next steps.</p>",
+    },
+    {
+        "slug": "worksop-dinnington",
+        "name": "Worksop & Dinnington",
+        "postcodes": "S25, S80",
+        "title": "Exterior cleaning in Worksop & Dinnington | Dimension Exterior Cleaning",
+        "description": "Gutter and exterior cleaning in Worksop and Dinnington (S25, S80). Planned route days. Call 07494 503865.",
+        "h1": "Exterior cleaning in Worksop & Dinnington",
+        "intro": "<p>Dinnington and Worksop, including S25 and S80, are covered on planned route days. This area includes older properties, newer estates and homes with mature trees, so the work can range from a seasonal gutter clean to a full patio or roof clean. A postcode and a couple of photos are enough to start the conversation, with the measure done at the property where the surface or roof needs it.</p>",
+    },
+    {
+        "slug": "doncaster",
+        "name": "Doncaster",
+        "postcodes": "DN4, DN11 fringe",
+        "title": "Exterior cleaning in Doncaster fringe | Dimension Exterior Cleaning",
+        "description": "Exterior cleaning on the Doncaster fringe (DN4, DN11). Gutters, drives, patios and roofs. Call 07494 503865.",
+        "h1": "Exterior cleaning on the Doncaster fringe",
+        "intro": "<p>Doncaster fringe, including DN4 and DN11, is within the area Dimension Exterior Cleaning already serves. These jobs are grouped sensibly with nearby work where possible, but the service stays personal rather than being passed to a call centre. Joe will confirm the route, then explain the price and next step in plain English.</p>",
+    },
+    {
+        "slug": "retford",
+        "name": "Retford",
+        "postcodes": "By arrangement",
+        "title": "Exterior cleaning in Retford | Dimension Exterior Cleaning",
+        "description": "Exterior cleaning in the Retford area by arrangement. Ask with your postcode. Call 07494 503865.",
+        "h1": "Exterior cleaning in Retford",
+        "intro": "<p>Retford and further out may be possible by arrangement. It depends on the route that month and the size of the job, so it is better to ask than assume. Email <a href=\"mailto:joe@dimensioncleaning.co.uk\">joe@dimensioncleaning.co.uk</a> with your postcode and service, or call <a href=\"tel:+447494503865\">07494 503865</a>. If the location works, you will get a clear reply before any booking is made.</p>",
+    }
+]
 
-    <section class="section">
-      <div class="container">
-        <p class="lead mb-2">We work across Sheffield and the surrounding towns we already serve:</p>
-        <ul class="area-list">
-          <li>Sheffield (including S8, S10, S13, S20, S2, S9 and nearby)</li>
-          <li>Aston / Mosborough (S26)</li>
-          <li>Worksop / Dinnington (S25, S80)</li>
-          <li>Doncaster fringe (DN4, DN11)</li>
-          <li>Retford area (by arrangement)</li>
-        </ul>
-        <div class="prose mt-3">
-          <p>Dimension Exterior Cleaning is based around Sheffield and takes on exterior cleaning work across South Yorkshire and nearby North Nottinghamshire. Joe plans jobs by route, which keeps the visit practical and helps customers get a straightforward answer on availability. Send the postcode before booking and he will confirm whether the property sits within the current run.</p>
-          <p><strong>Sheffield</strong> is the main service area, including S8, S10, S13, S20, S2 and S9, plus nearby postcodes. The city has a mix of terraces, semis, steep gardens and larger detached homes, so the job is priced around the property rather than just the postcode. Gutter vacuum cleaning, driveways, patios, roof work, soffits and fascias can all be discussed in the same visit where access and timing make sense.</p>
-          <p><strong>Aston and Mosborough</strong>, including S26, are regular parts of the route. Homes here often have larger drives, rear paths and roof areas than a typical city terrace. Joe can measure a drive or roof on site, while gutter cleaning is usually placed into a clear home-size price band.</p>
-          <p><strong>Dinnington and Worksop</strong>, including S25 and S80, are covered on planned route days. This area includes older properties, newer estates and homes with mature trees, so the work can range from a seasonal gutter clean to a full patio or roof clean. A postcode and a couple of photos are enough to start the conversation, with the measure done at the property where the surface or roof needs it.</p>
-          <p><strong>Doncaster fringe</strong>, including DN4 and DN11, is also within the area we already serve. These jobs are grouped sensibly with nearby work where possible, but the service stays personal rather than being passed to a call centre. Joe will confirm the route, then explain the price and next step in plain English.</p>
-          <p><strong>Retford and further out</strong> may be possible by arrangement. It depends on the route that month and the size of the job, so it is better to ask than assume. Email <a href="mailto:joe@dimensioncleaning.co.uk">joe@dimensioncleaning.co.uk</a> with your postcode and service, or call <a href="tel:+447494503865">07494 503865</a>. If the location works, you will get a clear reply before any booking is made.</p>
-          <p>For properties across the area, gutter cleans use clear home-size bands, while driveways, patios and roofs are measured where the surface or access makes that necessary. The care plan is available for regular gutter visits and includes 15% off other exterior cleaning while it is active. Use the <a href="/get-a-quote/">quote builder</a> to send the basics and get the right next step.</p>
-        </div>
-      </div>
-    </section>
+def area_nap_block():
+    return (
+        '        <div class="nap-block mt-3">'
+        f'          <p><strong>Dimension Exterior Cleaning</strong></p>'
+        f'          <p>Sheffield &amp; South Yorkshire</p>'
+        f'          <p><a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a> / <a href="mailto:{EMAIL}">{EMAIL}</a></p>'
+        '        </div>'
+    )
 
-    <section class="cta-band">
-      <div class="container">
-        <h2>Check we cover you</h2>
-        <p>Send your postcode: <a href="mailto:{EMAIL}">{EMAIL}</a> / <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></p>
-        <p class="mt-2"><a class="btn btn-primary" href="/contact/">Send your postcode</a></p>
-      </div>
-    </section>'''
+def area_services_list():
+    return (
+        '        <ul class="area-list">'
+        '<li><a href="/gutter-cleaning/">Gutter cleaning</a></li>'
+        '<li><a href="/soffits-fascias/">Soffits &amp; fascias</a></li>'
+        '<li><a href="/drive-patio/">Drive &amp; patio cleaning</a></li>'
+        '<li><a href="/roof-cleaning/">Roof cleaning</a></li>'
+        '<li><a href="/care-plan/">Care plan</a></li>'
+        '</ul>'
+    )
+
+area_cards = "\n".join(
+    (
+        f'          <a class="area-card" href="/areas/{t["slug"]}/">'
+        f'<h3>{html.escape(t["name"])}</h3>'
+        f'<p class="muted">{html.escape(t["postcodes"])}</p>'
+        '</a>'
+    )
+    for t in AREA_TOWNS
+)
+
+areas_body = (
+    '    <section class="page-hero">'
+    '<div class="container">'
+    '<h1>Sheffield, South Yorkshire, and nearby</h1>'
+    '</div>'
+    '</section>'
+    '<section class="section">'
+    '<div class="container">'
+    '<p class="lead mb-2">We work across Sheffield and the surrounding towns we already serve. Pick your area for local details, or send a postcode if you are unsure.</p>'
+    f'<div class="area-cards">\n{area_cards}\n        </div>'
+    '<div class="prose mt-3">'
+    '<p>Dimension Exterior Cleaning is based around Sheffield and takes on exterior cleaning work across South Yorkshire and nearby North Nottinghamshire. Joe plans jobs by route, which keeps the visit practical and helps customers get a straightforward answer on availability. Send the postcode before booking and he will confirm whether the property sits within the current run.</p>'
+    '<p>For properties across the area, gutter cleans use clear home-size bands, while driveways, patios and roofs are measured where the surface or access makes that necessary. The care plan is available for regular gutter visits and includes 15% off other exterior cleaning while it is active. Use the <a href="/get-a-quote/">quote builder</a> to send the basics and get the right next step.</p>'
+    '</div>'
+    f'{area_nap_block()}'
+   '</div>'
+    '</section>'
+    '<section class="cta-band">'
+    '<div class="container">'
+    '<h2>Check we cover you</h2>'
+    f'<p>Send your postcode: <a href="mailto:{EMAIL}">{EMAIL}</a> / <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></p>'
+    '<p class="mt-2"><a class="btn btn-primary" href="/contact/">Send your postcode</a> '
+    '<a class="btn btn-secondary" href="/get-a-quote/">Get a quote</a></p>'
+    '</div>'
+    '</section>'
+)
 
 write("areas/index.html", page(
     "Areas we cover | Dimension Exterior Cleaning",
@@ -792,6 +877,54 @@ write("areas/index.html", page(
     canonical="/areas/",
     crumb="Areas",
 ))
+
+for town in AREA_TOWNS:
+    slug = town["slug"]
+    name = town["name"]
+    safe_name = html.escape(name)
+    safe_pc = html.escape(town["postcodes"])
+    webpage_schema = (
+        "{\n"
+        '  "@context": "https://schema.org",\n'
+        '  "@type": "WebPage",\n'
+        f'  "name": {json.dumps(town["title"])},\n'
+        f'  "description": {json.dumps(town["description"])},\n'
+        f'  "url": "{SITE_ORIGIN}/areas/{slug}/",\n'
+        f'  "isPartOf": {{"@type": "WebSite", "url": "{SITE_ORIGIN}/"}},\n'
+        f'  "about": {{"@id": "{SITE_ORIGIN}/#business"}}\n'
+        "}"
+    )
+    body = (
+        '    <section class="page-hero">'
+        '<div class="container">'
+        f'<h1>{html.escape(town["h1"])}</h1>'
+        f'<p class="sub">{safe_pc}</p>'
+        '</div>'
+        '</section>'
+        '<section class="section">'
+        '<div class="container prose">'
+        f'{town["intro"]}'
+        f'<h2>Services in {safe_name}</h2>'
+        f'{area_services_list()}'
+        f'{area_nap_block()}'
+        '<p class="mt-3">'
+        '<a class="btn btn-primary" href="/get-a-quote/">Get a quote</a> '
+        '<a class="btn btn-secondary" href="/contact/">Contact</a>'
+        '</p>'
+        '<p class="muted mt-2"><a href="/areas/">All areas we cover</a></p>'
+        '</div>'
+        '</section>'
+    )
+    write(f"areas/{slug}/index.html", page(
+        town["title"],
+        town["description"],
+        "areas",
+        body,
+        schema_json=webpage_schema,
+        canonical=f"/areas/{slug}/",
+        crumb=safe_name,
+        crumb_parent=("/areas/", "Areas"),
+    ))
 
 # —— ABOUT ——
 about_body = f'''    <section class="page-hero">
@@ -1123,7 +1256,7 @@ write("get-a-quote/index.html", page(
     schema=True,
     canonical="/get-a-quote/",
     crumb="Get a quote",
-    extra_scripts='  <script src="/assets/js/quote-builder.js" defer></script>\n',
+    extra_scripts='  <script src="/assets/js/quote-builder.js?v=imp1" defer></script>\n',
 ))
 
 # —— PRIVACY ——
@@ -1209,6 +1342,11 @@ SITEMAP_PATHS = [
     "/care-plan/",
     "/about/",
     "/areas/",
+    "/areas/sheffield/",
+    "/areas/aston-mosborough/",
+    "/areas/worksop-dinnington/",
+    "/areas/doncaster/",
+    "/areas/retford/",
     "/get-a-quote/",
     "/contact/",
     "/faq/",
