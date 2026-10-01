@@ -325,7 +325,7 @@ home_body = f'''    <section class="page-hero">
     <section class="section section-alt" id="reviews">
       <div class="container">
         <h2>What customers say</h2>
-        <p class="muted mb-2">{REVIEW_RATING:.0f}★ from {REVIEW_COUNT} Google reviews.</p>
+        <p class="muted mb-2">Real Google reviews.</p>
         <div class="testimonials">
           {testimonial_cards_html()}
         </div>
@@ -1078,7 +1078,7 @@ write("privacy/index.html", page(
 reviews_body = f'''    <section class="page-hero">
       <div class="container">
         <h1>Google reviews</h1>
-        <p class="sub">{REVIEW_RATING:.0f}★ from {REVIEW_COUNT} Google reviews for Dimension Exterior Cleaning.</p>
+        <p class="sub">Real Google reviews for Dimension Exterior Cleaning.</p>
         <p class="mt-2">
           <a class="btn btn-primary btn-lg" href="{GOOGLE_REVIEWS_URL}" target="_blank" rel="noopener noreferrer">See all on Google →</a>
         </p>
@@ -1104,7 +1104,7 @@ reviews_body = f'''    <section class="page-hero">
 
 write("reviews/index.html", page(
     "Reviews | Dimension Exterior Cleaning",
-    "Read Google reviews for Dimension Exterior Cleaning in Sheffield. 5.0 from 4 reviews for gutter, drive and patio cleaning.",
+    "Read Google reviews for Dimension Exterior Cleaning in Sheffield. Gutter, drive and patio cleaning.",
     "reviews",
     reviews_body,
     schema=True,
