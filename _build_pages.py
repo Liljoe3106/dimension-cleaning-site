@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Generate Dimension Exterior Cleaning static HTML pages from approved copy."""
 
+import html
+import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -45,6 +47,35 @@ PHONE_WA = "447494503865"
 EMAIL = "joe@dimensioncleaning.co.uk"
 GOOGLE_REVIEWS_URL = "https://share.google/9QR0ZfozypxOPySyf"
 
+_REVIEWS_DATA = json.loads((ROOT / "google-reviews.json").read_text(encoding="utf-8"))
+REVIEWS = _REVIEWS_DATA["reviews"]
+REVIEW_RATING = _REVIEWS_DATA["rating"]
+REVIEW_COUNT = _REVIEWS_DATA["review_count"]
+
+
+def stars_html(rating=5):
+    filled = "★" * int(rating)
+    return f'<span class="stars" aria-label="{int(rating)} out of 5 stars">{filled}</span>'
+
+
+def testimonial_cards_html(reviews=None):
+    reviews = reviews if reviews is not None else REVIEWS
+    cards = []
+    for r in reviews:
+        author = html.escape(r["author"])
+        body = html.escape(r["text"])
+        cards.append(
+            f'<blockquote class="testimonial">'
+            f'<p class="testimonial-text">{body}</p>'
+            f'<footer class="testimonial-meta">'
+            f'{stars_html(r.get("rating", 5))}'
+            f'<cite class="testimonial-author">{author}</cite>'
+            f'</footer>'
+            f'</blockquote>'
+        )
+    return "\n          ".join(cards)
+
+
 HEADER = '''  <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <a class="brand-banner" href="/">
@@ -78,6 +109,7 @@ HEADER = '''  <a class="skip-link" href="#main">Skip to content</a>
           <a href="/care-plan/" data-nav="care-plan">Care plan</a>
           <a href="/areas/" data-nav="areas">Areas</a>
           <a href="/faq/" data-nav="faq">FAQ</a>
+          <a href="/reviews/" data-nav="reviews">Reviews</a>
           <a href="/get-a-quote/" data-nav="get-a-quote">Get a quote</a>
           <a href="/contact/" data-nav="contact">Contact</a>
         </nav>
@@ -189,7 +221,7 @@ def page(title, description, nav_id, body, *, schema=False, canonical="/", crumb
   <meta name="theme-color" content="#ffffff">
   <meta name="color-scheme" content="light only">
   <meta name="supported-color-schemes" content="light">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=banner1">{schema_block}
+  <link rel="stylesheet" href="/assets/css/styles.css?v=reviews1">{schema_block}
 </head>
 <body>
 {header}
@@ -276,16 +308,6 @@ home_body = f'''    <section class="page-hero">
 
     <section class="section">
       <div class="container">
-        <div class="callout">
-          <h2>Google reviews</h2>
-          <p>See what customers say about Dimension Exterior Cleaning.</p>
-          <a class="btn btn-primary" href="{GOOGLE_REVIEWS_URL}" target="_blank" rel="noopener noreferrer">See our Google reviews →</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
         <h2>Before &amp; after</h2>
         <p class="muted mb-2">Real jobs from around Sheffield. Gutters, downpipes, path, driveway, conservatory, and roof.</p>
         <div class="gallery">
@@ -297,6 +319,21 @@ home_body = f'''    <section class="page-hero">
           {gallery_photo("roof-scrape", "Roof", "Moss scrape on a terracotta roof", 1200, 1600)}
           {gallery_photo("roof-softwash", "Softwash", "Softwash foam on a pantile roof", 1200, 1600)}
         </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="reviews">
+      <div class="container">
+        <h2>What customers say</h2>
+        <p class="muted mb-2">{REVIEW_RATING:.0f}★ from {REVIEW_COUNT} Google reviews.</p>
+        <div class="testimonials">
+          {testimonial_cards_html()}
+        </div>
+        <p class="mt-2 testimonials-links">
+          <a href="/reviews/">See all reviews →</a>
+          ·
+          <a href="{GOOGLE_REVIEWS_URL}" target="_blank" rel="noopener noreferrer">See all on Google →</a>
+        </p>
       </div>
     </section>
 
@@ -568,7 +605,7 @@ write("roof-cleaning/index.html", page(
 care_body = f'''    <section class="page-hero">
       <div class="container">
         <h1>Pay once. Two gutter visits. 15% off other services.</h1>
-        <p class="sub">Annual care plan. Most semis: <strong>£98 a year</strong>.</p>
+        <p class="sub">Annual care plan timed around spring growth and autumn leaf fall. Most semis: <strong>£98 a year</strong>.</p>
         <p class="mt-2"><a class="btn btn-primary btn-lg" href="/contact/">Ask to join the care plan</a></p>
       </div>
     </section>
@@ -577,7 +614,8 @@ care_body = f'''    <section class="page-hero">
       <div class="container">
         <h2>What’s included</h2>
         <ul>
-          <li>Two gutter cleans, six months apart</li>
+          <li>Two gutter cleans, six months apart: after spring growth and after autumn leaf fall</li>
+          <li>Aimed at preventing blockages before they become a problem</li>
           <li>Visits show as covered (no extra gutter fee those days)</li>
           <li><strong>15% off</strong> soffits, drive, patio, seal, roof, and render while the plan is live</li>
         </ul>
@@ -605,7 +643,7 @@ care_body = f'''    <section class="page-hero">
     <section class="section">
       <div class="container prose">
         <h2>Who it’s for</h2>
-        <p>You want gutters done twice a year without chasing a booking every autumn, plus a real discount when you add drive, roof, or fascias later.</p>
+        <p>You want gutters done twice a year, after spring growth and after autumn leaf fall, so leaves and debris are cleared before they cause a blockage. No chasing a booking every season, plus a real discount when you add drive, roof, or fascias later.</p>
       </div>
     </section>
 
@@ -1035,6 +1073,45 @@ write("privacy/index.html", page(
     crumb="Privacy",
 ))
 
+
+# —— REVIEWS ——
+reviews_body = f'''    <section class="page-hero">
+      <div class="container">
+        <h1>Google reviews</h1>
+        <p class="sub">{REVIEW_RATING:.0f}★ from {REVIEW_COUNT} Google reviews for Dimension Exterior Cleaning.</p>
+        <p class="mt-2">
+          <a class="btn btn-primary btn-lg" href="{GOOGLE_REVIEWS_URL}" target="_blank" rel="noopener noreferrer">See all on Google →</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="testimonials testimonials--page">
+          {testimonial_cards_html()}
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container">
+        <h2>Ready for a clean?</h2>
+        <p>Email <a href="mailto:{EMAIL}">{EMAIL}</a> · Call <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></p>
+        <p class="mt-2"><a class="btn btn-primary" href="/get-a-quote/">Get a quote</a>
+          <a class="btn btn-secondary" href="/contact/">Contact</a></p>
+      </div>
+    </section>'''
+
+write("reviews/index.html", page(
+    "Reviews | Dimension Exterior Cleaning",
+    "Read Google reviews for Dimension Exterior Cleaning in Sheffield. 5.0 from 4 reviews for gutter, drive and patio cleaning.",
+    "reviews",
+    reviews_body,
+    schema=True,
+    canonical="/reviews/",
+    crumb="Reviews",
+))
+
 # —— robots.txt + sitemap.xml ——
 ROBOTS = """User-agent: *
 Allow: /
@@ -1055,6 +1132,7 @@ SITEMAP_PATHS = [
     "/get-a-quote/",
     "/contact/",
     "/faq/",
+    "/reviews/",
     "/privacy/",
 ]
 sitemap_urls = "\n".join(
