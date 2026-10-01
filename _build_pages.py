@@ -41,6 +41,51 @@ def gallery_pair(stem_a, stem_b, label, alt_a, alt_b, width, height):
     )
 
 
+def gallery_slider(slides, label="Gallery photos"):
+    """Lightweight carousel markup from a list of slide HTML strings (figures)."""
+    slides_html = "\n          ".join(
+        f'<div class="gallery-slider__slide">{slide}</div>' for slide in slides
+    )
+    safe_label = html.escape(label)
+    return (
+        f'<div class="gallery-slider" data-gallery-slider tabindex="0" '
+        f'aria-roledescription="carousel" aria-label="{safe_label}">'
+        f'<button type="button" class="gallery-slider__btn gallery-slider__btn--prev" '
+        f'aria-label="Previous photo"><span aria-hidden="true">‹</span></button>'
+        f'<div class="gallery-slider__viewport">'
+        f'<div class="gallery-slider__track">'
+        f'{slides_html}'
+        f'</div>'
+        f'</div>'
+        f'<button type="button" class="gallery-slider__btn gallery-slider__btn--next" '
+        f'aria-label="Next photo"><span aria-hidden="true">›</span></button>'
+        f'<div class="gallery-slider__dots" role="tablist" aria-label="{safe_label} pages"></div>'
+        f'</div>'
+    )
+
+
+def gallery_category(title, slides, href=None, link_text=None, blurb=None):
+    """Home category block: h3, optional muted blurb/link, then slider."""
+    safe_title = html.escape(title)
+    meta_bits = []
+    if blurb:
+        meta_bits.append(html.escape(blurb))
+    if href:
+        lt = html.escape(link_text or f"{title} →")
+        meta_bits.append(f'<a href="{html.escape(href)}">{lt}</a>')
+    meta = ""
+    if meta_bits:
+        meta = f'<p class="muted gallery-category__meta">{" · ".join(meta_bits)}</p>'
+    slider = gallery_slider(slides, label=f"{title} photos")
+    return (
+        f'<div class="gallery-category">'
+        f'<h3>{safe_title}</h3>'
+        f'{meta}'
+        f'{slider}'
+        f'</div>'
+    )
+
+
 PHONE_DISPLAY = "07494 503865"
 PHONE_TEL = "+447494503865"
 PHONE_WA = "447494503865"
@@ -136,7 +181,7 @@ FOOTER = f'''  <footer class="site-footer">
     <a class="mb-wa" href="https://wa.me/{PHONE_WA}" target="_blank" rel="noopener">WhatsApp</a>
     <a class="mb-quote" href="/get-a-quote/">Get a quote</a>
   </nav>
-  <script src="/assets/js/main.js" defer></script>'''
+  <script src="/assets/js/main.js?v=galcats1" defer></script>'''
 
 SITE_ORIGIN = "https://dimensioncleaning.co.uk"
 OG_IMAGE = f"{SITE_ORIGIN}/assets/images/path-after.jpg"
@@ -221,7 +266,7 @@ def page(title, description, nav_id, body, *, schema=False, canonical="/", crumb
   <meta name="theme-color" content="#ffffff">
   <meta name="color-scheme" content="light only">
   <meta name="supported-color-schemes" content="light">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=reviews1">{schema_block}
+  <link rel="stylesheet" href="/assets/css/styles.css?v=galcats1">{schema_block}
 </head>
 <body>
 {header}
@@ -309,19 +354,44 @@ home_body = f'''    <section class="page-hero">
     <section class="section">
       <div class="container">
         <h2>Before &amp; after</h2>
-        <p class="muted mb-2">Real jobs from around Sheffield. Gutters, downpipes, path, driveway, patio, render, conservatory, and roof.</p>
-        <div class="gallery">
-          {gallery_pair("gutter-before", "gutter-after", "Gutters", "Gutter before cleaning, full of moss and debris", "Gutter after vac cleaning, clear and tidy", 1400, 1866)}
-          {gallery_photo("gutter-process", "Gutter vac", "Gutter vac in use with high-reach pole and debris collection bag", 1078, 1078)}
-          {gallery_photo("gutter-ba", "White gutter", "White gutter before and after vac cleaning on a slate roof", 1200, 1200)}
-          {gallery_photo("downpipe-blocked", "Downpipe", "Blocked downpipe packed with leaves and sludge", 1200, 1600)}
-          {gallery_photo("downpipe-block", "Downpipe plug", "Square downpipe opened with a solid debris plug pulled out", 1200, 1200)}
-          {gallery_photo("path-ba", "Path", "Flagstone path before and after pressure washing", 1076, 1076)}
-          {gallery_photo("drive-ba", "Driveway", "Herringbone driveway before and after pressure washing, job 285", 1200, 1200)}
-          {gallery_pair("conservatory-before", "conservatory-after", "Conservatory", "Conservatory roof before cleaning, algae on polycarbonate panels", "Conservatory roof after cleaning, clear polycarbonate panels", 1600, 1200)}
-          {gallery_photo("roof-scrape", "Roof", "Moss scrape on a terracotta roof", 1200, 1600)}
-          {gallery_photo("roof-softwash", "Softwash", "Softwash foam on a pantile roof", 1200, 1600)}
-          {gallery_photo("render-before-after", "Render", "Rendered wall before and after softwash cleaning", 1200, 1200)}
+        <p class="muted mb-2">Real jobs from around Sheffield, grouped by service.</p>
+        <div class="gallery-categories">
+          {gallery_category(
+            "Gutter cleaning",
+            [
+              gallery_pair("gutter-before", "gutter-after", "Gutters", "Gutter before cleaning, full of moss and debris", "Gutter after vac cleaning, clear and tidy", 1400, 1866),
+              gallery_photo("gutter-process", "Gutter vac", "Gutter vac in use with high-reach pole and debris collection bag", 1078, 1078),
+              gallery_photo("gutter-ba", "White gutter", "White gutter before and after vac cleaning on a slate roof", 1200, 1200),
+              gallery_photo("downpipe-blocked", "Downpipe", "Blocked downpipe packed with leaves and sludge", 1200, 1600),
+              gallery_photo("downpipe-block", "Downpipe plug", "Square downpipe opened with a solid debris plug pulled out", 1200, 1200),
+            ],
+            href="/gutter-cleaning/",
+            link_text="Gutter cleaning →",
+            blurb="Vac clears and downpipe work.",
+          )}
+          {gallery_category(
+            "Drive & patio",
+            [
+              gallery_photo("path-ba", "Path", "Flagstone path before and after pressure washing", 1076, 1076),
+              gallery_photo("drive-ba", "Driveway", "Herringbone driveway before and after pressure washing, job 285", 1200, 1200),
+              gallery_photo("patio-before-after", "Patio", "Patio slabs before and after pressure washing", 1200, 1200),
+            ],
+            href="/drive-patio/",
+            link_text="Drive & patio →",
+            blurb="Paths, drives and patio washes.",
+          )}
+          {gallery_category(
+            "Roof & softwash",
+            [
+              gallery_photo("roof-scrape", "Roof", "Moss scrape on a terracotta roof", 1200, 1600),
+              gallery_photo("roof-softwash", "Softwash", "Softwash foam on a pantile roof", 1200, 1600),
+              gallery_photo("render-before-after", "Render", "Rendered wall before and after softwash cleaning", 1200, 1200),
+              gallery_pair("conservatory-before", "conservatory-after", "Conservatory", "Conservatory roof before cleaning, algae on polycarbonate panels", "Conservatory roof after cleaning, clear polycarbonate panels", 1600, 1200),
+            ],
+            href="/roof-cleaning/",
+            link_text="Roof cleaning →",
+            blurb="Roof scrape, softwash, render and conservatory.",
+          )}
         </div>
       </div>
     </section>
@@ -407,14 +477,14 @@ gutter_body = f'''    <section class="page-hero">
       <div class="container">
         <h2>Before &amp; after</h2>
         <p class="muted mb-2">What a blocked run and a cleared gutter look like on a real job.</p>
-        <div class="gallery gallery--proof">
-          {gallery_photo("gutter-before", "Before", "Gutter before cleaning, full of moss and debris", 1400, 1866)}
-          {gallery_photo("gutter-after", "After", "Gutter after vac cleaning, clear and tidy", 1400, 1866)}
-          {gallery_photo("gutter-process", "Gutter vac", "Gutter vac in use with high-reach pole and debris collection bag", 1078, 1078)}
-          {gallery_photo("gutter-ba", "White gutter", "White gutter before and after vac cleaning on a slate roof", 1200, 1200)}
-          {gallery_photo("downpipe-blocked", "Blocked downpipe", "Blocked downpipe packed with leaves and sludge", 1200, 1600)}
-          {gallery_photo("downpipe-block", "Downpipe plug", "Square downpipe opened with a solid debris plug pulled out", 1200, 1200)}
-        </div>
+        {gallery_slider([
+          gallery_photo("gutter-before", "Before", "Gutter before cleaning, full of moss and debris", 1400, 1866),
+          gallery_photo("gutter-after", "After", "Gutter after vac cleaning, clear and tidy", 1400, 1866),
+          gallery_photo("gutter-process", "Gutter vac", "Gutter vac in use with high-reach pole and debris collection bag", 1078, 1078),
+          gallery_photo("gutter-ba", "White gutter", "White gutter before and after vac cleaning on a slate roof", 1200, 1200),
+          gallery_photo("downpipe-blocked", "Blocked downpipe", "Blocked downpipe packed with leaves and sludge", 1200, 1600),
+          gallery_photo("downpipe-block", "Downpipe plug", "Square downpipe opened with a solid debris plug pulled out", 1200, 1200),
+        ], label="Gutter cleaning photos")}
       </div>
     </section>
 
@@ -534,11 +604,11 @@ drive_body = f'''    <section class="page-hero">
       <div class="container">
         <h2>Before &amp; after</h2>
         <p class="muted mb-2">Path, driveway and patio cleans on real jobs. Dry after is what your neighbours will see.</p>
-        <div class="gallery gallery--proof">
-          {gallery_photo("path-ba", "Path", "Flagstone path before and after pressure washing", 1076, 1076)}
-          {gallery_photo("drive-ba", "Driveway", "Herringbone driveway before and after pressure washing, job 285", 1200, 1200)}
-          {gallery_photo("patio-before-after", "Patio", "Patio slabs before and after pressure washing", 1200, 1200)}
-        </div>
+        {gallery_slider([
+          gallery_photo("path-ba", "Path", "Flagstone path before and after pressure washing", 1076, 1076),
+          gallery_photo("drive-ba", "Driveway", "Herringbone driveway before and after pressure washing, job 285", 1200, 1200),
+          gallery_photo("patio-before-after", "Patio", "Patio slabs before and after pressure washing", 1200, 1200),
+        ], label="Drive and patio photos")}
       </div>
     </section>
 
@@ -557,7 +627,7 @@ write("drive-patio/index.html", page(
     drive_body,
     schema=True,
     canonical="/drive-patio/",
-    crumb="Drive &amp; patio",
+    crumb="Drive & patio",
 ))
 
 # —— ROOF ——
@@ -582,11 +652,13 @@ roof_body = f'''    <section class="page-hero">
     <section class="section section-alt">
       <div class="container">
         <h2>Proof</h2>
-        <p class="muted mb-2">Moss scrape and softwash on a terracotta roof.</p>
-        <div class="gallery gallery--proof">
-          {gallery_photo("roof-scrape", "Roof scrape", "Moss scrape on a terracotta roof", 1200, 1600)}
-          {gallery_photo("roof-softwash", "Softwash", "Softwash foam on a pantile roof", 1200, 1600)}
-        </div>
+        <p class="muted mb-2">Moss scrape, softwash, render and conservatory on real jobs.</p>
+        {gallery_slider([
+          gallery_photo("roof-scrape", "Roof scrape", "Moss scrape on a terracotta roof", 1200, 1600),
+          gallery_photo("roof-softwash", "Softwash", "Softwash foam on a pantile roof", 1200, 1600),
+          gallery_photo("render-before-after", "Render", "Rendered wall before and after softwash cleaning", 1200, 1200),
+          gallery_pair("conservatory-before", "conservatory-after", "Conservatory", "Conservatory roof before cleaning, algae on polycarbonate panels", "Conservatory roof after cleaning, clear polycarbonate panels", 1600, 1200),
+        ], label="Roof and softwash photos")}
       </div>
     </section>
 
