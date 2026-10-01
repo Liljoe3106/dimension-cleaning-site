@@ -309,15 +309,19 @@ home_body = f'''    <section class="page-hero">
     <section class="section">
       <div class="container">
         <h2>Before &amp; after</h2>
-        <p class="muted mb-2">Real jobs from around Sheffield. Gutters, downpipes, path, driveway, conservatory, and roof.</p>
+        <p class="muted mb-2">Real jobs from around Sheffield. Gutters, downpipes, path, driveway, patio, render, conservatory, and roof.</p>
         <div class="gallery">
           {gallery_pair("gutter-before", "gutter-after", "Gutters", "Gutter before cleaning, full of moss and debris", "Gutter after vac cleaning, clear and tidy", 1400, 1866)}
+          {gallery_photo("gutter-process", "Gutter vac", "Gutter vac in use with high-reach pole and debris collection bag", 1078, 1078)}
+          {gallery_photo("gutter-ba", "White gutter", "White gutter before and after vac cleaning on a slate roof", 1200, 1200)}
           {gallery_photo("downpipe-blocked", "Downpipe", "Blocked downpipe packed with leaves and sludge", 1200, 1600)}
-          {gallery_pair("path-before", "path-after", "Path", "Dirty flagstone path before cleaning", "Cleaned flagstone path after pressure washing", 1200, 1600)}
-          {gallery_pair("drive-before", "drive-after", "Driveway", "Dirty herringbone driveway before cleaning", "Cleaned herringbone driveway after pressure washing", 1200, 1600)}
+          {gallery_photo("downpipe-block", "Downpipe plug", "Square downpipe opened with a solid debris plug pulled out", 1200, 1200)}
+          {gallery_photo("path-ba", "Path", "Flagstone path before and after pressure washing", 1076, 1076)}
+          {gallery_photo("drive-ba", "Driveway", "Herringbone driveway before and after pressure washing, job 285", 1200, 1200)}
           {gallery_pair("conservatory-before", "conservatory-after", "Conservatory", "Conservatory roof before cleaning, algae on polycarbonate panels", "Conservatory roof after cleaning, clear polycarbonate panels", 1600, 1200)}
           {gallery_photo("roof-scrape", "Roof", "Moss scrape on a terracotta roof", 1200, 1600)}
           {gallery_photo("roof-softwash", "Softwash", "Softwash foam on a pantile roof", 1200, 1600)}
+          {gallery_photo("render-before-after", "Render", "Rendered wall before and after softwash cleaning", 1200, 1200)}
         </div>
       </div>
     </section>
@@ -406,7 +410,10 @@ gutter_body = f'''    <section class="page-hero">
         <div class="gallery gallery--proof">
           {gallery_photo("gutter-before", "Before", "Gutter before cleaning, full of moss and debris", 1400, 1866)}
           {gallery_photo("gutter-after", "After", "Gutter after vac cleaning, clear and tidy", 1400, 1866)}
+          {gallery_photo("gutter-process", "Gutter vac", "Gutter vac in use with high-reach pole and debris collection bag", 1078, 1078)}
+          {gallery_photo("gutter-ba", "White gutter", "White gutter before and after vac cleaning on a slate roof", 1200, 1200)}
           {gallery_photo("downpipe-blocked", "Blocked downpipe", "Blocked downpipe packed with leaves and sludge", 1200, 1600)}
+          {gallery_photo("downpipe-block", "Downpipe plug", "Square downpipe opened with a solid debris plug pulled out", 1200, 1200)}
         </div>
       </div>
     </section>
@@ -526,10 +533,11 @@ drive_body = f'''    <section class="page-hero">
     <section class="section section-alt">
       <div class="container">
         <h2>Before &amp; after</h2>
-        <p class="muted mb-2">Path and driveway cleans on real jobs. Dry after is what your neighbours will see.</p>
+        <p class="muted mb-2">Path, driveway and patio cleans on real jobs. Dry after is what your neighbours will see.</p>
         <div class="gallery gallery--proof">
-          {gallery_pair("path-before", "path-after", "Path", "Dirty flagstone path before cleaning", "Cleaned flagstone path after pressure washing", 1200, 1600)}
-          {gallery_pair("drive-before", "drive-after", "Driveway", "Dirty herringbone driveway before cleaning", "Cleaned herringbone driveway after pressure washing", 1200, 1600)}
+          {gallery_photo("path-ba", "Path", "Flagstone path before and after pressure washing", 1076, 1076)}
+          {gallery_photo("drive-ba", "Driveway", "Herringbone driveway before and after pressure washing, job 285", 1200, 1200)}
+          {gallery_photo("patio-before-after", "Patio", "Patio slabs before and after pressure washing", 1200, 1200)}
         </div>
       </div>
     </section>
