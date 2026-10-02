@@ -59,18 +59,16 @@
     }
   });
 
-  // Contact form → mailto fallback
+  // Contact form → Web3Forms (with mailto fallback)
   var form = document.getElementById('contact-form');
   if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var name = (form.querySelector('[name="name"]') || {}).value || '';
-      var phone = (form.querySelector('[name="phone"]') || {}).value || '';
-      var email = (form.querySelector('[name="email"]') || {}).value || '';
-      var postcode = (form.querySelector('[name="postcode"]') || {}).value || '';
-      var service = (form.querySelector('[name="service"]') || {}).value || '';
-      var message = (form.querySelector('[name="message"]') || {}).value || '';
-
+    var PLACEHOLDER_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
+    function contactAccessKey() {
+      var key = (form.getAttribute('data-access-key') || '').trim();
+      if (!key || key === PLACEHOLDER_KEY) return '';
+      return key;
+    }
+    function contactMailto(name, phone, email, postcode, service, message) {
       var subject = 'Quote request' + (service ? ' — ' + service : '') + (postcode ? ' (' + postcode + ')' : '');
       var body = [
         'Name: ' + name,
@@ -82,19 +80,70 @@
         'Message:',
         message
       ].join('\n');
-
-      var mailto =
+      return (
         'mailto:joe@dimensioncleaning.co.uk' +
         '?subject=' + encodeURIComponent(subject) +
-        '&body=' + encodeURIComponent(body);
-
+        '&body=' + encodeURIComponent(body)
+      );
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = (form.querySelector('[name="name"]') || {}).value || '';
+      var phone = (form.querySelector('[name="phone"]') || {}).value || '';
+      var email = (form.querySelector('[name="email"]') || {}).value || '';
+      var postcode = (form.querySelector('[name="postcode"]') || {}).value || '';
+      var service = (form.querySelector('[name="service"]') || {}).value || '';
+      var message = (form.querySelector('[name="message"]') || {}).value || '';
       var success = document.getElementById('form-success');
-      if (success) {
-        success.textContent = 'Your email app should open… If it doesn’t, email joe@dimensioncleaning.co.uk or call 07494 503865.';
-        success.classList.add('is-visible');
+      var key = contactAccessKey();
+      var btn = form.querySelector('[type="submit"]');
+
+      function showMailtoFallback() {
+        if (success) {
+          success.textContent = 'Your email app should open… If it doesn’t, email joe@dimensioncleaning.co.uk or call 07494 503865.';
+          success.classList.add('is-visible');
+        }
+        window.location.href = contactMailto(name, phone, email, postcode, service, message);
       }
 
-      window.location.href = mailto;
+      if (!key) {
+        showMailtoFallback();
+        return;
+      }
+
+      if (btn) btn.disabled = true;
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: key,
+          subject: 'Contact form' + (service ? ' — ' + service : '') + (postcode ? ' (' + postcode + ')' : ''),
+          from_name: name || 'Website contact',
+          name: name,
+          phone: phone,
+          email: email,
+          postcode: postcode,
+          service: service,
+          message: message
+        })
+      })
+        .then(function (res) { return res.json().then(function (data) { return { ok: res.ok, data: data }; }); })
+        .then(function (result) {
+          if (btn) btn.disabled = false;
+          if (result.ok && result.data && result.data.success) {
+            if (success) {
+              success.textContent = 'Thanks — your message is with Joe. He’ll reply soon, or call 07494 503865.';
+              success.classList.add('is-visible');
+            }
+            form.reset();
+          } else {
+            showMailtoFallback();
+          }
+        })
+        .catch(function () {
+          if (btn) btn.disabled = false;
+          showMailtoFallback();
+        });
     });
   }
 

@@ -3,7 +3,10 @@
 
 import html
 import json
+import os
 from pathlib import Path
+
+WEB3FORMS_KEY = os.environ.get("WEB3FORMS_ACCESS_KEY", "").strip() or "e7d5388a-1ae2-4e82-9852-a95826fb5807"
 
 ROOT = Path(__file__).resolve().parent
 
@@ -187,7 +190,7 @@ FOOTER = f'''  <footer class="site-footer">
     <a class="mb-wa" href="https://wa.me/{PHONE_WA}" target="_blank" rel="noopener">WhatsApp</a>
     <a class="mb-quote" href="/get-a-quote/">Get a quote</a>
   </nav>
-  <script src="/assets/js/main.js?v=imp1" defer></script>'''
+  <script src="/assets/js/main.js?v=w3f1" defer></script>'''
 
 SITE_ORIGIN = "https://dimensioncleaning.co.uk"
 OG_IMAGE = f"{SITE_ORIGIN}/assets/images/path-after.jpg"
@@ -1049,7 +1052,7 @@ contact_body = f'''    <section class="page-hero">
           </div>
           <div>
             <div id="form-success" class="form-success" role="status" aria-live="polite"></div>
-            <form id="contact-form" action="#" method="get" novalidate>
+            <form id="contact-form" action="#" method="get" data-access-key="{html.escape(WEB3FORMS_KEY, quote=True)}" novalidate>
               <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required autocomplete="name">
@@ -1113,7 +1116,7 @@ quote_body = f'''    <section class="page-hero">
         <div id="quote-success" class="form-success" role="status" aria-live="polite"></div>
         <div id="quote-error" class="form-error" role="alert" aria-live="assertive"></div>
 
-        <form id="quote-form" class="quote-layout" data-access-key="YOUR_WEB3FORMS_ACCESS_KEY" novalidate>
+        <form id="quote-form" class="quote-layout" data-access-key="{html.escape(WEB3FORMS_KEY, quote=True)}" novalidate>
           <div class="quote-panel">
             <div class="quote-section" id="house-size-wrap">
               <h2>House size</h2>
@@ -1256,7 +1259,7 @@ write("get-a-quote/index.html", page(
     schema=True,
     canonical="/get-a-quote/",
     crumb="Get a quote",
-    extra_scripts='  <script src="/assets/js/quote-builder.js?v=imp1" defer></script>\n',
+    extra_scripts='  <script src="/assets/js/quote-builder.js?v=w3f1" defer></script>\n',
 ))
 
 # —— PRIVACY ——
