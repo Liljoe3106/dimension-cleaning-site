@@ -175,6 +175,7 @@ FOOTER = f'''  <footer class="site-footer">
     <div class="container footer-inner">
       <div>
         <div class="footer-brand">© Dimension Exterior Cleaning</div>
+        <p class="footer-former">Formerly Dimension Powerwash.</p>
         <div><a href="mailto:{EMAIL}">{EMAIL}</a></div>
         <div><a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></div>
       </div>
@@ -285,7 +286,7 @@ def page(title, description, nav_id, body, *, schema=False, schema_json=None, ca
   <meta name="theme-color" content="#ffffff">
   <meta name="color-scheme" content="light only">
   <meta name="supported-color-schemes" content="light">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=imp1">{schema_block}
+  <link rel="stylesheet" href="/assets/css/styles.css?v=footer1">{schema_block}
 </head>
 <body>
 {header}
