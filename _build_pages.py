@@ -746,6 +746,7 @@ care_body = f'''    <section class="page-hero">
             </tbody>
           </table>
         </div>
+        <p><strong>Add-ons:</strong> Conservatory or extension +£15 a year. Extra downpipes after the first two +£10 each a year.</p>
         <p class="muted">How we price it: double the gutter band, take 30%. Paid up front.</p>
       </div>
     </section>
@@ -754,7 +755,7 @@ care_body = f'''    <section class="page-hero">
       <div class="container">
         <h2>Upgrade on the day</h2>
         <p>Already booked a one-off gutter clean? Add the difference on the day and your next clean in six months is included, plus 15% off other work for the year.</p>
-        <p>Your one-off clean counts as plan visit 1.</p>
+        <p>Your one-off clean counts as plan visit 1. Any add-ons carry over to the plan at the same price.</p>
         <div class="table-wrap">
           <table class="pricing">
             <thead><tr><th>Home</th><th>Top-up on the day</th><th>One-off to care plan</th></tr></thead>
@@ -1018,7 +1019,7 @@ faq_items = [
     ("Do you cover my area?",
      'Sheffield and nearby South Yorks / North Notts. See <a href="/areas/">Areas</a>, or send your postcode if you are unsure.'),
     ("What’s the care plan again?",
-     "Pay once for the year. Two gutter visits. 15% off other exterior work while you’re on the plan. From £70 a year for small homes. Medium homes usually £98."),
+     "Pay once for the year. Two gutter visits. 15% off other exterior work while you’re on the plan. From £70 a year for small homes. Medium homes usually £98. Conservatory or extension (+£15) and extra downpipe (+£10 each) add-ons apply at the same prices, added to the yearly price."),
 ]
 faq_html = "\n".join(
     f'        <div class="faq-item">\n          <h3>{q}</h3>\n          <p>{a}</p>\n        </div>'
@@ -1164,15 +1165,16 @@ quote_body = f'''    <section class="page-hero">
               <p class="muted" style="margin-bottom:0.75rem">Select at least one. Gutter one-off and care plan cannot both be selected.</p>
 
               <label class="quote-check"><input type="checkbox" id="svc-gutter" name="svc_gutter"> Gutter clean (one-off)</label>
+
+              <label class="quote-check"><input type="checkbox" id="svc-care" name="svc_care"> Care plan (annual): two gutter visits, 15% off other work</label>
               <div id="gutter-addons" class="quote-nested" hidden>
                 <label class="quote-check"><input type="checkbox" id="addon-conservatory"> Conservatory or extension (+£15)</label>
                 <div class="form-group" style="margin:0.5rem 0 0">
                   <label for="addon-downpipes">Extra downpipes after the first two (£10 each)</label>
                   <input type="number" id="addon-downpipes" min="0" step="1" value="0" inputmode="numeric">
                 </div>
+                <p class="quote-helper">Gutter add-ons. On the care plan they are added per year at the same price.</p>
               </div>
-
-              <label class="quote-check"><input type="checkbox" id="svc-care" name="svc_care"> Care plan (annual): two gutter visits, 15% off other work</label>
 
               <label class="quote-check"><input type="checkbox" id="svc-fascias" name="svc_fascias"> Soffits &amp; fascias</label>
               <div id="fascias-options" class="quote-nested" hidden>
@@ -1289,7 +1291,7 @@ write("get-a-quote/index.html", page(
     schema=True,
     canonical="/get-a-quote/",
     crumb="Get a quote",
-    extra_scripts='  <script src="/assets/js/quote-builder.js?v=w3f1" defer></script>\n',
+    extra_scripts='  <script src="/assets/js/quote-builder.js?v=careaddon1" defer></script>\n',
 ))
 
 # —— PRIVACY ——

@@ -15,6 +15,8 @@
   var ROOF_RATE = 12;
   var ROOF_FLOOR = 500;
   var CARE_OFF = 0.15;
+  var ADDON_CONSERVATORY = 15;
+  var ADDON_DOWNPIPE = 10;
 
   var SIZE_LABELS = {
     small: 'Small (terrace 1-2 bed)',
@@ -74,7 +76,7 @@
   }
 
   function syncVisibility() {
-    if (gutterAddons) gutterAddons.hidden = !(svcGutter && svcGutter.checked);
+    if (gutterAddons) gutterAddons.hidden = !((svcGutter && svcGutter.checked) || (svcCare && svcCare.checked));
     if (fasciasOptions) fasciasOptions.hidden = !(svcFascias && svcFascias.checked);
     if (windowsWrap) {
       var showWin = !(svcFascias && svcFascias.checked);
@@ -121,16 +123,6 @@
       anyService = true;
       if (size && GUTTER[size] != null) {
         push({ label: 'Gutter clean (one-off)', amount: GUTTER[size], display: money(GUTTER[size]) });
-        var cons = form.querySelector('#addon-conservatory');
-        if (cons && cons.checked) {
-          push({ label: 'Conservatory / extension', amount: 15, display: money(15) });
-        }
-        var dpEl = form.querySelector('#addon-downpipes');
-        var dp = dpEl ? parseInt(dpEl.value, 10) : 0;
-        if (!isFinite(dp) || dp < 0) dp = 0;
-        if (dp > 0) {
-          push({ label: 'Extra downpipes × ' + dp, amount: dp * 10, display: money(dp * 10) });
-        }
       } else {
         push({ label: 'Gutter clean (one-off)', amount: 0, display: 'Select house size', pending: true });
       }
@@ -142,6 +134,23 @@
         push({ label: 'Care plan (annual)', amount: CARE[size], display: money(CARE[size]) });
       } else {
         push({ label: 'Care plan (annual)', amount: 0, display: 'Select house size', pending: true });
+      }
+    }
+
+    // Gutter add-ons: same prices for the one-off clean and the care plan (per year on the plan).
+    // Charged once even if both are ticked. Never discounted by the care plan 15%.
+    var gutterOn = !!(svcGutter && svcGutter.checked);
+    if ((gutterOn || careOn) && size && GUTTER[size] != null) {
+      var addonSuffix = gutterOn ? '' : ' (plan)';
+      var cons = form.querySelector('#addon-conservatory');
+      if (cons && cons.checked) {
+        push({ label: 'Conservatory / extension' + addonSuffix, amount: ADDON_CONSERVATORY, display: money(ADDON_CONSERVATORY) });
+      }
+      var dpEl = form.querySelector('#addon-downpipes');
+      var dp = dpEl ? parseInt(dpEl.value, 10) : 0;
+      if (!isFinite(dp) || dp < 0) dp = 0;
+      if (dp > 0) {
+        push({ label: 'Extra downpipes × ' + dp + addonSuffix, amount: dp * ADDON_DOWNPIPE, display: money(dp * ADDON_DOWNPIPE) });
       }
     }
 

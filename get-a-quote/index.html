@@ -138,15 +138,16 @@
               <p class="muted" style="margin-bottom:0.75rem">Select at least one. Gutter one-off and care plan cannot both be selected.</p>
 
               <label class="quote-check"><input type="checkbox" id="svc-gutter" name="svc_gutter"> Gutter clean (one-off)</label>
+
+              <label class="quote-check"><input type="checkbox" id="svc-care" name="svc_care"> Care plan (annual): two gutter visits, 15% off other work</label>
               <div id="gutter-addons" class="quote-nested" hidden>
                 <label class="quote-check"><input type="checkbox" id="addon-conservatory"> Conservatory or extension (+£15)</label>
                 <div class="form-group" style="margin:0.5rem 0 0">
                   <label for="addon-downpipes">Extra downpipes after the first two (£10 each)</label>
                   <input type="number" id="addon-downpipes" min="0" step="1" value="0" inputmode="numeric">
                 </div>
+                <p class="quote-helper">Gutter add-ons. On the care plan they are added per year at the same price.</p>
               </div>
-
-              <label class="quote-check"><input type="checkbox" id="svc-care" name="svc_care"> Care plan (annual): two gutter visits, 15% off other work</label>
 
               <label class="quote-check"><input type="checkbox" id="svc-fascias" name="svc_fascias"> Soffits &amp; fascias</label>
               <div id="fascias-options" class="quote-nested" hidden>
@@ -276,6 +277,6 @@
     <a class="mb-quote" href="/get-a-quote/">Get a quote</a>
   </nav>
   <script src="/assets/js/main.js?v=w3f1" defer></script>
-  <script src="/assets/js/quote-builder.js?v=w3f1" defer></script>
+  <script src="/assets/js/quote-builder.js?v=careaddon1" defer></script>
 </body>
 </html>
