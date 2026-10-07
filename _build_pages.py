@@ -332,6 +332,7 @@ home_body = f'''    <section class="page-hero">
           <article class="card">
             <h3>Gutters</h3>
             <p>Vac clean from £50. First two downpipes included.</p>
+            <p class="mt-1"><strong>30-day overflow guarantee.</strong> If your gutters overflow within 30 days because of a blockage I missed, I'll come back and sort it free.</p>
             <p class="mt-1"><a href="/gutter-cleaning/">Gutter cleaning →</a></p>
           </article>
           <article class="card">
@@ -480,6 +481,11 @@ gutter_body = f'''    <section class="page-hero">
           </table>
         </div>
         <p><strong>Add-ons:</strong> Conservatory or extension +£15. Extra downpipes after the first two +£10 each.</p>
+        <div class="callout-plain mt-3">
+          <h3>30-day overflow guarantee</h3>
+          <p>If your gutters overflow within 30 days because of a blockage I missed, I'll come back and sort it free.</p>
+        </div>
+        <p class="mt-2"><strong>Upgrade on the day.</strong> Already booked a one-off gutter clean? Add the difference on the day and your next clean in six months is included, plus 15% off other work for the year. <a href="/care-plan/#upgrade">See the top-up prices</a>.</p>
       </div>
     </section>
 
@@ -718,6 +724,7 @@ care_body = f'''    <section class="page-hero">
           <li>Aimed at preventing blockages before they become a problem</li>
           <li>Visits show as covered (no extra gutter fee those days)</li>
           <li><strong>15% off</strong> soffits, drive, patio, seal, roof, and render while the plan is live</li>
+          <li><strong>30-day overflow guarantee:</strong> If your gutters overflow within 30 days because of a blockage I missed, I'll come back and sort it free.</li>
         </ul>
       </div>
     </section>
@@ -737,6 +744,25 @@ care_body = f'''    <section class="page-hero">
           </table>
         </div>
         <p class="muted">How we price it: double the gutter band, take 30%. Paid up front.</p>
+      </div>
+    </section>
+
+    <section class="section" id="upgrade">
+      <div class="container">
+        <h2>Upgrade on the day</h2>
+        <p>Already booked a one-off gutter clean? Add the difference on the day and your next clean in six months is included, plus 15% off other work for the year.</p>
+        <p>Your one-off clean counts as plan visit 1.</p>
+        <div class="table-wrap">
+          <table class="pricing">
+            <thead><tr><th>Home</th><th>Top-up on the day</th><th>One-off to care plan</th></tr></thead>
+            <tbody>
+              <tr><td>Small</td><td class="price">+£20</td><td>£50 to £70</td></tr>
+              <tr class="highlight"><td>Medium</td><td class="price">+£28</td><td>£70 to £98</td></tr>
+              <tr><td>Large</td><td class="price">+£40</td><td>£100 to £140</td></tr>
+              <tr><td>XL</td><td class="price">+£60</td><td>£150 to £210</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
 
