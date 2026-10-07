@@ -69,6 +69,16 @@
     return '';
   }
 
+  function downpipeTotal() {
+    var el = form.querySelector('#addon-downpipes');
+    if (!el) return null;
+    var v = String(el.value || '').trim();
+    if (v === '') return null;
+    var n = parseInt(v, 10);
+    if (!isFinite(n) || n < 0) return null;
+    return n;
+  }
+
   function needsHouseSize() {
     return !!(
       (svcGutter && svcGutter.checked) ||
@@ -90,7 +100,7 @@
     if (downpipesHint) {
       var hs = sizeKey();
       downpipesHint.textContent = hs && DOWNPIPES_INCLUDED[hs] != null
-        ? 'Your size includes ' + DOWNPIPES_INCLUDED[hs] + ' downpipes. Only enter the extras.'
+        ? 'Your size includes ' + DOWNPIPES_INCLUDED[hs] + '. We\'ll only charge for any extra (£10 each).'
         : DOWNPIPES_HINT_DEFAULT;
     }
     if (houseSizeWrap) houseSizeWrap.classList.toggle('is-required', needsHouseSize());
@@ -148,18 +158,30 @@
 
     // Gutter add-ons: same prices for the one-off clean and the care plan (per year on the plan).
     // Charged once even if both are ticked. Never discounted by the care plan 15%.
+    // Downpipes: the customer enters the house's total; extras = total minus the number included for the size.
+    // "Not sure" (empty) means no downpipe charge.
     var gutterOn = !!(svcGutter && svcGutter.checked);
-    if ((gutterOn || careOn) && size && GUTTER[size] != null) {
-      var addonSuffix = gutterOn ? '' : ' (plan)';
-      var cons = form.querySelector('#addon-conservatory');
-      if (cons && cons.checked) {
-        push({ label: 'Conservatory / extension' + addonSuffix, amount: ADDON_CONSERVATORY, display: money(ADDON_CONSERVATORY) });
-      }
-      var dpEl = form.querySelector('#addon-downpipes');
-      var dp = dpEl ? parseInt(dpEl.value, 10) : 0;
-      if (!isFinite(dp) || dp < 0) dp = 0;
-      if (dp > 0) {
-        push({ label: 'Extra downpipes × ' + dp + ' (beyond ' + DOWNPIPES_INCLUDED[size] + ' included' + (gutterOn ? '' : ', plan') + ')', amount: dp * ADDON_DOWNPIPE, display: money(dp * ADDON_DOWNPIPE) });
+    var dpTotal = (gutterOn || careOn) ? downpipeTotal() : null;
+    if (gutterOn || careOn) {
+      if (size && GUTTER[size] != null) {
+        var addonSuffix = gutterOn ? '' : ' (plan)';
+        var cons = form.querySelector('#addon-conservatory');
+        if (cons && cons.checked) {
+          push({ label: 'Conservatory / extension' + addonSuffix, amount: ADDON_CONSERVATORY, display: money(ADDON_CONSERVATORY) });
+        }
+        if (dpTotal != null) {
+          var dpIncluded = DOWNPIPES_INCLUDED[size];
+          var dpExtra = Math.max(0, dpTotal - dpIncluded);
+          if (dpExtra > 0) {
+            push({
+              label: 'Extra downpipes × ' + dpExtra + ' (' + dpTotal + ' total, ' + dpIncluded + ' included' + (gutterOn ? '' : ', plan') + ')',
+              amount: dpExtra * ADDON_DOWNPIPE,
+              display: money(dpExtra * ADDON_DOWNPIPE)
+            });
+          }
+        }
+      } else if (dpTotal != null) {
+        push({ label: 'Downpipes (' + dpTotal + ' total)', amount: 0, display: 'Select house size', pending: true });
       }
     }
 
@@ -282,7 +304,7 @@
     }
 
     total = Math.round(total * 100) / 100;
-    return { lines: lines, total: total, anyService: anyService, size: size, careOn: careOn };
+    return { lines: lines, total: total, anyService: anyService, size: size, careOn: careOn, gutterOrPlan: gutterOn || careOn, dpTotal: dpTotal };
   }
 
   function escapeHtml(s) {
@@ -395,6 +417,7 @@
       'Email: ' + email,
       'Postcode: ' + postcode,
       'House size: ' + sizeLabel,
+      q.gutterOrPlan ? 'Downpipes: ' + (q.dpTotal != null ? q.dpTotal + ' total' : 'not sure') : null,
       '',
       'Selected services:',
       lineText || '(none)',
@@ -405,7 +428,7 @@
       notes || '(none)',
       '',
       'Submitted: ' + stamp + ' (UK)'
-    ].join('\n');
+    ].filter(function (l) { return l !== null; }).join('\n');
   }
 
   function subjectLine(q, postcode) {

@@ -1135,6 +1135,7 @@ write("contact/index.html", page(
 
 
 # —— GET A QUOTE ——
+DOWNPIPE_OPTIONS = "\n".join(f'                    <option value="{n}">{n}</option>' for n in range(1, 21))
 quote_body = f'''    <section class="page-hero">
       <div class="container">
         <h1>Get a guide price</h1>
@@ -1170,8 +1171,11 @@ quote_body = f'''    <section class="page-hero">
               <div id="gutter-addons" class="quote-nested" hidden>
                 <label class="quote-check"><input type="checkbox" id="addon-conservatory"> Conservatory or extension (+£15)</label>
                 <div class="form-group" style="margin:0.5rem 0 0">
-                  <label for="addon-downpipes">Extra downpipes beyond those included for your size (£10 each)</label>
-                  <input type="number" id="addon-downpipes" min="0" step="1" value="0" inputmode="numeric" aria-describedby="downpipes-included-hint">
+                  <label for="addon-downpipes">How many downpipes does your house have?</label>
+                  <select id="addon-downpipes" name="downpipes_total" aria-describedby="downpipes-included-hint">
+                    <option value="" selected>Not sure</option>
+{DOWNPIPE_OPTIONS}
+                  </select>
                   <p class="quote-helper" id="downpipes-included-hint">Downpipes included: 2 on Small and Medium, 4 on Large, 6 on XL.</p>
                 </div>
                 <p class="quote-helper">Gutter add-ons. On the care plan they are added per year at the same price.</p>
@@ -1292,7 +1296,7 @@ write("get-a-quote/index.html", page(
     schema=True,
     canonical="/get-a-quote/",
     crumb="Get a quote",
-    extra_scripts='  <script src="/assets/js/quote-builder.js?v=downpipe1" defer></script>\n',
+    extra_scripts='  <script src="/assets/js/quote-builder.js?v=downpipe2" defer></script>\n',
 ))
 
 # —— PRIVACY ——
