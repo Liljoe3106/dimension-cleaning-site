@@ -13,6 +13,9 @@ WEB3FORMS_KEY = _W3F_ENV if re.fullmatch(r"[0-9a-fA-F-]{36}", _W3F_ENV) else "e7
 
 ROOT = Path(__file__).resolve().parent
 
+# Gutter round landing page (/gutter-round/) season switch: "autumn" (Sep to Dec) or "spring" (Mar to Jun).
+SEASON = "autumn"
+
 
 def picture(stem, alt, width, height, class_name=""):
     """WebP + JPG picture markup with absolute asset paths."""
@@ -183,6 +186,7 @@ FOOTER = f'''  <footer class="site-footer">
         <div><a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></div>
       </div>
       <ul class="footer-links">
+        <li><a href="/gutter-round/">Gutter round</a></li>
         <li><a href="/privacy/">Privacy</a></li>
         <li><a href="/about/">About</a></li>
         <li><a href="/contact/">Contact</a></li>
@@ -289,7 +293,7 @@ def page(title, description, nav_id, body, *, schema=False, schema_json=None, ca
   <meta name="theme-color" content="#ffffff">
   <meta name="color-scheme" content="light only">
   <meta name="supported-color-schemes" content="light">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=footer1">{schema_block}
+  <link rel="stylesheet" href="/assets/css/styles.css?v=round1">{schema_block}
 </head>
 <body>
 {header}
@@ -1296,7 +1300,7 @@ write("get-a-quote/index.html", page(
     schema=True,
     canonical="/get-a-quote/",
     crumb="Get a quote",
-    extra_scripts='  <script src="/assets/js/quote-builder.js?v=downpipe2" defer></script>\n',
+    extra_scripts='  <script src="/assets/js/quote-builder.js?v=src1" defer></script>\n',
 ))
 
 # —— PRIVACY ——
@@ -1365,6 +1369,203 @@ write("reviews/index.html", page(
     crumb="Reviews",
 ))
 
+# —— GUTTER ROUND (seasonal landing page) ——
+# Season is chosen by SEASON near the top of this file. Only these blocks swap.
+GUTTER_ROUND_SEASONAL = {
+    "autumn": {
+        "meta": "Gutters vacuum cleared before the winter rain. Downpipes checked, before and after photos, 30-day overflow guarantee. From £50.",
+        "headline": "Gutters cleared before the winter rain.",
+        "subhead": "I'm booking the autumn gutter round now. Full run vacuumed, downpipes checked, before and after photos sent to you, and a 30-day overflow guarantee. From £50.",
+        "problem_intro": "Leaves come down, land in the gutter and sit on top of the moss and grit that's already there. A few weeks of rain turns it into sludge that blocks the outlet. Then the first proper winter downpour has nowhere to go but over the edge and down your wall.",
+        "round_line": "I'm booking the autumn round in S2, S8, S9, S10, S13 and S20, plus Aston and Mosborough, now. Book before it fills and you're on the next run.",
+        "cta_heading": "Get them done before the winter rain.",
+        "cta_line": "Tell me your house size and postcode and you'll get a guide price straight away. I'll confirm your slot on the autumn round.",
+    },
+    "spring": {
+        "meta": "Clear the winter build-up out of your gutters before spring growth takes hold. Downpipes checked, before and after photos, 30-day overflow guarantee. From £50.",
+        "headline": "Clear the winter build-up before spring growth takes hold.",
+        "subhead": "I'm booking the spring gutter round now. Moss, roof grit and seedlings vacuumed out, downpipes checked, before and after photos sent to you, and a 30-day overflow guarantee. From £50.",
+        "problem_intro": "Over winter, gutters fill with moss off the roof, roof grit and whatever leaves were left. By spring there are seedlings and weeds growing in it. Once something has rooted in, it holds water and blocks the outlets, and the summer storms find the weak spot.",
+        "round_line": "I'm booking the spring round in S2, S8, S9, S10, S13 and S20, plus Aston and Mosborough, now. Book before it fills and you're on the next run, with the winter muck out before the growing season.",
+        "cta_heading": "Get the winter build-up out before it takes root.",
+        "cta_line": "Tell me your house size and postcode and you'll get a guide price straight away. I'll confirm your slot on the spring round.",
+    },
+}
+if SEASON not in GUTTER_ROUND_SEASONAL:
+    raise SystemExit(f"SEASON must be one of {sorted(GUTTER_ROUND_SEASONAL)}, got {SEASON!r}")
+_gr = {k: html.escape(v, quote=False) for k, v in GUTTER_ROUND_SEASONAL[SEASON].items()}
+GR_QUOTE_URL = "/get-a-quote/?src=gutter-round"
+_gr_review = testimonial_cards_html([r for r in REVIEWS if r["author"] == "Mark Winter"])
+
+gutter_round_body = f'''    <section class="page-hero">
+      <div class="container">
+        <h1>{_gr["headline"]}</h1>
+        <p class="sub">{_gr["subhead"]}</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary btn-lg" href="{GR_QUOTE_URL}">Get my gutter price</a>
+          <a class="btn btn-secondary btn-lg" href="tel:{PHONE_TEL}">Call or WhatsApp {PHONE_DISPLAY}</a>
+        </div>
+        <p class="muted mt-2">Clear prices by house size. No "call for a quote" on a standard house.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <p>{_gr["problem_intro"]}</p>
+        <h2 class="mt-3">Signs your gutters need clearing</h2>
+        <p>A gutter can look fine from the ground and still be packed solid. Look for:</p>
+        <ul class="mt-1">
+          <li>Water spilling over the front edge when it rains</li>
+          <li>Damp patches or green marks on the wall under the gutter</li>
+          <li>Staining on the fascia board</li>
+          <li>Plants or moss poking up over the gutter line</li>
+          <li>A downpipe that stays quiet in heavy rain, or a puddle at the bottom of it</li>
+        </ul>
+        <p class="mt-1">Left alone, overflow runs down the brickwork and collects at the base of the house. That's when it starts costing more than a gutter clean.</p>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <h2>What you get on the round</h2>
+        <ol class="steps">
+          <li><div><h3>The full gutter run, cleared</h3><p>I go along the whole length with a high-reach vacuum, not just the worst bit by the downpipe. The vacuum keeps the muck contained, so it doesn't end up on your windows, paths or flower beds.</p></div></li>
+          <li><div><h3>Downpipes checked and cleared</h3><p>Included in the price: 2 on Small and Medium homes, 4 on Large, 6 on XL. Extra downpipes are £10 each. If one's properly blocked, I'll show you before doing anything extra.</p></div></li>
+          <li><div><h3>Before and after photos, sent to you</h3><p>You see exactly what came out and what the gutter looks like now. No taking my word for it.</p></div></li>
+          <li><div><h3>A free condition note while I'm up there</h3><p>I'll tell you what I spot on your fascias, soffits and roof moss and send it with your photos. Nothing to pay and no hard sell. It just means you know what's coming.</p></div></li>
+          <li><div><h3>30-day overflow guarantee</h3><p>If your gutters overflow within 30 days because of a blockage I missed, I'll come back and sort it free.</p></div></li>
+          <li><div><h3>The option to make it two cleans a year</h3><p>Add a small top-up on the day and your next clean in six months is included. <a href="#upgrade">Details below.</a></p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="prices">
+      <div class="container">
+        <h2>Prices</h2>
+        <div class="table-wrap">
+          <table class="pricing">
+            <thead><tr><th>Home</th><th>One-off clean</th><th>Downpipes included</th></tr></thead>
+            <tbody>
+              <tr><td>Small (terrace 1-2 bed)</td><td class="price">£50</td><td>2</td></tr>
+              <tr class="highlight"><td>Medium (semi 2-3 bed)</td><td class="price">£70</td><td>2</td></tr>
+              <tr><td>Large (detached 3-4)</td><td class="price">£100</td><td>4</td></tr>
+              <tr><td>XL (detached 5+)</td><td class="price">£150</td><td>6</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>Add-ons:</strong> conservatory or extension +£15. Extra downpipes +£10 each.</p>
+        <p class="mt-1">Pay on the day by cash, card or bank transfer. Not sure of your size? The quote form gives you a guide price in a minute.</p>
+        <p class="mt-2"><a class="btn btn-primary" href="{GR_QUOTE_URL}">Get my gutter price</a></p>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="callout">
+          <h2>30-day overflow guarantee</h2>
+          <p>If your gutters overflow within 30 days because of a blockage I missed, I'll come back and sort it free.</p>
+          <p>A gutter that's been cleared properly shouldn't block again in a month. If it does, that's on me.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="upgrade">
+      <div class="container">
+        <h2>Want it done twice a year? Upgrade on the day.</h2>
+        <p>Add the difference on the day and today's clean counts as visit 1 of the care plan. Your next clean in six months is included, plus 15% off other work for the year. Any add-ons carry over at the same price.</p>
+        <div class="table-wrap mt-2">
+          <table class="pricing">
+            <thead><tr><th>Home</th><th>Top-up on the day</th><th>One-off to care plan</th></tr></thead>
+            <tbody>
+              <tr><td>Small</td><td class="price">+£20</td><td>£50 to £70</td></tr>
+              <tr class="highlight"><td>Medium</td><td class="price">+£28</td><td>£70 to £98</td></tr>
+              <tr><td>Large</td><td class="price">+£40</td><td>£100 to £140</td></tr>
+              <tr><td>XL</td><td class="price">+£60</td><td>£150 to £210</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Just ask on the day, or mention it when you book.</p>
+        <p class="mt-1"><a href="/care-plan/#upgrade">How the care plan works →</a></p>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <h2>Real gutters from real jobs</h2>
+        {gallery_slider([
+          gallery_pair("gutter-before", "gutter-after", "Gutters, before and after", "Gutter before cleaning, full of moss and debris", "Gutter after vac cleaning, clear and tidy", 900, 1200).replace("gallery-card--pair", "gallery-card--pair gallery-card--pair-tall", 1),
+          gallery_photo("gutter-process", "Gutter vac, mid-clean", "Gutter vac in use with high-reach pole and debris collection bag", 1078, 1078),
+          gallery_photo("gutter-ba", "White gutter, before and after", "White gutter before and after vac cleaning on a slate roof", 1200, 1200),
+          gallery_photo("downpipe-block", "Downpipe plug pulled out", "Square downpipe opened with a solid debris plug pulled out", 1200, 1200),
+        ], label="Gutter round photos")}
+        <p class="mt-2">Every job gets photos like these, sent to you.</p>
+        <div class="testimonials mt-2">
+          {_gr_review}
+        </div>
+        <p class="mt-2 testimonials-links">
+          <a href="{GOOGLE_REVIEWS_URL}" target="_blank" rel="noopener noreferrer">Read what customers say on Google.</a>
+          ·
+          <a href="/reviews/">See all reviews →</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="callout-plain">
+          <p>{_gr["round_line"]}</p>
+          <p class="mt-1">Not on that list? <a href="/contact/">Send me your postcode</a> and I'll tell you if you're on the route.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container prose">
+        <h2>FAQ</h2>
+        <div class="faq-item">
+          <h3>Do I need to be in?</h3>
+          <p>Ideally, yes. The vacuum needs a plug socket, so it's easiest if someone's home to let me plug in. I'll message you a couple of days before to confirm.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Do you need a plug socket?</h3>
+          <p>Yes. The vacuum runs off mains, so I need an outside socket or a lead through a door or window.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do I pay?</h3>
+          <p>Cash, card or bank transfer, on the day.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What if a downpipe is blocked?</h3>
+          <p>I check the downpipes included for your house size as part of the clean. If one's packed solid, I'll show you a photo and tell you what it needs before I do any extra work. Nothing extra without your OK.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Will it make a mess?</h3>
+          <p>Very little. The vacuum pulls the muck into a container instead of dropping it on the ground. Anything that does fall, I clear up before I leave.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container">
+        <h2>{_gr["cta_heading"]}</h2>
+        <p>{_gr["cta_line"]}</p>
+        <div class="hero-ctas mt-2" style="justify-content:center">
+          <a class="btn btn-primary btn-lg" href="{GR_QUOTE_URL}">Get my gutter price</a>
+          <a class="btn btn-secondary btn-lg" href="tel:{PHONE_TEL}">Call or WhatsApp {PHONE_DISPLAY}</a>
+        </div>
+      </div>
+    </section>'''
+
+write("gutter-round/index.html", page(
+    "Gutter cleaning round, Sheffield | Dimension Exterior Cleaning",
+    _gr["meta"],
+    None,
+    gutter_round_body,
+    schema=True,
+    canonical="/gutter-round/",
+    crumb="Gutter round",
+))
+
 # —— robots.txt + sitemap.xml ——
 ROBOTS = """User-agent: *
 Allow: /
@@ -1380,6 +1581,7 @@ SITEMAP_PATHS = [
     "/roof-cleaning/",
     "/soffits-fascias/",
     "/care-plan/",
+    "/gutter-round/",
     "/about/",
     "/areas/",
     "/areas/sheffield/",

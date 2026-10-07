@@ -1698,3 +1698,14 @@ body.lightbox-open {
 .nap-block p {
   margin: 0.15rem 0;
 }
+
+/* Buttons inside the CTA band keep their own colours (the band's link colour was overriding them) */
+.cta-band a.btn { text-decoration: none; }
+.cta-band a.btn-primary,
+.cta-band a.btn-primary:hover { color: var(--white); }
+.cta-band a.btn-secondary { color: var(--navy); }
+.cta-band a.btn-secondary:hover { color: var(--white); }
+
+/* Before/after pair that fills a square tile (portrait halves), used on /gutter-round/ */
+.gallery-card--pair-tall .pair-grid picture,
+.gallery-card--pair-tall .pair-grid img { aspect-ratio: 1 / 2; }

@@ -388,6 +388,12 @@
     return errors;
   }
 
+  // Optional traffic source from the page URL, e.g. /get-a-quote/?src=gutter-round
+  function sourceTag() {
+    var m = /[?&]src=([a-z0-9-]{1,40})(?:&|$)/i.exec(window.location.search || '');
+    return m ? m[1].toLowerCase() : '';
+  }
+
   function buildEmailBody(q) {
     var name = (form.querySelector('#q-name') || {}).value || '';
     var phone = (form.querySelector('#q-phone') || {}).value || '';
@@ -427,6 +433,7 @@
       'Notes:',
       notes || '(none)',
       '',
+      sourceTag() ? 'Source: ' + sourceTag() : null,
       'Submitted: ' + stamp + ' (UK)'
     ].filter(function (l) { return l !== null; }).join('\n');
   }
