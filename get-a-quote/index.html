@@ -143,8 +143,9 @@
               <div id="gutter-addons" class="quote-nested" hidden>
                 <label class="quote-check"><input type="checkbox" id="addon-conservatory"> Conservatory or extension (+£15)</label>
                 <div class="form-group" style="margin:0.5rem 0 0">
-                  <label for="addon-downpipes">Extra downpipes after the first two (£10 each)</label>
-                  <input type="number" id="addon-downpipes" min="0" step="1" value="0" inputmode="numeric">
+                  <label for="addon-downpipes">Extra downpipes beyond those included for your size (£10 each)</label>
+                  <input type="number" id="addon-downpipes" min="0" step="1" value="0" inputmode="numeric" aria-describedby="downpipes-included-hint">
+                  <p class="quote-helper" id="downpipes-included-hint">Downpipes included: 2 on Small and Medium, 4 on Large, 6 on XL.</p>
                 </div>
                 <p class="quote-helper">Gutter add-ons. On the care plan they are added per year at the same price.</p>
               </div>
@@ -277,6 +278,6 @@
     <a class="mb-quote" href="/get-a-quote/">Get a quote</a>
   </nav>
   <script src="/assets/js/main.js?v=w3f1" defer></script>
-  <script src="/assets/js/quote-builder.js?v=careaddon1" defer></script>
+  <script src="/assets/js/quote-builder.js?v=downpipe1" defer></script>
 </body>
 </html>

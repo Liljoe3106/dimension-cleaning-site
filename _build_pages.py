@@ -334,7 +334,7 @@ home_body = f'''    <section class="page-hero">
         <div class="card-grid">
           <article class="card">
             <h3>Gutters</h3>
-            <p>Vac clean from £50. First two downpipes included.</p>
+            <p>Vac clean from £50. Downpipes included: 2 on Small and Medium, 4 on Large, 6 on XL.</p>
             <p class="mt-1"><strong>30-day overflow guarantee.</strong> If your gutters overflow within 30 days because of a blockage I missed, I'll come back and sort it free.</p>
             <p class="mt-1"><a href="/gutter-cleaning/">Gutter cleaning →</a></p>
           </article>
@@ -462,9 +462,9 @@ gutter_body = f'''    <section class="page-hero">
     <section class="section">
       <div class="container prose">
         <p>A gutter can look fine from the ground and still be packed with moss, leaves and roof grit. The warning signs are easy to spot: water spilling over the front edge in rain, damp marks below the gutter, staining on the fascia, or a downpipe that stays quiet when the gutter is full. Left alone, overflow can run down brickwork and collect around the base of the house.</p>
-        <p>Joe clears the gutter run with a high-reach vacuum, working along the full length rather than just scooping out the worst bit. The vacuum keeps the debris contained and means there is less mess around windows, paths and flower beds. Once the run is clear, he checks the outlets and the first two downpipes included in the standard price. If a downpipe is slow or blocked, he will tell you what he found before any extra work is done.</p>
+        <p>Joe clears the gutter run with a high-reach vacuum, working along the full length rather than just scooping out the worst bit. The vacuum keeps the debris contained and means there is less mess around windows, paths and flower beds. Once the run is clear, he checks the outlets and the downpipes included in the standard price: 2 on Small and Medium homes, 4 on Large and 6 on XL. If a downpipe is slow or blocked, he will tell you what he found before any extra work is done.</p>
         <p>This is useful on the tree-lined streets of Sheffield, where autumn leaves can fill a run quickly. We regularly work around S8, S10, S13, S20, S2 and S9, as well as Aston, Mosborough and nearby South Yorkshire homes. The same practical clean works for a terrace, a two-storey semi or a larger detached property. The price is based on the home size and the number of extras, rather than a vague price that changes when we arrive.</p>
-        <p>As a guide, standard gutter cleans start at £50 for a small terrace, £70 for a medium semi, £100 for a larger detached home and £150 for an XL property. A conservatory or extension is £15, and extra downpipes after the first two are £10 each. The <a href="/get-a-quote/">quote builder</a> gives you the right price band once you enter your property details. You can also email <a href="mailto:joe@dimensioncleaning.co.uk">joe@dimensioncleaning.co.uk</a> or call <a href="tel:+447494503865">07494 503865</a>.</p>
+        <p>As a guide, standard gutter cleans start at £50 for a small terrace, £70 for a medium semi, £100 for a larger detached home and £150 for an XL property. A conservatory or extension is £15, and extra downpipes beyond those included for your size are £10 each. The <a href="/get-a-quote/">quote builder</a> gives you the right price band once you enter your property details. You can also email <a href="mailto:joe@dimensioncleaning.co.uk">joe@dimensioncleaning.co.uk</a> or call <a href="tel:+447494503865">07494 503865</a>.</p>
         <p>If your gutters need attention twice a year, the care plan keeps it simple. You get two gutter visits, six months apart, and 15% off other exterior cleaning while the plan is active. It suits homes with trees nearby or owners who would rather prevent the overflow than wait for the next heavy downpour.</p>
       </div>
     </section>
@@ -483,7 +483,7 @@ gutter_body = f'''    <section class="page-hero">
             </tbody>
           </table>
         </div>
-        <p><strong>Add-ons:</strong> Conservatory or extension +£15. Extra downpipes after the first two +£10 each.</p>
+        <p><strong>Add-ons:</strong> Conservatory or extension +£15. Downpipes included: 2 on Small and Medium, 4 on Large, 6 on XL. Extra downpipes +£10 each.</p>
         <div class="callout-plain mt-3">
           <h3>30-day overflow guarantee</h3>
           <p>If your gutters overflow within 30 days because of a blockage I missed, I'll come back and sort it free.</p>
@@ -746,7 +746,7 @@ care_body = f'''    <section class="page-hero">
             </tbody>
           </table>
         </div>
-        <p><strong>Add-ons:</strong> Conservatory or extension +£15 a year. Extra downpipes after the first two +£10 each a year.</p>
+        <p><strong>Add-ons:</strong> Conservatory or extension +£15 a year. Downpipes included: 2 on Small and Medium, 4 on Large, 6 on XL. Extra downpipes +£10 each a year.</p>
         <p class="muted">How we price it: double the gutter band, take 30%. Paid up front.</p>
       </div>
     </section>
@@ -1007,7 +1007,7 @@ faq_items = [
     ("How often should gutters be cleaned?",
      "Most houses once or twice a year. Trees nearby = lean toward twice. That’s what the care plan is for."),
     ("What’s included in a gutter clean?",
-     "Vac of the runs, outlets checked, first two downpipes included. Extra downpipes +£10 each. Conservatory/extension +£15."),
+     "Vac of the runs, outlets checked. Downpipes included: 2 on Small and Medium, 4 on Large, 6 on XL. Extra downpipes +£10 each. Conservatory/extension +£15."),
     ("How do you clean roofs?",
      "We scrape the moss first, then softwash the roof. That clears growth at the root and leaves the tiles in better shape."),
     ("Why is there a £200 minimum on drives and patios?",
@@ -1019,7 +1019,7 @@ faq_items = [
     ("Do you cover my area?",
      'Sheffield and nearby South Yorks / North Notts. See <a href="/areas/">Areas</a>, or send your postcode if you are unsure.'),
     ("What’s the care plan again?",
-     "Pay once for the year. Two gutter visits. 15% off other exterior work while you’re on the plan. From £70 a year for small homes. Medium homes usually £98. Conservatory or extension (+£15) and extra downpipe (+£10 each) add-ons apply at the same prices, added to the yearly price."),
+     "Pay once for the year. Two gutter visits. 15% off other exterior work while you’re on the plan. From £70 a year for small homes. Medium homes usually £98. Conservatory or extension (+£15) and extra downpipe (+£10 each beyond those included for your size) add-ons apply at the same prices, added to the yearly price."),
 ]
 faq_html = "\n".join(
     f'        <div class="faq-item">\n          <h3>{q}</h3>\n          <p>{a}</p>\n        </div>'
@@ -1170,8 +1170,9 @@ quote_body = f'''    <section class="page-hero">
               <div id="gutter-addons" class="quote-nested" hidden>
                 <label class="quote-check"><input type="checkbox" id="addon-conservatory"> Conservatory or extension (+£15)</label>
                 <div class="form-group" style="margin:0.5rem 0 0">
-                  <label for="addon-downpipes">Extra downpipes after the first two (£10 each)</label>
-                  <input type="number" id="addon-downpipes" min="0" step="1" value="0" inputmode="numeric">
+                  <label for="addon-downpipes">Extra downpipes beyond those included for your size (£10 each)</label>
+                  <input type="number" id="addon-downpipes" min="0" step="1" value="0" inputmode="numeric" aria-describedby="downpipes-included-hint">
+                  <p class="quote-helper" id="downpipes-included-hint">Downpipes included: 2 on Small and Medium, 4 on Large, 6 on XL.</p>
                 </div>
                 <p class="quote-helper">Gutter add-ons. On the care plan they are added per year at the same price.</p>
               </div>
@@ -1291,7 +1292,7 @@ write("get-a-quote/index.html", page(
     schema=True,
     canonical="/get-a-quote/",
     crumb="Get a quote",
-    extra_scripts='  <script src="/assets/js/quote-builder.js?v=careaddon1" defer></script>\n',
+    extra_scripts='  <script src="/assets/js/quote-builder.js?v=downpipe1" defer></script>\n',
 ))
 
 # —— PRIVACY ——

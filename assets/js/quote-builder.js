@@ -17,6 +17,8 @@
   var CARE_OFF = 0.15;
   var ADDON_CONSERVATORY = 15;
   var ADDON_DOWNPIPE = 10;
+  var DOWNPIPES_INCLUDED = { small: 2, medium: 2, large: 4, xl: 6 };
+  var DOWNPIPES_HINT_DEFAULT = 'Downpipes included: 2 on Small and Medium, 4 on Large, 6 on XL.';
 
   var SIZE_LABELS = {
     small: 'Small (terrace 1-2 bed)',
@@ -43,6 +45,7 @@
   var windowsWrap = form.querySelector('#windows-wrap');
   var gutterAddons = form.querySelector('#gutter-addons');
   var roofOptions = form.querySelector('#roof-options');
+  var downpipesHint = form.querySelector('#downpipes-included-hint');
 
   function money(n) {
     var r = Math.round(n * 100) / 100;
@@ -84,6 +87,12 @@
       if (!showWin && svcWindows) svcWindows.checked = false;
     }
     if (roofOptions) roofOptions.hidden = !(svcRoof && svcRoof.checked);
+    if (downpipesHint) {
+      var hs = sizeKey();
+      downpipesHint.textContent = hs && DOWNPIPES_INCLUDED[hs] != null
+        ? 'Your size includes ' + DOWNPIPES_INCLUDED[hs] + ' downpipes. Only enter the extras.'
+        : DOWNPIPES_HINT_DEFAULT;
+    }
     if (houseSizeWrap) houseSizeWrap.classList.toggle('is-required', needsHouseSize());
 
     [
@@ -150,7 +159,7 @@
       var dp = dpEl ? parseInt(dpEl.value, 10) : 0;
       if (!isFinite(dp) || dp < 0) dp = 0;
       if (dp > 0) {
-        push({ label: 'Extra downpipes × ' + dp + addonSuffix, amount: dp * ADDON_DOWNPIPE, display: money(dp * ADDON_DOWNPIPE) });
+        push({ label: 'Extra downpipes × ' + dp + ' (beyond ' + DOWNPIPES_INCLUDED[size] + ' included' + (gutterOn ? '' : ', plan') + ')', amount: dp * ADDON_DOWNPIPE, display: money(dp * ADDON_DOWNPIPE) });
       }
     }
 
