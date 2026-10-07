@@ -3,10 +3,13 @@
 
 import html
 import json
+import re
 import os
 from pathlib import Path
 
-WEB3FORMS_KEY = os.environ.get("WEB3FORMS_ACCESS_KEY", "").strip() or "e7d5388a-1ae2-4e82-9852-a95826fb5807"
+_W3F_ENV = os.environ.get("WEB3FORMS_ACCESS_KEY", "").strip()
+# Only trust the env value if it looks like a full Web3Forms UUID key
+WEB3FORMS_KEY = _W3F_ENV if re.fullmatch(r"[0-9a-fA-F-]{36}", _W3F_ENV) else "e7d5388a-1ae2-4e82-9852-a95826fb5807"
 
 ROOT = Path(__file__).resolve().parent
 
@@ -313,7 +316,7 @@ home_body = f'''    <section class="page-hero">
         <p class="sub">Clear prices. Proper roof softwash. A care plan that actually saves you money.</p>
         <div class="hero-ctas">
           <a class="btn btn-primary btn-lg" href="/contact/">Book a gutter clean from £50</a>
-          <a class="btn btn-secondary btn-lg" href="/care-plan/">See the care plan from £98/year</a>
+          <a class="btn btn-secondary btn-lg" href="/care-plan/">See the care plan from £70/year</a>
           <a class="btn btn-secondary btn-lg" href="/get-a-quote/">Get a guide price</a>
         </div>
       </div>
@@ -354,7 +357,7 @@ home_body = f'''    <section class="page-hero">
       <div class="container">
         <div class="callout">
           <h2>Pay once. Two gutter visits. 15% off other services.</h2>
-          <p>Most semis: <span class="price-em">£98 a year.</span></p>
+          <p>From <span class="price-em">£70 a year.</span> Most semis £98.</p>
           <a class="btn btn-primary" href="/care-plan/">See how the care plan works →</a>
         </div>
       </div>
@@ -711,7 +714,7 @@ write("roof-cleaning/index.html", page(
 care_body = f'''    <section class="page-hero">
       <div class="container">
         <h1>Pay once. Two gutter visits. 15% off other services.</h1>
-        <p class="sub">Annual care plan timed around spring growth and autumn leaf fall. Most semis: <strong>£98 a year</strong>.</p>
+        <p class="sub">Annual care plan timed around spring growth and autumn leaf fall. From <strong>£70 a year</strong>. Most semis £98.</p>
         <p class="mt-2"><a class="btn btn-primary btn-lg" href="/contact/">Ask to join the care plan</a></p>
       </div>
     </section>
@@ -784,7 +787,7 @@ care_body = f'''    <section class="page-hero">
 
 write("care-plan/index.html", page(
     "Care plan Sheffield | Dimension Exterior Cleaning",
-    "Pay once. Two gutter visits. 15% off other services. Most semis: £98 a year.",
+    "Pay once. Two gutter visits. 15% off other services. From £70 a year, most semis £98.",
     "care-plan",
     care_body,
     schema=True,
@@ -1015,7 +1018,7 @@ faq_items = [
     ("Do you cover my area?",
      'Sheffield and nearby South Yorks / North Notts. See <a href="/areas/">Areas</a>, or send your postcode if you are unsure.'),
     ("What’s the care plan again?",
-     "Pay once for the year. Two gutter visits. 15% off other exterior work while you’re on the plan. Medium homes usually £98/year."),
+     "Pay once for the year. Two gutter visits. 15% off other exterior work while you’re on the plan. From £70 a year for small homes. Medium homes usually £98."),
 ]
 faq_html = "\n".join(
     f'        <div class="faq-item">\n          <h3>{q}</h3>\n          <p>{a}</p>\n        </div>'
