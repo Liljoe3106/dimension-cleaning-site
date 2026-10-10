@@ -4,9 +4,9 @@
   var PLACEHOLDER_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
   var JOE_EMAIL = 'joe@dimensioncleaning.co.uk';
 
-  var GUTTER = { small: 50, medium: 70, large: 100, xl: 150 };
-  var CARE = { small: 70, medium: 98, large: 140, xl: 210 };
-  var FASCIAS = { small: 100, medium: 140, large: 200, xl: 300 };
+  var GUTTER = { small: 49, medium: 79, large: 119, xl: 169 };
+  var CARE = { small: 69, medium: 111, large: 167, xl: 237 };
+  var FASCIAS = { small: 49, medium: 79, large: 119, xl: 169 };
   var FASCIAS_WIN = { small: 120, medium: 165, large: 235, xl: 355 };
   var WINDOWS = { small: 20, medium: 25, large: 35, xl: 55 };
 
@@ -16,9 +16,6 @@
   var ROOF_FLOOR = 500;
   var CARE_OFF = 0.15;
   var ADDON_CONSERVATORY = 15;
-  var ADDON_DOWNPIPE = 10;
-  var DOWNPIPES_INCLUDED = { small: 2, medium: 2, large: 4, xl: 6 };
-  var DOWNPIPES_HINT_DEFAULT = 'Downpipes included: 2 on Small and Medium, 4 on Large, 6 on XL.';
 
   var SIZE_LABELS = {
     small: 'Small (terrace 1-2 bed)',
@@ -45,7 +42,6 @@
   var windowsWrap = form.querySelector('#windows-wrap');
   var gutterAddons = form.querySelector('#gutter-addons');
   var roofOptions = form.querySelector('#roof-options');
-  var downpipesHint = form.querySelector('#downpipes-included-hint');
 
   function money(n) {
     var r = Math.round(n * 100) / 100;
@@ -69,16 +65,6 @@
     return '';
   }
 
-  function downpipeTotal() {
-    var el = form.querySelector('#addon-downpipes');
-    if (!el) return null;
-    var v = String(el.value || '').trim();
-    if (v === '') return null;
-    var n = parseInt(v, 10);
-    if (!isFinite(n) || n < 0) return null;
-    return n;
-  }
-
   function needsHouseSize() {
     return !!(
       (svcGutter && svcGutter.checked) ||
@@ -97,12 +83,6 @@
       if (!showWin && svcWindows) svcWindows.checked = false;
     }
     if (roofOptions) roofOptions.hidden = !(svcRoof && svcRoof.checked);
-    if (downpipesHint) {
-      var hs = sizeKey();
-      downpipesHint.textContent = hs && DOWNPIPES_INCLUDED[hs] != null
-        ? 'Your size includes ' + DOWNPIPES_INCLUDED[hs] + '. We\'ll only charge for any extra (£10 each).'
-        : DOWNPIPES_HINT_DEFAULT;
-    }
     if (houseSizeWrap) houseSizeWrap.classList.toggle('is-required', needsHouseSize());
 
     [
@@ -158,30 +138,12 @@
 
     // Gutter add-ons: same prices for the one-off clean and the care plan (per year on the plan).
     // Charged once even if both are ticked. Never discounted by the care plan 15%.
-    // Downpipes: the customer enters the house's total; extras = total minus the number included for the size.
-    // "Not sure" (empty) means no downpipe charge.
     var gutterOn = !!(svcGutter && svcGutter.checked);
-    var dpTotal = (gutterOn || careOn) ? downpipeTotal() : null;
-    if (gutterOn || careOn) {
-      if (size && GUTTER[size] != null) {
-        var addonSuffix = gutterOn ? '' : ' (plan)';
-        var cons = form.querySelector('#addon-conservatory');
-        if (cons && cons.checked) {
-          push({ label: 'Conservatory / extension' + addonSuffix, amount: ADDON_CONSERVATORY, display: money(ADDON_CONSERVATORY) });
-        }
-        if (dpTotal != null) {
-          var dpIncluded = DOWNPIPES_INCLUDED[size];
-          var dpExtra = Math.max(0, dpTotal - dpIncluded);
-          if (dpExtra > 0) {
-            push({
-              label: 'Extra downpipes × ' + dpExtra + ' (' + dpTotal + ' total, ' + dpIncluded + ' included' + (gutterOn ? '' : ', plan') + ')',
-              amount: dpExtra * ADDON_DOWNPIPE,
-              display: money(dpExtra * ADDON_DOWNPIPE)
-            });
-          }
-        }
-      } else if (dpTotal != null) {
-        push({ label: 'Downpipes (' + dpTotal + ' total)', amount: 0, display: 'Select house size', pending: true });
+    if ((gutterOn || careOn) && size && GUTTER[size] != null) {
+      var addonSuffix = gutterOn ? '' : ' (plan)';
+      var cons = form.querySelector('#addon-conservatory');
+      if (cons && cons.checked) {
+        push({ label: 'Conservatory / extension' + addonSuffix, amount: ADDON_CONSERVATORY, display: money(ADDON_CONSERVATORY) });
       }
     }
 
@@ -304,7 +266,7 @@
     }
 
     total = Math.round(total * 100) / 100;
-    return { lines: lines, total: total, anyService: anyService, size: size, careOn: careOn, gutterOrPlan: gutterOn || careOn, dpTotal: dpTotal };
+    return { lines: lines, total: total, anyService: anyService, size: size, careOn: careOn };
   }
 
   function escapeHtml(s) {
@@ -423,7 +385,6 @@
       'Email: ' + email,
       'Postcode: ' + postcode,
       'House size: ' + sizeLabel,
-      q.gutterOrPlan ? 'Downpipes: ' + (q.dpTotal != null ? q.dpTotal + ' total' : 'not sure') : null,
       '',
       'Selected services:',
       lineText || '(none)',
