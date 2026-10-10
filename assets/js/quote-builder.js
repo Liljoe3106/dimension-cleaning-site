@@ -7,7 +7,7 @@
   var GUTTER = { small: 49, medium: 79, large: 119, xl: 169 };
   var CARE = { small: 69, medium: 111, large: 167, xl: 237 };
   var FASCIAS = { small: 49, medium: 79, large: 119, xl: 169 };
-  var FASCIAS_WIN = { small: 120, medium: 165, large: 235, xl: 355 };
+  var FASCIAS_WIN = { small: 69, medium: 104, large: 154, xl: 224 };
   var WINDOWS = { small: 20, medium: 25, large: 35, xl: 55 };
 
   var WASH_FLOOR = 200;

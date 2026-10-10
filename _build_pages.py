@@ -466,7 +466,7 @@ gutter_body = f'''    <section class="page-hero">
     <section class="section">
       <div class="container prose">
         <p>A gutter can look fine from the ground and still be packed with moss, leaves and roof grit. The warning signs are easy to spot: water spilling over the front edge in rain, damp marks below the gutter, staining on the fascia, or a downpipe that stays quiet when the gutter is full. Left alone, overflow can run down brickwork and collect around the base of the house.</p>
-        <p>Joe clears the gutter run with a high-reach vacuum, working along the full length rather than just scooping out the worst bit. The vacuum keeps the debris contained and means there is less mess around windows, paths and flower beds. Once the run is clear, he checks the outlets and the downpipes, which are included in the standard price. If a downpipe is slow or blocked, he will tell you what he found before any extra work is done.</p>
+        <p>Joe clears the gutter run with a high-reach vacuum, working along the full length rather than just scooping out the worst bit. The vacuum keeps the debris contained and means there is less mess around windows, paths and flower beds. Once the run is clear, he checks the outlets and the downpipes, which are included in the standard price. If a downpipe is damaged or needs a repair, he will show you and tell you before doing anything else.</p>
         <p>This is useful on the tree-lined streets of Sheffield, where autumn leaves can fill a run quickly. We regularly work around S8, S10, S13, S20, S2 and S9, as well as Aston, Mosborough and nearby South Yorkshire homes. The same practical clean works for a terrace, a two-storey semi or a larger detached property. The price is based on the home size and the number of extras, rather than a vague price that changes when we arrive.</p>
         <p>As a guide, standard gutter cleans start at £49 for a small terrace, £79 for a medium semi, £119 for a larger detached home and £169 for an XL property. A conservatory or extension is £15. The <a href="/get-a-quote/">quote builder</a> gives you the right price band once you enter your property details. You can also email <a href="mailto:joe@dimensioncleaning.co.uk">joe@dimensioncleaning.co.uk</a> or call <a href="tel:+447494503865">07494 503865</a>.</p>
         <p>If your gutters need attention twice a year, the care plan keeps it simple. You get two gutter visits, six months apart, and 15% off other exterior cleaning while the plan is active. It suits homes with trees nearby or owners who would rather prevent the overflow than wait for the next heavy downpour.</p>
@@ -563,10 +563,10 @@ soffits_body = f'''    <section class="page-hero">
               <tr><th>Home</th><th>Fascias only</th><th>Fascias + windows</th></tr>
             </thead>
             <tbody>
-              <tr><td>Small</td><td class="price">£49</td><td class="price">£120</td></tr>
-              <tr class="highlight"><td>Medium</td><td class="price">£79</td><td class="price">£165</td></tr>
-              <tr><td>Large</td><td class="price">£119</td><td class="price">£235</td></tr>
-              <tr><td>XL</td><td class="price">£169</td><td class="price">£355</td></tr>
+              <tr><td>Small</td><td class="price">£49</td><td class="price">£69</td></tr>
+              <tr class="highlight"><td>Medium</td><td class="price">£79</td><td class="price">£104</td></tr>
+              <tr><td>Large</td><td class="price">£119</td><td class="price">£154</td></tr>
+              <tr><td>XL</td><td class="price">£169</td><td class="price">£224</td></tr>
             </tbody>
           </table>
         </div>
@@ -1294,7 +1294,7 @@ write("get-a-quote/index.html", page(
     schema=True,
     canonical="/get-a-quote/",
     crumb="Get a quote",
-    extra_scripts='  <script src="/assets/js/quote-builder.js?v=price1010" defer></script>\n',
+    extra_scripts='  <script src="/assets/js/quote-builder.js?v=price1010b" defer></script>\n',
 ))
 
 # —— PRIVACY ——
@@ -1424,7 +1424,7 @@ gutter_round_body = f'''    <section class="page-hero">
         <h2>What you get on the round</h2>
         <ol class="steps">
           <li><div><h3>The full gutter run, cleared</h3><p>I go along the whole length with a high-reach vacuum, not just the worst bit by the downpipe. The vacuum keeps the muck contained, so it doesn't end up on your windows, paths or flower beds.</p></div></li>
-          <li><div><h3>Downpipes checked and cleared</h3><p>Included in the price as standard. If one's properly blocked, I'll show you before doing anything extra.</p></div></li>
+          <li><div><h3>Downpipes checked and cleared</h3><p>Included in the price as standard. If a pipe is damaged or needs a repair, I'll show you and tell you before doing anything else.</p></div></li>
           <li><div><h3>Before and after photos, sent to you</h3><p>You see exactly what came out and what the gutter looks like now. No taking my word for it.</p></div></li>
           <li><div><h3>A free condition note while I'm up there</h3><p>I'll tell you what I spot on your fascias, soffits and roof moss and send it with your photos. Nothing to pay and no hard sell. It just means you know what's coming.</p></div></li>
           <li><div><h3>30-day overflow guarantee</h3><p>If your gutters overflow within 30 days because of a blockage I missed, I'll come back and sort it free.</p></div></li>
@@ -1530,7 +1530,7 @@ gutter_round_body = f'''    <section class="page-hero">
         </div>
         <div class="faq-item">
           <h3>What if a downpipe is blocked?</h3>
-          <p>I check the downpipes as part of the clean. If one's packed solid, I'll show you a photo and tell you what it needs before I do any extra work. Nothing extra without your OK.</p>
+          <p>I check and clear the downpipes as part of the clean. If a pipe is damaged or needs a repair, I'll show you and tell you before doing anything else.</p>
         </div>
         <div class="faq-item">
           <h3>Will it make a mess?</h3>
