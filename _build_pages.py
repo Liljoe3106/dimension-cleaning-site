@@ -338,7 +338,7 @@ home_body = f'''    <section class="page-hero">
         <div class="card-grid">
           <article class="card">
             <h3>Gutters</h3>
-            <p>Vac clean from £49. Downpipes cleared as standard.</p>
+            <p>From £49. Full gutter run vacuumed, downpipes checked and cleared, before and after photos sent to you, and a free condition note on your fascias, soffits and roof moss.</p>
             <p class="mt-1"><strong>30-day overflow guarantee.</strong> If your gutters overflow within 30 days because of a blockage I missed, I'll come back and sort it free.</p>
             <p class="mt-1"><a href="/gutter-cleaning/">Gutter cleaning →</a></p>
           </article>
@@ -487,7 +487,8 @@ gutter_body = f'''    <section class="page-hero">
             </tbody>
           </table>
         </div>
-        <p><strong>Add-ons:</strong> Conservatory or extension +£15. Downpipes cleared as standard.</p>
+        <p><strong>Included:</strong> Full gutter run vacuumed, downpipes checked and cleared, before and after photos sent to you, and a free condition note on your fascias, soffits and roof moss.</p>
+        <p><strong>Add-ons:</strong> Conservatory or extension +£15.</p>
         <div class="callout-plain mt-3">
           <h3>30-day overflow guarantee</h3>
           <p>If your gutters overflow within 30 days because of a blockage I missed, I'll come back and sort it free.</p>
@@ -728,6 +729,7 @@ care_body = f'''    <section class="page-hero">
         <h2>What’s included</h2>
         <ul>
           <li>Two gutter cleans, six months apart: after spring growth and after autumn leaf fall</li>
+          <li>Every clean: full gutter run vacuumed, downpipes checked and cleared, before and after photos sent to you, and a free condition note on your fascias, soffits and roof moss</li>
           <li>Aimed at preventing blockages before they become a problem</li>
           <li>Visits show as covered (no extra gutter fee those days)</li>
           <li><strong>15% off</strong> soffits, drive, patio, seal, roof, and render while the plan is live</li>
@@ -1011,7 +1013,7 @@ faq_items = [
     ("How often should gutters be cleaned?",
      "Most houses once or twice a year. Trees nearby = lean toward twice. That’s what the care plan is for."),
     ("What’s included in a gutter clean?",
-     "Vac of the runs, outlets and downpipes checked. Conservatory/extension +£15."),
+     "Full gutter run vacuumed, downpipes checked and cleared, before and after photos sent to you, and a free condition note on your fascias, soffits and roof moss. Conservatory/extension +£15."),
     ("How do you clean roofs?",
      "We scrape the moss first, then softwash the roof. That clears growth at the root and leaves the tiles in better shape."),
     ("Why is there a £200 minimum on drives and patios?",
@@ -1365,18 +1367,18 @@ write("reviews/index.html", page(
 # Season is chosen by SEASON near the top of this file. Only these blocks swap.
 GUTTER_ROUND_SEASONAL = {
     "autumn": {
-        "meta": "Gutters vacuum cleared before the winter rain. Downpipes checked, before and after photos, 30-day overflow guarantee. From £49.",
+        "meta": "Gutters vacuum cleared before the winter rain. Downpipes checked and cleared, before and after photos, 30-day overflow guarantee. From £49.",
         "headline": "Gutters cleared before the winter rain.",
-        "subhead": "I'm booking the autumn gutter round now. Full run vacuumed, downpipes checked, before and after photos sent to you, and a 30-day overflow guarantee. From £49.",
+        "subhead": "I'm booking the autumn gutter round now. Full run vacuumed, downpipes checked and cleared, before and after photos sent to you, and a 30-day overflow guarantee. From £49.",
         "problem_intro": "Leaves come down, land in the gutter and sit on top of the moss and grit that's already there. A few weeks of rain turns it into sludge that blocks the outlet. Then the first proper winter downpour has nowhere to go but over the edge and down your wall.",
         "round_line": "I'm booking the autumn round in S2, S8, S9, S10, S13 and S20, plus Aston and Mosborough, now. Book before it fills and you're on the next run.",
         "cta_heading": "Get them done before the winter rain.",
         "cta_line": "Tell me your house size and postcode and you'll get a guide price straight away. I'll confirm your slot on the autumn round.",
     },
     "spring": {
-        "meta": "Clear the winter build-up out of your gutters before spring growth takes hold. Downpipes checked, before and after photos, 30-day overflow guarantee. From £49.",
+        "meta": "Clear the winter build-up out of your gutters before spring growth takes hold. Downpipes checked and cleared, before and after photos, 30-day overflow guarantee. From £49.",
         "headline": "Clear the winter build-up before spring growth takes hold.",
-        "subhead": "I'm booking the spring gutter round now. Moss, roof grit and seedlings vacuumed out, downpipes checked, before and after photos sent to you, and a 30-day overflow guarantee. From £49.",
+        "subhead": "I'm booking the spring gutter round now. Moss, roof grit and seedlings vacuumed out, downpipes checked and cleared, before and after photos sent to you, and a 30-day overflow guarantee. From £49.",
         "problem_intro": "Over winter, gutters fill with moss off the roof, roof grit and whatever leaves were left. By spring there are seedlings and weeds growing in it. Once something has rooted in, it holds water and blocks the outlets, and the summer storms find the weak spot.",
         "round_line": "I'm booking the spring round in S2, S8, S9, S10, S13 and S20, plus Aston and Mosborough, now. Book before it fills and you're on the next run, with the winter muck out before the growing season.",
         "cta_heading": "Get the winter build-up out before it takes root.",
