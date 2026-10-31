@@ -504,6 +504,7 @@
 
     submitWeb3Forms(key, q)
       .then(function () {
+        if (typeof window.dimTrack === 'function') window.dimTrack('quote-submit');
         showSuccess(
           'Thanks. We’ve sent your guide estimate to Dimension Exterior Cleaning. We’ll confirm the final price before work starts.'
         );

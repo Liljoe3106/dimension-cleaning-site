@@ -198,7 +198,7 @@ FOOTER = f'''  <footer class="site-footer">
     <a class="mb-wa" href="https://wa.me/{PHONE_WA}" target="_blank" rel="noopener">WhatsApp</a>
     <a class="mb-quote" href="/get-a-quote/">Get a quote</a>
   </nav>
-  <script src="/assets/js/main.js?v=w3f1" defer></script>'''
+  <script src="/assets/js/main.js?v=gc1" defer></script>'''
 
 SITE_ORIGIN = "https://dimensioncleaning.co.uk"
 OG_IMAGE = f"{SITE_ORIGIN}/assets/images/path-after.jpg"
@@ -301,7 +301,8 @@ def page(title, description, nav_id, body, *, schema=False, schema_json=None, ca
 {crumb_html}{body}
   </main>
 {FOOTER}
-{scripts}</body>
+{scripts}  <script data-goatcounter="https://dimensioncleaning.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
 </html>
 '''
 
@@ -1294,7 +1295,7 @@ write("get-a-quote/index.html", page(
     schema=True,
     canonical="/get-a-quote/",
     crumb="Get a quote",
-    extra_scripts='  <script src="/assets/js/quote-builder.js?v=price1010b" defer></script>\n',
+    extra_scripts='  <script src="/assets/js/quote-builder.js?v=gc1" defer></script>\n',
 ))
 
 # —— PRIVACY ——
@@ -1310,8 +1311,8 @@ privacy_body = f'''    <section class="page-hero">
         <p>Dimension Exterior Cleaning (“we”) collects the information you send us when you ask for a quote or book work: typically your name, phone, email, postcode, and message details.</p>
         <p>We use that information only to respond to your enquiry, arrange visits, and keep records of jobs we do for you. We do not sell your details.</p>
         <p>Emails and calls may be stored in our inbox, phone, or simple business tools. You can ask us what we hold about you, or ask us to delete it where we no longer need it for the job, by emailing <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
-        <p>This site does not use advertising cookies or analytics trackers at present. If that changes, this page will be updated.</p>
-        <p class="muted mt-3">Last updated: September 2026.</p>
+        <p>This site uses GoatCounter, a privacy-friendly visitor counter. It uses no cookies and does not track you across other sites. It counts page views and taps on the call, WhatsApp, email and quote buttons so we can see which pages help people get in touch. This site does not use advertising cookies.</p>
+        <p class="muted mt-3">Last updated: October 2026.</p>
       </div>
     </section>'''
 

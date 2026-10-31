@@ -1,6 +1,40 @@
 (function () {
   'use strict';
 
+  // GoatCounter events (cookie-free). Event path carries the page path so town pages can be compared.
+  function dimTrack(name) {
+    try {
+      var page = window.location.pathname || '/';
+      var payload = { path: name + ' ' + page, title: name + ' on ' + page, event: true };
+      if (window.goatcounter && typeof window.goatcounter.count === 'function') {
+        window.goatcounter.count(payload);
+      } else {
+        // count.js loads async; queue until it is ready
+        var tries = 0;
+        var t = setInterval(function () {
+          tries++;
+          if (window.goatcounter && typeof window.goatcounter.count === 'function') {
+            clearInterval(t);
+            window.goatcounter.count(payload);
+          } else if (tries > 20) {
+            clearInterval(t);
+          }
+        }, 250);
+      }
+    } catch (err) { /* never break the page for analytics */ }
+  }
+  window.dimTrack = dimTrack;
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (href.indexOf('tel:') === 0) dimTrack('call');
+    else if (href.indexOf('mailto:') === 0) dimTrack('email');
+    else if (/^https?:\/\/(wa\.me|api\.whatsapp\.com|(www\.)?whatsapp\.com)\//i.test(href)) dimTrack('whatsapp');
+    else if (/^\/get-a-quote\/?(\?|#|$)/.test(href) && a.matches('.btn, .mb-quote')) dimTrack('quote-cta');
+  }, true);
+
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.querySelector('.site-nav');
   if (toggle && nav) {
@@ -135,6 +169,7 @@
               success.textContent = 'Thanks — your message is with Joe. He’ll reply soon, or call 07494 503865.';
               success.classList.add('is-visible');
             }
+            dimTrack('contact-submit');
             form.reset();
           } else {
             showMailtoFallback();
