@@ -413,6 +413,15 @@ li + li { margin-top: 0.35rem; }
 .page-hero .hero-ctas {
   margin-top: 1.25rem;
 }
+.page-hero .hero-note {
+  margin-top: 0.85rem;
+  font-size: 0.95rem;
+  color: var(--gray-600);
+}
+.page-hero .hero-note a {
+  color: var(--teal-dark);
+  font-weight: 600;
+}
 
 /* —— Sections —— */
 .section {

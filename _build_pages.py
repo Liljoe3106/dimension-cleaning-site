@@ -15,6 +15,11 @@ ROOT = Path(__file__).resolve().parent
 
 # Gutter round landing page (/gutter-round/) season switch: "autumn" (Sep to Dec) or "spring" (Mar to Jun).
 SEASON = "autumn"
+# Short home page hero line, follows SEASON so it stays right out of season.
+HOME_ROUND_LINE = {
+    "autumn": "The autumn gutter round is booking now.",
+    "spring": "The spring gutter round is booking now.",
+}
 
 
 def picture(stem, alt, width, height, class_name=""):
@@ -198,7 +203,7 @@ FOOTER = f'''  <footer class="site-footer">
     <a class="mb-wa" href="https://wa.me/{PHONE_WA}" target="_blank" rel="noopener">WhatsApp</a>
     <a class="mb-quote" href="/get-a-quote/">Get a quote</a>
   </nav>
-  <script src="/assets/js/main.js?v=gc1" defer></script>'''
+  <script src="/assets/js/main.js?v=gc2" defer></script>'''
 
 SITE_ORIGIN = "https://dimensioncleaning.co.uk"
 OG_IMAGE = f"{SITE_ORIGIN}/assets/images/path-after.jpg"
@@ -293,7 +298,7 @@ def page(title, description, nav_id, body, *, schema=False, schema_json=None, ca
   <meta name="theme-color" content="#ffffff">
   <meta name="color-scheme" content="light only">
   <meta name="supported-color-schemes" content="light">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=round1">{schema_block}
+  <link rel="stylesheet" href="/assets/css/styles.css?v=round2">{schema_block}
 </head>
 <body>
 {header}
@@ -320,10 +325,11 @@ home_body = f'''    <section class="page-hero">
         <h1>Gutter cleaning and exterior cleaning in Sheffield</h1>
         <p class="sub">Clear prices. Proper roof softwash. A care plan that actually saves you money.</p>
         <div class="hero-ctas">
-          <a class="btn btn-primary btn-lg" href="/contact/">Book a gutter clean from £49</a>
+          <a class="btn btn-primary btn-lg" href="/gutter-round/">Book a gutter clean from £49</a>
           <a class="btn btn-secondary btn-lg" href="/care-plan/">See the care plan from £69/year</a>
           <a class="btn btn-secondary btn-lg" href="/get-a-quote/">Get a guide price</a>
         </div>
+        <p class="hero-note"><a href="/gutter-round/">{HOME_ROUND_LINE[SEASON]}</a></p>
       </div>
     </section>
 

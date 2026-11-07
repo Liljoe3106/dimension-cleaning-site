@@ -32,7 +32,7 @@
     if (href.indexOf('tel:') === 0) dimTrack('call');
     else if (href.indexOf('mailto:') === 0) dimTrack('email');
     else if (/^https?:\/\/(wa\.me|api\.whatsapp\.com|(www\.)?whatsapp\.com)\//i.test(href)) dimTrack('whatsapp');
-    else if (/^\/get-a-quote\/?(\?|#|$)/.test(href) && a.matches('.btn, .mb-quote')) dimTrack('quote-cta');
+    else if (/^\/(get-a-quote|gutter-round)\/?(\?|#|$)/.test(href) && a.matches('.btn, .mb-quote')) dimTrack('quote-cta');
   }, true);
 
   var toggle = document.querySelector('.nav-toggle');
