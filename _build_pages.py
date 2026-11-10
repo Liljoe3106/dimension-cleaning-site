@@ -182,6 +182,8 @@ HEADER = '''  <a class="skip-link" href="#main">Skip to content</a>
     </div>
   </header>'''
 
+CONSENT_JS = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'assets', 'js', 'consent.js'), encoding='utf-8').read()
+
 FOOTER = f'''  <footer class="site-footer">
     <div class="container footer-inner">
       <div>
@@ -203,7 +205,9 @@ FOOTER = f'''  <footer class="site-footer">
     <a class="mb-wa" href="https://wa.me/{PHONE_WA}" target="_blank" rel="noopener">WhatsApp</a>
     <a class="mb-quote" href="/get-a-quote/">Get a quote</a>
   </nav>
-  <script src="/assets/js/main.js?v=gc2" defer></script>'''
+  <script src="/assets/js/main.js?v=gc2" defer></script>
+  <script>
+{CONSENT_JS}  </script>'''
 
 SITE_ORIGIN = "https://dimensioncleaning.co.uk"
 OG_IMAGE = f"{SITE_ORIGIN}/assets/images/path-after.jpg"
@@ -298,7 +302,7 @@ def page(title, description, nav_id, body, *, schema=False, schema_json=None, ca
   <meta name="theme-color" content="#ffffff">
   <meta name="color-scheme" content="light only">
   <meta name="supported-color-schemes" content="light">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=round2">{schema_block}
+  <link rel="stylesheet" href="/assets/css/styles.css?v=px1">{schema_block}
 </head>
 <body>
 {header}
@@ -1301,7 +1305,7 @@ write("get-a-quote/index.html", page(
     schema=True,
     canonical="/get-a-quote/",
     crumb="Get a quote",
-    extra_scripts='  <script src="/assets/js/quote-builder.js?v=gc1" defer></script>\n',
+    extra_scripts='  <script src="/assets/js/quote-builder.js?v=px1" defer></script>\n',
 ))
 
 # —— PRIVACY ——
@@ -1317,8 +1321,8 @@ privacy_body = f'''    <section class="page-hero">
         <p>Dimension Exterior Cleaning (“we”) collects the information you send us when you ask for a quote or book work: typically your name, phone, email, postcode, and message details.</p>
         <p>We use that information only to respond to your enquiry, arrange visits, and keep records of jobs we do for you. We do not sell your details.</p>
         <p>Emails and calls may be stored in our inbox, phone, or simple business tools. You can ask us what we hold about you, or ask us to delete it where we no longer need it for the job, by emailing <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
-        <p>This site does not use advertising cookies.</p>
-        <p class="muted mt-3">Last updated: October 2026.</p>
+        <p><button type="button" class="privacy-consent-reset" data-consent-reset>Change cookie choice</button></p>
+        <p class="muted mt-3">Last updated: November 2026.</p>
       </div>
     </section>'''
 

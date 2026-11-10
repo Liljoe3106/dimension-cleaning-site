@@ -467,6 +467,22 @@
     });
   }
 
+  // Meta Lead event: only after a successful Web3Forms response, and only with cookie consent.
+  function trackLead(q) {
+    try {
+      var granted = false;
+      try { granted = window.localStorage.getItem('dimConsent') === 'granted'; } catch (e) { granted = false; }
+      if (!granted || typeof window.fbq !== 'function') return;
+      var seen = {};
+      var names = (q.lines || []).map(function (l) { return l.label; }).filter(function (n) {
+        if (!n || seen[n]) return false;
+        seen[n] = true;
+        return true;
+      });
+      window.fbq('track', 'Lead', { content_name: names.join(', ') || 'Quote' });
+    } catch (err) { /* never break the form for tracking */ }
+  }
+
   if (svcGutter) {
     svcGutter.addEventListener('change', function () {
       if (svcGutter.checked && svcCare) svcCare.checked = false;
@@ -505,6 +521,7 @@
     submitWeb3Forms(key, q)
       .then(function () {
         if (typeof window.dimTrack === 'function') window.dimTrack('quote-submit');
+        trackLead(q);
         showSuccess(
           'Thanks. We’ve sent your guide estimate to Dimension Exterior Cleaning. We’ll confirm the final price before work starts.'
         );

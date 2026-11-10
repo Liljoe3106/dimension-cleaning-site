@@ -1718,3 +1718,57 @@ body.lightbox-open {
 /* Before/after pair that fills a square tile (portrait halves), used on /gutter-round/ */
 .gallery-card--pair-tall .pair-grid picture,
 .gallery-card--pair-tall .pair-grid img { aspect-ratio: 1 / 2; }
+
+/* —— Cookie consent banner —— */
+.consent-banner {
+  position: fixed;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: calc(72px + env(safe-area-inset-bottom));
+  z-index: 95;
+  background: #ffffff;
+  color: #1e293b;
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+}
+.consent-banner[hidden] { display: none; }
+.consent-banner__text { margin: 0; line-height: 1.4; }
+.consent-banner__actions { display: flex; gap: 0.5rem; }
+.consent-btn {
+  flex: 1;
+  min-height: 44px;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--navy);
+  background: #ffffff;
+  color: var(--navy);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.consent-btn:hover, .consent-btn:focus-visible { background: var(--gray-50); }
+.privacy-consent-reset {
+  min-height: 44px;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--gray-200);
+  background: #ffffff;
+  color: var(--navy);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+@media (min-width: 768px) {
+  .consent-banner {
+    left: auto;
+    right: 1rem;
+    bottom: 1rem;
+    max-width: 380px;
+  }
+}
