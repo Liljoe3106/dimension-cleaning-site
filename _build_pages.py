@@ -144,7 +144,7 @@ def testimonial_cards_html(reviews=None):
 HEADER = '''  <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <a class="brand-banner" href="/">
-      <img class="brand-banner-logo" src="/assets/images/logo-light.svg" width="243" height="220" alt="Dimension Exterior Cleaning" decoding="async">
+      <img class="brand-banner-logo" src="/assets/images/logo-light-plate.svg" width="243" height="220" alt="Dimension Exterior Cleaning" decoding="async">
       <span class="brand-banner-area">Sheffield &amp; South Yorkshire</span>
     </a>
     <div class="site-nav-bar">
@@ -188,7 +188,7 @@ FOOTER = f'''  <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand-block">
         <a class="footer-logo-link" href="/">
-          <img class="footer-logo" src="/assets/images/logo-light.svg" width="133" height="120" alt="Dimension Exterior Cleaning">
+          <img class="footer-logo" src="/assets/images/logo-light-plate.svg" width="133" height="120" alt="Dimension Exterior Cleaning">
         </a>
         <div>
         <div class="footer-brand">© Dimension Exterior Cleaning</div>
@@ -312,7 +312,7 @@ def page(title, description, nav_id, body, *, schema=False, schema_json=None, ca
   <meta name="theme-color" content="#ffffff">
   <meta name="color-scheme" content="light only">
   <meta name="supported-color-schemes" content="light">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=white1">{schema_block}
+  <link rel="stylesheet" href="/assets/css/styles.css?v=white2">{schema_block}
 </head>
 <body>
 {header}

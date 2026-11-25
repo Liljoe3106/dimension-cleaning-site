@@ -120,12 +120,17 @@ li + li { margin-top: 0.35rem; }
   padding: 1.75rem 1.25rem 1.4rem;
   border-bottom: 1px solid var(--gray-100);
 }
+/* The logo file (logo-light-plate.svg) has a white rounded plate baked in, with 6.25% padding
+   round the artwork (canvas 1.125x). Sizes are scaled by 1.125 and the padding is pulled back
+   with negative margins, so the artwork renders exactly where it did before and the plate is
+   invisible on the white header. If a browser force-darkens the page, the plate keeps the
+   navy DIMENSION wordmark readable. */
 .brand-banner-logo {
   display: block;
-  margin: 0 auto;
-  height: 13.75rem; /* 220px: DIMENSION stays readable */
+  margin: calc(13.75rem * -0.0625) auto;
+  height: calc(13.75rem * 1.125); /* artwork 220px tall: DIMENSION stays readable */
   width: auto;
-  max-width: min(20rem, 80vw);
+  max-width: calc(min(20rem, 80vw) * 1.125);
   object-fit: contain;
   background: transparent;
   filter: none !important;
@@ -146,7 +151,7 @@ li + li { margin-top: 0.35rem; }
 }
 @media (max-width: 900px) {
   .brand-banner { padding: 1.2rem 1rem 1.05rem; }
-  .brand-banner-logo { height: 9.5rem; }
+  .brand-banner-logo { height: calc(9.5rem * 1.125); margin: calc(9.5rem * -0.0625) auto; }
 }
 
 /* Sticky nav row only (banner does not stick) */
@@ -1118,15 +1123,17 @@ table.pricing .highlight .price { color: var(--teal-dark); }
 }
 .footer-logo {
   display: block;
-  height: 7.5rem;
-  width: auto;
+  height: calc(7.5rem * 1.125); /* plate logo: see .brand-banner-logo */
+  width: calc(7.5rem * 1.24426); /* height x logo aspect ratio (742.26 / 671.12) */
+  max-width: none; /* the negative side margins would otherwise make max-width: 100% squash it */
+  margin: calc(7.5rem * -0.0625) calc(7.5rem * -0.06913);
 }
 @media (max-width: 640px) {
   .footer-brand-block {
     flex-direction: column;
     align-items: flex-start;
   }
-  .footer-logo { height: 6.25rem; }
+  .footer-logo { height: calc(6.25rem * 1.125); width: calc(6.25rem * 1.24426); margin: calc(6.25rem * -0.0625) calc(6.25rem * -0.06913); }
 }
 .footer-brand { color: var(--navy); font-weight: 600; margin-bottom: 0.35rem; }
 .footer-former {
