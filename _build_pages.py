@@ -319,7 +319,7 @@ def page(title, description, nav_id, body, *, schema=False, schema_json=None, ca
   <meta name="theme-color" content="#0f171c" media="(prefers-color-scheme: dark)">
   <meta name="color-scheme" content="light dark">
   <meta name="supported-color-schemes" content="light dark">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=dark1">{schema_block}
+  <link rel="stylesheet" href="/assets/css/styles.css?v=dark2">{schema_block}
 </head>
 <body>
 {header}
@@ -817,7 +817,7 @@ care_body = f'''    <section class="page-hero">
       <div class="container">
         <h2>Ask to join the care plan</h2>
         <p><a href="mailto:{EMAIL}">{EMAIL}</a> / <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></p>
-        <p class="mt-1 muted" style="color:rgba(255,255,255,0.7)">(Or ask when we’re on site for a one-off gutter.)</p>
+        <p class="mt-1 muted">(Or ask when we’re on site for a one-off gutter.)</p>
         <p class="mt-2"><a class="btn btn-primary" href="/contact/">Get in touch</a></p>
       </div>
     </section>'''

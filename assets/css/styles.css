@@ -398,7 +398,11 @@ li + li { margin-top: 0.35rem; }
     gap: 0.15rem;
   }
   .site-nav.is-open { display: flex; }
-  .header-inner { flex-wrap: wrap; }
+  .header-inner {
+    flex-wrap: wrap;
+    padding-left: 1.25rem;  /* keep the D mark and Menu clear of the screen edges */
+    padding-right: 1.25rem;
+  }
   .brand { flex: 1; min-width: 140px; }
   .nav-dropdown .dropdown-menu {
     position: static;
@@ -2007,7 +2011,11 @@ body.lightbox-open {
   .btn-header-cta:hover { background: var(--dk-btn-hover); border-color: var(--dk-btn-hover); color: #ffffff; }
   .btn-outline-light, .btn-outline-light:hover { color: #ffffff; }
   .mobile-bar .mb-wa { color: #ffffff; }
+  .cta-band a.btn-primary,
   .cta-band a.btn-primary:hover { color: #ffffff; }
+  .steps li::before { color: #ffffff; }
+  .lightbox__close:hover,
+  .lightbox__close:focus-visible { color: #ffffff; }
   .cta-band a.btn-secondary:hover { color: var(--dk-page); }
   .skip-link { background: var(--dk-btn); color: #ffffff; }
 
