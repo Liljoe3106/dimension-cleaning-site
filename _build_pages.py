@@ -144,7 +144,10 @@ def testimonial_cards_html(reviews=None):
 HEADER = '''  <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <a class="brand-banner" href="/">
-      <img class="brand-banner-logo" src="/assets/images/logo-light.svg" width="243" height="220" alt="Dimension Exterior Cleaning" decoding="async">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="/assets/images/logo-dark.svg">
+        <img class="brand-banner-logo" src="/assets/images/logo-light.svg" width="243" height="220" alt="Dimension Exterior Cleaning" decoding="async">
+      </picture>
       <span class="brand-banner-area">Sheffield &amp; South Yorkshire</span>
     </a>
     <div class="site-nav-bar">
@@ -188,7 +191,10 @@ FOOTER = f'''  <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand-block">
         <a class="footer-logo-link" href="/">
-          <img class="footer-logo" src="/assets/images/logo-light.svg" width="133" height="120" alt="Dimension Exterior Cleaning">
+          <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="/assets/images/logo-dark.svg">
+            <img class="footer-logo" src="/assets/images/logo-light.svg" width="133" height="120" alt="Dimension Exterior Cleaning">
+          </picture>
         </a>
         <div>
         <div class="footer-brand">© Dimension Exterior Cleaning</div>
@@ -309,10 +315,11 @@ def page(title, description, nav_id, body, *, schema=False, schema_json=None, ca
   <link rel="icon" href="/assets/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-  <meta name="theme-color" content="#ffffff">
-  <meta name="color-scheme" content="light only">
-  <meta name="supported-color-schemes" content="light">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=logo1">{schema_block}
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f171c" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=dark1">{schema_block}
 </head>
 <body>
 {header}
@@ -361,6 +368,7 @@ home_body = f'''    <section class="page-hero">
             <h3>Gutters</h3>
             <p>From £49. Full gutter run vacuumed, downpipes checked and cleared, before and after photos sent to you, and a free condition note on your fascias, soffits and roof moss.</p>
             <p class="mt-1"><strong>30-day overflow guarantee.</strong> If your gutters overflow within 30 days because of a blockage I missed, I'll come back and sort it free.</p>
+            <p class="mt-1">Commercial and business premises: £5 per metre, up to two storeys.</p>
             <p class="mt-1"><a href="/gutter-cleaning/">Gutter cleaning →</a></p>
           </article>
           <article class="card">
@@ -510,6 +518,7 @@ gutter_body = f'''    <section class="page-hero">
         </div>
         <p><strong>Included:</strong> Full gutter run vacuumed, downpipes checked and cleared, before and after photos sent to you, and a free condition note on your fascias, soffits and roof moss.</p>
         <p><strong>Add-ons:</strong> Conservatory or extension +£15.</p>
+        <p><strong>Commercial and business premises:</strong> £5 per metre, up to two storeys.</p>
         <div class="callout-plain mt-3">
           <h3>30-day overflow guarantee</h3>
           <p>If your gutters overflow within 30 days because of a blockage I missed, I'll come back and sort it free.</p>
