@@ -144,17 +144,17 @@ def testimonial_cards_html(reviews=None):
 HEADER = '''  <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <a class="brand-banner" href="/">
-      <picture>
-        <source srcset="/assets/images/brand-header.webp" type="image/webp">
-        <img src="/assets/images/brand-header.jpg" alt="" width="1206" height="393" decoding="async">
-      </picture>
-      <span class="sr-only">Dimension Exterior Cleaning</span>
+      <img class="brand-banner-logo" src="/assets/images/logo-light.svg" width="243" height="220" alt="Dimension Exterior Cleaning" decoding="async">
+      <span class="brand-banner-area">Sheffield &amp; South Yorkshire</span>
     </a>
     <div class="site-nav-bar">
       <div class="container header-inner">
         <a class="brand" href="/">
-          <span class="brand-name">Dimension Exterior Cleaning</span>
-          <span class="brand-tag">Sheffield &amp; South Yorkshire</span>
+          <img class="brand-mark" src="/assets/favicon.svg" width="36" height="36" alt="">
+          <span class="brand-text">
+            <span class="brand-name">Dimension Exterior Cleaning</span>
+            <span class="brand-tag">Sheffield &amp; South Yorkshire</span>
+          </span>
         </a>
         <div class="header-actions">
           <a class="btn btn-header-cta" href="/get-a-quote/">Get a quote</a>
@@ -186,11 +186,16 @@ CONSENT_JS = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'asse
 
 FOOTER = f'''  <footer class="site-footer">
     <div class="container footer-inner">
-      <div>
+      <div class="footer-brand-block">
+        <a class="footer-logo-link" href="/">
+          <img class="footer-logo" src="/assets/images/logo-light.svg" width="133" height="120" alt="Dimension Exterior Cleaning">
+        </a>
+        <div>
         <div class="footer-brand">© Dimension Exterior Cleaning</div>
         <p class="footer-former">Formerly Dimension Powerwash.</p>
         <div><a href="mailto:{EMAIL}">{EMAIL}</a></div>
         <div><a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></div>
+        </div>
       </div>
       <ul class="footer-links">
         <li><a href="/gutter-round/">Gutter round</a></li>
@@ -210,8 +215,9 @@ FOOTER = f'''  <footer class="site-footer">
 {CONSENT_JS}  </script>'''
 
 SITE_ORIGIN = "https://dimensioncleaning.co.uk"
-OG_IMAGE = f"{SITE_ORIGIN}/assets/images/path-after.jpg"
-LOGO_IMAGE = f"{SITE_ORIGIN}/assets/images/path-after.jpg"
+OG_IMAGE = f"{SITE_ORIGIN}/assets/images/og-image.jpg"
+LOGO_IMAGE = f"{SITE_ORIGIN}/assets/images/logo-light.png"
+PHOTO_IMAGE = f"{SITE_ORIGIN}/assets/images/path-after.jpg"
 
 LOCAL_BUSINESS_SCHEMA = f'''{{
   "@context": "https://schema.org",
@@ -222,7 +228,8 @@ LOCAL_BUSINESS_SCHEMA = f'''{{
   "url": "{SITE_ORIGIN}/",
   "telephone": "{PHONE_TEL}",
   "email": "{EMAIL}",
-  "image": "{LOGO_IMAGE}",
+  "image": "{PHOTO_IMAGE}",
+  "logo": "{LOGO_IMAGE}",
   "address": {{
     "@type": "PostalAddress",
     "addressLocality": "Sheffield",
@@ -296,13 +303,16 @@ def page(title, description, nav_id, body, *, schema=False, schema_json=None, ca
   <meta name="twitter:title" content="{title}">
   <meta name="twitter:description" content="{description}">
   <meta name="twitter:image" content="{OG_IMAGE}">
+  <link rel="preload" href="/assets/fonts/montserrat-latin-600.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/montserrat-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <meta name="theme-color" content="#ffffff">
   <meta name="color-scheme" content="light only">
   <meta name="supported-color-schemes" content="light">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=px1">{schema_block}
+  <link rel="stylesheet" href="/assets/css/styles.css?v=logo1">{schema_block}
 </head>
 <body>
 {header}
