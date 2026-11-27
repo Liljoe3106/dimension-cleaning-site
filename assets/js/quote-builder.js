@@ -23,7 +23,8 @@
     small: 'Small (terrace 1-2 bed)',
     medium: 'Medium (semi 2-3 bed)',
     large: 'Large (detached 3-4)',
-    xl: 'XL (detached 5+)'
+    xl: 'XL (detached 5+)',
+    commercial: 'Commercial'
   };
 
   var form = document.getElementById('quote-form');
@@ -67,9 +68,12 @@
     return '';
   }
 
+  function isCommercialSize() {
+    return sizeKey() === 'commercial';
+  }
+
   function isCommercialGutter() {
-    var commercial = form.querySelector('#gutter-type-commercial');
-    return !!(svcGutter && svcGutter.checked && commercial && commercial.checked);
+    return !!(svcGutter && svcGutter.checked && isCommercialSize());
   }
 
   function commercialHeight() {
@@ -89,9 +93,8 @@
   }
 
   function needsHouseSize() {
-    var gutterNeedsSize = !!(svcGutter && svcGutter.checked && !isCommercialGutter());
     return !!(
-      gutterNeedsSize ||
+      (svcGutter && svcGutter.checked) ||
       (svcCare && svcCare.checked) ||
       (svcFascias && svcFascias.checked) ||
       (svcWindows && svcWindows.checked)
@@ -100,18 +103,16 @@
 
   function syncVisibility() {
     var commercial = isCommercialGutter();
-    var propertyWrap = form.querySelector('#gutter-property-wrap');
     var commercialWrap = form.querySelector('#commercial-gutter-wrap');
     var minNote = form.querySelector('#commercial-gutter-min-note');
-    if (propertyWrap) propertyWrap.hidden = !(svcGutter && svcGutter.checked);
     if (commercialWrap) commercialWrap.hidden = !commercial;
     if (minNote) minNote.hidden = !(commercial && commercialHeight() === 'up_to_two');
-    if (commercial) {
+    if (isCommercialSize()) {
       var cons = form.querySelector('#addon-conservatory');
       if (cons) cons.checked = false;
     }
     if (gutterAddons) {
-      gutterAddons.hidden = !(((svcGutter && svcGutter.checked) || (svcCare && svcCare.checked)) && !commercial);
+      gutterAddons.hidden = !(((svcGutter && svcGutter.checked) || (svcCare && svcCare.checked)) && !isCommercialSize());
     }
     if (fasciasOptions) fasciasOptions.hidden = !(svcFascias && svcFascias.checked);
     if (windowsWrap) {
@@ -123,7 +124,7 @@
     if (houseSizeWrap) {
       var sizeNeeded = needsHouseSize();
       houseSizeWrap.classList.toggle('is-required', sizeNeeded);
-      houseSizeWrap.hidden = commercial && !sizeNeeded;
+      houseSizeWrap.hidden = false;
     }
 
     [
@@ -196,7 +197,14 @@
 
     if (svcCare && svcCare.checked) {
       anyService = true;
-      if (size && CARE[size] != null) {
+      if (isCommercialSize()) {
+        push({
+          label: 'Care plan (annual)',
+          amount: 0,
+          display: "We'll quote this one for you",
+          quoteNeeded: true
+        });
+      } else if (size && CARE[size] != null) {
         push({ label: 'Care plan (annual)', amount: CARE[size], display: money(CARE[size]) });
       } else {
         push({ label: 'Care plan (annual)', amount: 0, display: 'Select house size', pending: true });
@@ -221,7 +229,14 @@
       for (var mi = 0; mi < modeRadios.length; mi++) {
         if (modeRadios[mi].checked) { mode = modeRadios[mi].value; break; }
       }
-      if (size && FASCIAS[size] != null) {
+      if (isCommercialSize()) {
+        push({
+          label: 'Soffits & fascias',
+          amount: 0,
+          display: "We'll quote this one for you",
+          quoteNeeded: true
+        });
+      } else if (size && FASCIAS[size] != null) {
         var fPre = mode === 'fascias_windows' ? FASCIAS_WIN[size] : FASCIAS[size];
         var fLabel = mode === 'fascias_windows' ? 'Soffits & fascias + windows' : 'Soffits & fascias';
         var fDisc = applyCare(fPre, careOn);
@@ -237,7 +252,14 @@
       }
     } else if (svcWindows && svcWindows.checked) {
       anyService = true;
-      if (size && WINDOWS[size] != null) {
+      if (isCommercialSize()) {
+        push({
+          label: 'Windows only',
+          amount: 0,
+          display: "We'll quote this one for you",
+          quoteNeeded: true
+        });
+      } else if (size && WINDOWS[size] != null) {
         var wDisc = applyCare(WINDOWS[size], careOn);
         push({
           label: 'Windows only',
@@ -419,7 +441,7 @@
     if (!((form.querySelector('#q-email') || {}).value || '').trim()) errors.push('Enter your email.');
     if (!((form.querySelector('#q-postcode') || {}).value || '').trim()) errors.push('Enter your postcode.');
     if (!q.anyService) errors.push('Select at least one service.');
-    if (needsHouseSize() && !q.size) errors.push('Select your house size.');
+    if (needsHouseSize() && !q.size) errors.push('Select your property size.');
     return errors;
   }
 
@@ -467,13 +489,16 @@
       'Email: ' + email,
       'Postcode: ' + postcode
     ];
-    if (isCommercialGutter()) {
-      var metres = parseMetres();
+    if (isCommercialSize()) {
       header.push('Property type: Commercial');
-      header.push('Height: ' + (commercialHeight() === 'over_two' ? 'Over two storeys' : 'Up to two storeys'));
-      header.push('Gutter length: ' + (metres != null ? metres + ' metres' : '(not given, measure on site)'));
+      if (isCommercialGutter()) {
+        var metres = parseMetres();
+        header.push('Height: ' + (commercialHeight() === 'over_two' ? 'Over two storeys' : 'Up to two storeys'));
+        header.push('Gutter length: ' + (metres != null ? metres + ' metres' : '(not given, measure on site)'));
+      }
+    } else {
+      header.push('House size: ' + sizeLabel);
     }
-    header.push('House size: ' + sizeLabel);
 
     return header.concat([
       '',
@@ -500,7 +525,7 @@
         !q.lines.some(function (l) { return l.measure && l.display !== "From £250, we'll measure on site"; })) {
       totalBit = "From £250, we'll measure on site";
     } else totalBit = 'measure on site';
-    var prefix = isCommercialGutter()
+    var prefix = isCommercialSize()
       ? 'Quote enquiry — Commercial — '
       : 'Quote enquiry — ';
     return prefix + (postcode || 'no postcode') + ' — ' + totalBit;

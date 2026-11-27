@@ -1250,13 +1250,27 @@ quote_body = f'''    <section class="page-hero">
         <form id="quote-form" class="quote-layout" data-access-key="{html.escape(WEB3FORMS_KEY, quote=True)}" novalidate>
           <div class="quote-panel">
             <div class="quote-section" id="house-size-wrap">
-              <h2>House size</h2>
-              <p class="house-size-hint muted" style="margin-bottom:0.75rem">Needed for gutters, fascias, windows, and the care plan.</p>
-              <div class="house-size-grid" role="radiogroup" aria-label="House size">
+              <h2>Property size</h2>
+              <p class="house-size-hint muted" style="margin-bottom:0.75rem">Needed for gutters, fascias, windows, and the care plan. Pick Commercial for a business premises gutter clean.</p>
+              <div class="house-size-grid" role="radiogroup" aria-label="Property size">
                 <label class="quote-radio"><input type="radio" name="house_size" value="small"> Small (terrace 1-2 bed)</label>
                 <label class="quote-radio"><input type="radio" name="house_size" value="medium"> Medium (semi 2-3 bed)</label>
                 <label class="quote-radio"><input type="radio" name="house_size" value="large"> Large (detached 3-4)</label>
                 <label class="quote-radio"><input type="radio" name="house_size" value="xl"> XL (detached 5+)</label>
+                <label class="quote-radio"><input type="radio" name="house_size" value="commercial"> Commercial</label>
+              </div>
+              <div id="commercial-gutter-wrap" class="quote-nested" hidden>
+                <p class="quote-helper" style="margin-top:0">Height</p>
+                <div class="house-size-grid" role="radiogroup" aria-label="Commercial building height">
+                  <label class="quote-radio"><input type="radio" name="gutter_commercial_height" id="gutter-height-up-to-two" value="up_to_two" checked> Up to two storeys</label>
+                  <label class="quote-radio"><input type="radio" name="gutter_commercial_height" id="gutter-height-over-two" value="over_two"> Over two storeys</label>
+                </div>
+                <div class="m2-row" style="margin-left:0">
+                  <label for="gutter-metres">Gutter length (metres)</label>
+                  <input type="number" id="gutter-metres" name="gutter_metres" min="1" step="1" inputmode="numeric" placeholder="Optional">
+                </div>
+                <p class="quote-helper">Rough total length is fine, we'll confirm on site.</p>
+                <p class="quote-helper" id="commercial-gutter-min-note">Minimum charge £250</p>
               </div>
             </div>
 
@@ -1265,26 +1279,6 @@ quote_body = f'''    <section class="page-hero">
               <p class="muted" style="margin-bottom:0.75rem">Select at least one. Gutter one-off and care plan cannot both be selected.</p>
 
               <label class="quote-check"><input type="checkbox" id="svc-gutter" name="svc_gutter"> Gutter clean (one-off)</label>
-              <div id="gutter-property-wrap" class="quote-nested" hidden>
-                <p class="quote-helper" style="margin-top:0">Property type</p>
-                <div class="house-size-grid" role="radiogroup" aria-label="Property type">
-                  <label class="quote-radio"><input type="radio" name="gutter_property_type" id="gutter-type-residential" value="residential" checked> Residential</label>
-                  <label class="quote-radio"><input type="radio" name="gutter_property_type" id="gutter-type-commercial" value="commercial"> Commercial</label>
-                </div>
-                <div id="commercial-gutter-wrap" hidden>
-                  <p class="quote-helper" style="margin-top:0.75rem">Height</p>
-                  <div class="house-size-grid" role="radiogroup" aria-label="Commercial building height">
-                    <label class="quote-radio"><input type="radio" name="gutter_commercial_height" id="gutter-height-up-to-two" value="up_to_two" checked> Up to two storeys</label>
-                    <label class="quote-radio"><input type="radio" name="gutter_commercial_height" id="gutter-height-over-two" value="over_two"> Over two storeys</label>
-                  </div>
-                  <div class="m2-row" style="margin-left:0">
-                    <label for="gutter-metres">Gutter length (metres)</label>
-                    <input type="number" id="gutter-metres" name="gutter_metres" min="1" step="1" inputmode="numeric" placeholder="Optional">
-                  </div>
-                  <p class="quote-helper">Rough total length is fine, we'll confirm on site.</p>
-                  <p class="quote-helper" id="commercial-gutter-min-note">Minimum charge £250</p>
-                </div>
-              </div>
 
               <label class="quote-check"><input type="checkbox" id="svc-care" name="svc_care"> Care plan (annual): two gutter visits, 15% off other work</label>
               <div id="gutter-addons" class="quote-nested" hidden>
@@ -1407,7 +1401,7 @@ write("get-a-quote/index.html", page(
     schema=True,
     canonical="/get-a-quote/",
     crumb="Get a quote",
-    extra_scripts='  <script src="/assets/js/quote-builder.js?v=care2" defer></script>\n',
+    extra_scripts='  <script src="/assets/js/quote-builder.js?v=commsize1" defer></script>\n',
 ))
 
 # —— PRIVACY ——
