@@ -4,7 +4,7 @@
   var PLACEHOLDER_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
   var JOE_EMAIL = 'joe@dimensioncleaning.co.uk';
 
-  var GUTTER = { small: 49, medium: 79, large: 119, xl: 169 };
+  var GUTTER = { small: 54, medium: 84, large: 124, xl: 174 };
   var CARE = { small: 69, medium: 111, large: 167, xl: 237 };
   var FASCIAS = { small: 49, medium: 79, large: 119, xl: 169 };
   var FASCIAS_WIN = { small: 69, medium: 104, large: 154, xl: 224 };
@@ -14,6 +14,8 @@
   var SEAL_FLOOR = 200;
   var ROOF_RATE = 12;
   var ROOF_FLOOR = 500;
+  var COMMERCIAL_GUTTER_RATE = 5;
+  var COMMERCIAL_GUTTER_FLOOR = 250;
   var CARE_OFF = 0.15;
   var ADDON_CONSERVATORY = 15;
 
@@ -65,9 +67,31 @@
     return '';
   }
 
+  function isCommercialGutter() {
+    var commercial = form.querySelector('#gutter-type-commercial');
+    return !!(svcGutter && svcGutter.checked && commercial && commercial.checked);
+  }
+
+  function commercialHeight() {
+    var over = form.querySelector('#gutter-height-over-two');
+    if (over && over.checked) return 'over_two';
+    return 'up_to_two';
+  }
+
+  function parseMetres() {
+    var input = form.querySelector('#gutter-metres');
+    if (!input) return null;
+    var v = String(input.value || '').trim();
+    if (v === '') return null;
+    var n = parseFloat(v);
+    if (!isFinite(n) || n < 1) return null;
+    return Math.floor(n);
+  }
+
   function needsHouseSize() {
+    var gutterNeedsSize = !!(svcGutter && svcGutter.checked && !isCommercialGutter());
     return !!(
-      (svcGutter && svcGutter.checked) ||
+      gutterNeedsSize ||
       (svcCare && svcCare.checked) ||
       (svcFascias && svcFascias.checked) ||
       (svcWindows && svcWindows.checked)
@@ -75,7 +99,20 @@
   }
 
   function syncVisibility() {
-    if (gutterAddons) gutterAddons.hidden = !((svcGutter && svcGutter.checked) || (svcCare && svcCare.checked));
+    var commercial = isCommercialGutter();
+    var propertyWrap = form.querySelector('#gutter-property-wrap');
+    var commercialWrap = form.querySelector('#commercial-gutter-wrap');
+    var minNote = form.querySelector('#commercial-gutter-min-note');
+    if (propertyWrap) propertyWrap.hidden = !(svcGutter && svcGutter.checked);
+    if (commercialWrap) commercialWrap.hidden = !commercial;
+    if (minNote) minNote.hidden = !(commercial && commercialHeight() === 'up_to_two');
+    if (commercial) {
+      var cons = form.querySelector('#addon-conservatory');
+      if (cons) cons.checked = false;
+    }
+    if (gutterAddons) {
+      gutterAddons.hidden = !(((svcGutter && svcGutter.checked) || (svcCare && svcCare.checked)) && !commercial);
+    }
     if (fasciasOptions) fasciasOptions.hidden = !(svcFascias && svcFascias.checked);
     if (windowsWrap) {
       var showWin = !(svcFascias && svcFascias.checked);
@@ -83,7 +120,11 @@
       if (!showWin && svcWindows) svcWindows.checked = false;
     }
     if (roofOptions) roofOptions.hidden = !(svcRoof && svcRoof.checked);
-    if (houseSizeWrap) houseSizeWrap.classList.toggle('is-required', needsHouseSize());
+    if (houseSizeWrap) {
+      var sizeNeeded = needsHouseSize();
+      houseSizeWrap.classList.toggle('is-required', sizeNeeded);
+      houseSizeWrap.hidden = commercial && !sizeNeeded;
+    }
 
     [
       { id: 'drive-block', row: 'row-m2-block' },
@@ -120,7 +161,33 @@
 
     if (svcGutter && svcGutter.checked) {
       anyService = true;
-      if (size && GUTTER[size] != null) {
+      if (isCommercialGutter()) {
+        var metres = parseMetres();
+        var overTwo = commercialHeight() === 'over_two';
+        var label = overTwo
+          ? 'Gutter clean, commercial (over two storeys'
+          : 'Gutter clean, commercial (up to two storeys';
+        if (metres != null) label += ', ' + metres + ' m';
+        label += ')';
+        if (overTwo) {
+          push({
+            label: label,
+            amount: 0,
+            display: "We'll quote this one for you",
+            quoteNeeded: true
+          });
+        } else if (metres != null) {
+          var est = Math.max(metres * COMMERCIAL_GUTTER_RATE, COMMERCIAL_GUTTER_FLOOR);
+          push({ label: label, amount: est, display: money(est) });
+        } else {
+          push({
+            label: label,
+            amount: 0,
+            display: "From £250, we'll measure on site",
+            measure: true
+          });
+        }
+      } else if (size && GUTTER[size] != null) {
         push({ label: 'Gutter clean (one-off)', amount: GUTTER[size], display: money(GUTTER[size]) });
       } else {
         push({ label: 'Gutter clean (one-off)', amount: 0, display: 'Select house size', pending: true });
@@ -139,7 +206,7 @@
     // Gutter add-ons: same prices for the one-off clean and the care plan (per year on the plan).
     // Charged once even if both are ticked. Never discounted by the care plan 15%.
     var gutterOn = !!(svcGutter && svcGutter.checked);
-    if ((gutterOn || careOn) && size && GUTTER[size] != null) {
+    if ((gutterOn || careOn) && !isCommercialGutter() && size && GUTTER[size] != null) {
       var addonSuffix = gutterOn ? '' : ' (plan)';
       var cons = form.querySelector('#addon-conservatory');
       if (cons && cons.checked) {
@@ -288,8 +355,8 @@
       linesEl.innerHTML = q.lines
         .map(function (line) {
           var right;
-          if (line.measure) {
-            right = '<span class="quote-amt measure">measure on site</span>';
+          if (line.measure || line.quoteNeeded) {
+            right = '<span class="quote-amt measure">' + escapeHtml(line.display) + '</span>';
           } else if (line.pending) {
             right = '<span class="quote-amt muted">' + escapeHtml(line.display) + '</span>';
           } else if (line.careOff && line.pre != null) {
@@ -319,8 +386,14 @@
 
     if (q.total > 0) {
       totalEl.textContent = money(q.total);
+    } else if (q.anyService && q.lines.some(function (l) { return l.quoteNeeded; }) &&
+        !q.lines.some(function (l) { return l.measure; })) {
+      totalEl.textContent = "We'll quote this one for you";
     } else if (q.anyService && q.lines.some(function (l) { return l.measure; })) {
-      totalEl.textContent = 'measure on site';
+      var onlyFrom250 = q.lines.every(function (l) {
+        return l.quoteNeeded || l.pending || l.display === "From £250, we'll measure on site";
+      }) && q.lines.some(function (l) { return l.display === "From £250, we'll measure on site"; });
+      totalEl.textContent = onlyFrom250 ? "From £250, we'll measure on site" : 'measure on site';
     } else {
       totalEl.textContent = money(0);
     }
@@ -367,7 +440,8 @@
     var lineText = q.lines
       .map(function (line) {
         var amt;
-        if (line.measure) amt = 'measure on site';
+        if (line.quoteNeeded) amt = 'quote needed';
+        else if (line.measure) amt = line.display || 'measure on site';
         else if (line.pending) amt = line.display;
         else if (line.careOff && line.pre != null) {
           amt = money(line.amount) + ' (was ' + money(line.pre) + ', care plan 15% off)';
@@ -376,15 +450,32 @@
       })
       .join('\n');
 
-    var totalText = q.total > 0 ? money(q.total) : 'measure on site';
+    var totalText;
+    if (q.total > 0) totalText = money(q.total);
+    else if (q.lines.some(function (l) { return l.quoteNeeded; }) &&
+        !q.lines.some(function (l) { return l.measure; })) {
+      totalText = 'quote needed';
+    } else if (q.lines.some(function (l) { return l.display === "From £250, we'll measure on site"; }) &&
+        !q.lines.some(function (l) { return l.measure && l.display !== "From £250, we'll measure on site"; })) {
+      totalText = "From £250, we'll measure on site";
+    } else totalText = 'measure on site';
     var stamp = new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' });
 
-    return [
+    var header = [
       'Name: ' + name,
       'Phone: ' + phone,
       'Email: ' + email,
-      'Postcode: ' + postcode,
-      'House size: ' + sizeLabel,
+      'Postcode: ' + postcode
+    ];
+    if (isCommercialGutter()) {
+      var metres = parseMetres();
+      header.push('Property type: Commercial');
+      header.push('Height: ' + (commercialHeight() === 'over_two' ? 'Over two storeys' : 'Up to two storeys'));
+      header.push('Gutter length: ' + (metres != null ? metres + ' metres' : '(not given, measure on site)'));
+    }
+    header.push('House size: ' + sizeLabel);
+
+    return header.concat([
       '',
       'Selected services:',
       lineText || '(none)',
@@ -396,12 +487,23 @@
       '',
       sourceTag() ? 'Source: ' + sourceTag() : null,
       'Submitted: ' + stamp + ' (UK)'
-    ].filter(function (l) { return l !== null; }).join('\n');
+    ].filter(function (l) { return l !== null; })).join('\n');
   }
 
   function subjectLine(q, postcode) {
-    var totalBit = q.total > 0 ? 'guide ' + money(q.total) : 'measure on site';
-    return 'Quote enquiry — ' + (postcode || 'no postcode') + ' — ' + totalBit;
+    var totalBit;
+    if (q.total > 0) totalBit = 'guide ' + money(q.total);
+    else if (isCommercialGutter() && commercialHeight() === 'over_two' &&
+        !q.lines.some(function (l) { return l.measure; })) {
+      totalBit = 'quote needed';
+    } else if (q.lines.some(function (l) { return l.display === "From £250, we'll measure on site"; }) &&
+        !q.lines.some(function (l) { return l.measure && l.display !== "From £250, we'll measure on site"; })) {
+      totalBit = "From £250, we'll measure on site";
+    } else totalBit = 'measure on site';
+    var prefix = isCommercialGutter()
+      ? 'Quote enquiry — Commercial — '
+      : 'Quote enquiry — ';
+    return prefix + (postcode || 'no postcode') + ' — ' + totalBit;
   }
 
   function showSuccess(msg) {

@@ -339,7 +339,7 @@ home_body = f'''    <section class="page-hero">
         <h1>Gutter cleaning and exterior cleaning in Sheffield</h1>
         <p class="sub">Clear prices. Proper roof softwash. A care plan that actually saves you money.</p>
         <div class="hero-ctas">
-          <a class="btn btn-primary btn-lg" href="/gutter-round/">Book a gutter clean from £49</a>
+          <a class="btn btn-primary btn-lg" href="/gutter-round/">Book a gutter clean from £54</a>
           <a class="btn btn-secondary btn-lg" href="/care-plan/">See the care plan from £69/year</a>
           <a class="btn btn-secondary btn-lg" href="/get-a-quote/">Get a guide price</a>
         </div>
@@ -359,7 +359,7 @@ home_body = f'''    <section class="page-hero">
         <div class="card-grid">
           <article class="card">
             <h3>Gutters</h3>
-            <p>From £49. Full gutter run vacuumed, downpipes checked and cleared, before and after photos sent to you, and a free condition note on your fascias, soffits and roof moss.</p>
+            <p>From £54. Full gutter run vacuumed, downpipes checked and cleared, before and after photos sent to you, and a free condition note on your fascias, soffits and roof moss.</p>
             <p class="mt-1"><strong>30-day overflow guarantee.</strong> If your gutters overflow within 30 days because of a blockage I missed, I'll come back and sort it free.</p>
             <p class="mt-1">Commercial and business premises: £5 per metre, up to two storeys.</p>
             <p class="mt-1"><a href="/gutter-cleaning/">Gutter cleaning →</a></p>
@@ -491,7 +491,7 @@ gutter_body = f'''    <section class="page-hero">
         <p>A gutter can look fine from the ground and still be packed with moss, leaves and roof grit. The warning signs are easy to spot: water spilling over the front edge in rain, damp marks below the gutter, staining on the fascia, or a downpipe that stays quiet when the gutter is full. Left alone, overflow can run down brickwork and collect around the base of the house.</p>
         <p>Joe clears the gutter run with a high-reach vacuum, working along the full length rather than just scooping out the worst bit. The vacuum keeps the debris contained and means there is less mess around windows, paths and flower beds. Once the run is clear, he checks the outlets and the downpipes, which are included in the standard price. If a downpipe is damaged or needs a repair, he will show you and tell you before doing anything else.</p>
         <p>This is useful on the tree-lined streets of Sheffield, where autumn leaves can fill a run quickly. We regularly work around S8, S10, S13, S20, S2 and S9, as well as Aston, Mosborough and nearby South Yorkshire homes. The same practical clean works for a terrace, a two-storey semi or a larger detached property. The price is based on the home size and the number of extras, rather than a vague price that changes when we arrive.</p>
-        <p>As a guide, standard gutter cleans start at £49 for a small terrace, £79 for a medium semi, £119 for a larger detached home and £169 for an XL property. A conservatory or extension is £15. The <a href="/get-a-quote/">quote builder</a> gives you the right price band once you enter your property details. You can also email <a href="mailto:joe@dimensioncleaning.co.uk">joe@dimensioncleaning.co.uk</a> or call <a href="tel:+447494503865">07494 503865</a>.</p>
+        <p>As a guide, standard gutter cleans start at £54 for a small terrace, £84 for a medium semi, £124 for a larger detached home and £174 for an XL property. A conservatory or extension is £15. The <a href="/get-a-quote/">quote builder</a> gives you the right price band once you enter your property details. You can also email <a href="mailto:joe@dimensioncleaning.co.uk">joe@dimensioncleaning.co.uk</a> or call <a href="tel:+447494503865">07494 503865</a>.</p>
         <p>If your gutters need attention twice a year, the care plan keeps it simple. You get two gutter visits, six months apart, and 15% off other exterior cleaning while the plan is active. It suits homes with trees nearby or owners who would rather prevent the overflow than wait for the next heavy downpour.</p>
       </div>
     </section>
@@ -503,10 +503,10 @@ gutter_body = f'''    <section class="page-hero">
           <table class="pricing">
             <thead><tr><th>Home</th><th>Price</th></tr></thead>
             <tbody>
-              <tr><td>Small (terrace 1-2 bed)</td><td class="price">£49</td></tr>
-              <tr class="highlight"><td>Medium (semi 2-3 bed)</td><td class="price">£79</td></tr>
-              <tr><td>Large (detached 3-4)</td><td class="price">£119</td></tr>
-              <tr><td>XL (detached 5+)</td><td class="price">£169</td></tr>
+              <tr><td>Small (terrace 1-2 bed)</td><td class="price">£54</td></tr>
+              <tr class="highlight"><td>Medium (semi 2-3 bed)</td><td class="price">£84</td></tr>
+              <tr><td>Large (detached 3-4)</td><td class="price">£124</td></tr>
+              <tr><td>XL (detached 5+)</td><td class="price">£174</td></tr>
               <tr><td>Commercial and business premises (up to two storeys)</td><td class="price">£5 per metre</td></tr>
             </tbody>
           </table>
@@ -556,7 +556,7 @@ gutter_body = f'''    <section class="page-hero">
 
 write("gutter-cleaning/index.html", page(
     "Gutter vac cleaning Sheffield | Dimension Exterior Cleaning",
-    "Cleared gutters and downpipes. Clear band prices from £49. No hidden call-for-a-quote games on a standard house.",
+    "Cleared gutters and downpipes. Clear band prices from £54. No hidden call-for-a-quote games on a standard house.",
     "gutter-cleaning",
     gutter_body,
     schema=True,
@@ -791,10 +791,10 @@ care_body = f'''    <section class="page-hero">
           <table class="pricing">
             <thead><tr><th>Home</th><th>Top-up on the day</th><th>One-off to care plan</th></tr></thead>
             <tbody>
-              <tr><td>Small</td><td class="price">+£20</td><td>£49 to £69</td></tr>
-              <tr class="highlight"><td>Medium</td><td class="price">+£32</td><td>£79 to £111</td></tr>
-              <tr><td>Large</td><td class="price">+£48</td><td>£119 to £167</td></tr>
-              <tr><td>XL</td><td class="price">+£68</td><td>£169 to £237</td></tr>
+              <tr><td>Small</td><td class="price">+£15</td><td>£54 to £69</td></tr>
+              <tr class="highlight"><td>Medium</td><td class="price">+£27</td><td>£84 to £111</td></tr>
+              <tr><td>Large</td><td class="price">+£43</td><td>£124 to £167</td></tr>
+              <tr><td>XL</td><td class="price">+£63</td><td>£174 to £237</td></tr>
             </tbody>
           </table>
         </div>
@@ -1170,7 +1170,7 @@ DOWNPIPE_OPTIONS = "\n".join(f'                    <option value="{n}">{n}</opti
 quote_body = f'''    <section class="page-hero">
       <div class="container">
         <h1>Get a guide price</h1>
-        <p class="sub">Pick your services and house size for an instant guide estimate. We confirm the final price before work starts.</p>
+        <p class="sub">Pick your services for an instant guide estimate. We confirm the final price before work starts.</p>
       </div>
     </section>
 
@@ -1197,6 +1197,26 @@ quote_body = f'''    <section class="page-hero">
               <p class="muted" style="margin-bottom:0.75rem">Select at least one. Gutter one-off and care plan cannot both be selected.</p>
 
               <label class="quote-check"><input type="checkbox" id="svc-gutter" name="svc_gutter"> Gutter clean (one-off)</label>
+              <div id="gutter-property-wrap" class="quote-nested" hidden>
+                <p class="quote-helper" style="margin-top:0">Property type</p>
+                <div class="house-size-grid" role="radiogroup" aria-label="Property type">
+                  <label class="quote-radio"><input type="radio" name="gutter_property_type" id="gutter-type-residential" value="residential" checked> Residential</label>
+                  <label class="quote-radio"><input type="radio" name="gutter_property_type" id="gutter-type-commercial" value="commercial"> Commercial</label>
+                </div>
+                <div id="commercial-gutter-wrap" hidden>
+                  <p class="quote-helper" style="margin-top:0.75rem">Height</p>
+                  <div class="house-size-grid" role="radiogroup" aria-label="Commercial building height">
+                    <label class="quote-radio"><input type="radio" name="gutter_commercial_height" id="gutter-height-up-to-two" value="up_to_two" checked> Up to two storeys</label>
+                    <label class="quote-radio"><input type="radio" name="gutter_commercial_height" id="gutter-height-over-two" value="over_two"> Over two storeys</label>
+                  </div>
+                  <div class="m2-row" style="margin-left:0">
+                    <label for="gutter-metres">Gutter length (metres)</label>
+                    <input type="number" id="gutter-metres" name="gutter_metres" min="1" step="1" inputmode="numeric" placeholder="Optional">
+                  </div>
+                  <p class="quote-helper">Rough total length is fine, we'll confirm on site.</p>
+                  <p class="quote-helper" id="commercial-gutter-min-note">Minimum charge £250</p>
+                </div>
+              </div>
 
               <label class="quote-check"><input type="checkbox" id="svc-care" name="svc_care"> Care plan (annual): two gutter visits, 15% off other work</label>
               <div id="gutter-addons" class="quote-nested" hidden>
@@ -1319,7 +1339,7 @@ write("get-a-quote/index.html", page(
     schema=True,
     canonical="/get-a-quote/",
     crumb="Get a quote",
-    extra_scripts='  <script src="/assets/js/quote-builder.js?v=px1" defer></script>\n',
+    extra_scripts='  <script src="/assets/js/quote-builder.js?v=commercial1" defer></script>\n',
 ))
 
 # —— PRIVACY ——
@@ -1392,18 +1412,18 @@ write("reviews/index.html", page(
 # Season is chosen by SEASON near the top of this file. Only these blocks swap.
 GUTTER_ROUND_SEASONAL = {
     "autumn": {
-        "meta": "Gutters vacuum cleared before the winter rain. Downpipes checked and cleared, before and after photos, 30-day overflow guarantee. From £49.",
+        "meta": "Gutters vacuum cleared before the winter rain. Downpipes checked and cleared, before and after photos, 30-day overflow guarantee. From £54.",
         "headline": "Gutters cleared before the winter rain.",
-        "subhead": "I'm booking the autumn gutter round now. Full run vacuumed, downpipes checked and cleared, before and after photos sent to you, and a 30-day overflow guarantee. From £49.",
+        "subhead": "I'm booking the autumn gutter round now. Full run vacuumed, downpipes checked and cleared, before and after photos sent to you, and a 30-day overflow guarantee. From £54.",
         "problem_intro": "Leaves come down, land in the gutter and sit on top of the moss and grit that's already there. A few weeks of rain turns it into sludge that blocks the outlet. Then the first proper winter downpour has nowhere to go but over the edge and down your wall.",
         "round_line": "I'm booking the autumn round in S2, S8, S9, S10, S13 and S20, plus Aston and Mosborough, now. Book before it fills and you're on the next run.",
         "cta_heading": "Get them done before the winter rain.",
         "cta_line": "Tell me your house size and postcode and you'll get a guide price straight away. I'll confirm your slot on the autumn round.",
     },
     "spring": {
-        "meta": "Clear the winter build-up out of your gutters before spring growth takes hold. Downpipes checked and cleared, before and after photos, 30-day overflow guarantee. From £49.",
+        "meta": "Clear the winter build-up out of your gutters before spring growth takes hold. Downpipes checked and cleared, before and after photos, 30-day overflow guarantee. From £54.",
         "headline": "Clear the winter build-up before spring growth takes hold.",
-        "subhead": "I'm booking the spring gutter round now. Moss, roof grit and seedlings vacuumed out, downpipes checked and cleared, before and after photos sent to you, and a 30-day overflow guarantee. From £49.",
+        "subhead": "I'm booking the spring gutter round now. Moss, roof grit and seedlings vacuumed out, downpipes checked and cleared, before and after photos sent to you, and a 30-day overflow guarantee. From £54.",
         "problem_intro": "Over winter, gutters fill with moss off the roof, roof grit and whatever leaves were left. By spring there are seedlings and weeds growing in it. Once something has rooted in, it holds water and blocks the outlets, and the summer storms find the weak spot.",
         "round_line": "I'm booking the spring round in S2, S8, S9, S10, S13 and S20, plus Aston and Mosborough, now. Book before it fills and you're on the next run, with the winter muck out before the growing season.",
         "cta_heading": "Get the winter build-up out before it takes root.",
@@ -1465,10 +1485,10 @@ gutter_round_body = f'''    <section class="page-hero">
           <table class="pricing">
             <thead><tr><th>Home</th><th>One-off clean</th></tr></thead>
             <tbody>
-              <tr><td>Small (terrace 1-2 bed)</td><td class="price">£49</td></tr>
-              <tr class="highlight"><td>Medium (semi 2-3 bed)</td><td class="price">£79</td></tr>
-              <tr><td>Large (detached 3-4)</td><td class="price">£119</td></tr>
-              <tr><td>XL (detached 5+)</td><td class="price">£169</td></tr>
+              <tr><td>Small (terrace 1-2 bed)</td><td class="price">£54</td></tr>
+              <tr class="highlight"><td>Medium (semi 2-3 bed)</td><td class="price">£84</td></tr>
+              <tr><td>Large (detached 3-4)</td><td class="price">£124</td></tr>
+              <tr><td>XL (detached 5+)</td><td class="price">£174</td></tr>
             </tbody>
           </table>
         </div>
@@ -1496,10 +1516,10 @@ gutter_round_body = f'''    <section class="page-hero">
           <table class="pricing">
             <thead><tr><th>Home</th><th>Top-up on the day</th><th>One-off to care plan</th></tr></thead>
             <tbody>
-              <tr><td>Small</td><td class="price">+£20</td><td>£49 to £69</td></tr>
-              <tr class="highlight"><td>Medium</td><td class="price">+£32</td><td>£79 to £111</td></tr>
-              <tr><td>Large</td><td class="price">+£48</td><td>£119 to £167</td></tr>
-              <tr><td>XL</td><td class="price">+£68</td><td>£169 to £237</td></tr>
+              <tr><td>Small</td><td class="price">+£15</td><td>£54 to £69</td></tr>
+              <tr class="highlight"><td>Medium</td><td class="price">+£27</td><td>£84 to £111</td></tr>
+              <tr><td>Large</td><td class="price">+£43</td><td>£124 to £167</td></tr>
+              <tr><td>XL</td><td class="price">+£63</td><td>£174 to £237</td></tr>
             </tbody>
           </table>
         </div>

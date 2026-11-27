@@ -115,7 +115,7 @@
     <section class="page-hero">
       <div class="container">
         <h1>Get a guide price</h1>
-        <p class="sub">Pick your services and house size for an instant guide estimate. We confirm the final price before work starts.</p>
+        <p class="sub">Pick your services for an instant guide estimate. We confirm the final price before work starts.</p>
       </div>
     </section>
 
@@ -142,6 +142,26 @@
               <p class="muted" style="margin-bottom:0.75rem">Select at least one. Gutter one-off and care plan cannot both be selected.</p>
 
               <label class="quote-check"><input type="checkbox" id="svc-gutter" name="svc_gutter"> Gutter clean (one-off)</label>
+              <div id="gutter-property-wrap" class="quote-nested" hidden>
+                <p class="quote-helper" style="margin-top:0">Property type</p>
+                <div class="house-size-grid" role="radiogroup" aria-label="Property type">
+                  <label class="quote-radio"><input type="radio" name="gutter_property_type" id="gutter-type-residential" value="residential" checked> Residential</label>
+                  <label class="quote-radio"><input type="radio" name="gutter_property_type" id="gutter-type-commercial" value="commercial"> Commercial</label>
+                </div>
+                <div id="commercial-gutter-wrap" hidden>
+                  <p class="quote-helper" style="margin-top:0.75rem">Height</p>
+                  <div class="house-size-grid" role="radiogroup" aria-label="Commercial building height">
+                    <label class="quote-radio"><input type="radio" name="gutter_commercial_height" id="gutter-height-up-to-two" value="up_to_two" checked> Up to two storeys</label>
+                    <label class="quote-radio"><input type="radio" name="gutter_commercial_height" id="gutter-height-over-two" value="over_two"> Over two storeys</label>
+                  </div>
+                  <div class="m2-row" style="margin-left:0">
+                    <label for="gutter-metres">Gutter length (metres)</label>
+                    <input type="number" id="gutter-metres" name="gutter_metres" min="1" step="1" inputmode="numeric" placeholder="Optional">
+                  </div>
+                  <p class="quote-helper">Rough total length is fine, we'll confirm on site.</p>
+                  <p class="quote-helper" id="commercial-gutter-min-note">Minimum charge £250</p>
+                </div>
+              </div>
 
               <label class="quote-check"><input type="checkbox" id="svc-care" name="svc_care"> Care plan (annual): two gutter visits, 15% off other work</label>
               <div id="gutter-addons" class="quote-nested" hidden>
@@ -370,7 +390,7 @@
   else boot();
 })();
   </script>
-  <script src="/assets/js/quote-builder.js?v=px1" defer></script>
+  <script src="/assets/js/quote-builder.js?v=commercial1" defer></script>
   <script data-goatcounter="https://dimensioncleaning.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
