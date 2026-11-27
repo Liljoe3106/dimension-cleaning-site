@@ -433,6 +433,7 @@ home_body = f'''    <section class="page-hero">
           {gallery_category(
             "Roof & softwash",
             [
+              gallery_photo("roof-ba-stacked", "Roof clean - before and after", "Roof clean before and after, Dimension Exterior Cleaning", 1200, 1200),
               gallery_photo("roof-scrape", "Roof scrape", "Moss scrape on a terracotta roof", 1200, 1600),
               gallery_photo("roof-softwash", "Roof softwash", "Softwash foam on a pantile roof", 1200, 1600),
               gallery_photo("render-before-after", "Render - before and after", "Rendered wall before and after softwash cleaning", 1200, 1200),
@@ -711,6 +712,7 @@ roof_body = f'''    <section class="page-hero">
         <h2>Proof</h2>
         <p class="muted mb-2">Moss scrape, softwash, render and conservatory on real jobs.</p>
         {gallery_slider([
+          gallery_photo("roof-ba-stacked", "Roof clean - before and after", "Roof clean before and after, Dimension Exterior Cleaning", 1200, 1200),
           gallery_photo("roof-scrape", "Roof scrape", "Moss scrape on a terracotta roof", 1200, 1600),
           gallery_photo("roof-softwash", "Roof softwash", "Softwash foam on a pantile roof", 1200, 1600),
           gallery_photo("render-before-after", "Render - before and after", "Rendered wall before and after softwash cleaning", 1200, 1200),
