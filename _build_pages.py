@@ -1093,7 +1093,7 @@ about_body = f'''    <section class="page-hero">
 
 write("about/index.html", page(
     "About us | Dimension Exterior Cleaning",
-    "Local exterior cleaning in Sheffield. Gutters first. Clear prices. Roof softwash done the right way.",
+    "Local gutter and exterior cleaning in Sheffield, done properly.",
     "about",
     about_body,
     schema=True,
