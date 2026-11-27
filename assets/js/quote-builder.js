@@ -11,7 +11,6 @@
   var WINDOWS = { small: 20, medium: 25, large: 35, xl: 55 };
 
   var WASH_FLOOR = 200;
-  var SEAL_FLOOR = 200;
   var ROOF_RATE = 12;
   var ROOF_FLOOR = 500;
   var COMMERCIAL_GUTTER_RATE = 5;
@@ -319,10 +318,8 @@
         push({ label: 'Seal (after wash)', amount: 0, display: 'measure on site', measure: true });
       } else {
         var sealRaw = sealM2 * 5;
-        var sealFloored = Math.max(sealRaw, SEAL_FLOOR);
-        var sealDisc = applyCare(sealFloored, careOn);
+        var sealDisc = applyCare(sealRaw, careOn);
         var sealLabel = 'Seal (' + sealM2 + ' m²)';
-        if (sealFloored > sealRaw) sealLabel += ' (min £200 applied)';
         push({
           label: sealLabel,
           amount: sealDisc.post,

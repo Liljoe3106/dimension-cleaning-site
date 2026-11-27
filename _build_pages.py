@@ -720,7 +720,7 @@ drive_body = f'''    <section class="page-hero">
         </div>
         <p class="muted mt-1">Re-grout price includes cleaning the patio first.</p>
         <div class="prose">
-          <p><strong>Pressure washing / drive &amp; patio wash:</strong> from £3/m² (patio, tarmac, concrete, resin) or £5/m² (block paving + resand), <strong>£200 minimum charge</strong>. Drive + patio on the same visit share one £200 minimum. Seal is separate at £5/m² with its own £200 minimum. We seal once joints are dry, usually 24 to 48 hours later. Block + seal = £9/m².</p>
+          <p><strong>Pressure washing / drive &amp; patio wash:</strong> from £3/m² (patio, tarmac, concrete, resin) or £5/m² (block paving + resand), <strong>£200 minimum charge</strong>. Drive + patio on the same visit share one £200 minimum. Seal is separate at £5/m², with no separate minimum. We seal once joints are dry, usually 24 to 48 hours later. Block + seal = £9/m².</p>
           <p class="mt-2">Care plan: <strong>15% off</strong> wash and seal.</p>
         </div>
       </div>
@@ -1297,7 +1297,7 @@ quote_body = f'''    <section class="page-hero">
               </div>
 
               <h3>Drive / patio</h3>
-              <p class="quote-helper">Add m² for a guide price. Leave blank if you want us to measure on site. Pressure washing / wash has a £200 minimum charge (drive + patio same visit share one minimum). Seal has its own £200 minimum.</p>
+              <p class="quote-helper">Add m² for a guide price. Leave blank if you want us to measure on site. Pressure washing / wash has a £200 minimum charge (drive + patio same visit share one minimum). Seal is £5 per m² with no separate minimum.</p>
 
               <div class="drive-surface">
                 <label class="quote-check"><input type="checkbox" id="drive-block"> Block paving + resand (£5/m²)</label>
@@ -1401,7 +1401,7 @@ write("get-a-quote/index.html", page(
     schema=True,
     canonical="/get-a-quote/",
     crumb="Get a quote",
-    extra_scripts='  <script src="/assets/js/quote-builder.js?v=commsize1" defer></script>\n',
+    extra_scripts='  <script src="/assets/js/quote-builder.js?v=sealnomin1" defer></script>\n',
 ))
 
 # —— PRIVACY ——
