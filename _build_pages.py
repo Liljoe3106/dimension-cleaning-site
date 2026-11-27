@@ -405,7 +405,7 @@ home_body = f'''    <section class="page-hero">
         <p class="sub">Clear prices, photo proof and satisfaction guarantee.</p>
         <div class="hero-ctas">
           <a class="btn btn-primary btn-lg" href="/gutter-round/">Book a gutter clean from £54</a>
-          <a class="btn btn-secondary btn-lg" href="/care-plan/">See the care plan from £69/year</a>
+          <a class="btn btn-secondary btn-lg" href="/care-plan/">See the care plan from £76/year</a>
           <a class="btn btn-secondary btn-lg" href="/get-a-quote/">Get a guide price</a>
         </div>
         <p class="hero-note"><a href="/gutter-round/">{HOME_ROUND_LINE[SEASON]}</a></p>
@@ -448,7 +448,7 @@ home_body = f'''    <section class="page-hero">
       <div class="container">
         <div class="callout">
           <h2>Pay once. Two gutter visits. 15% off other services.</h2>
-          <p>From <span class="price-em">£69 a year.</span> Most semis £111.</p>
+          <p>From <span class="price-em">£76 a year.</span> Most semis £118.</p>
           <a class="btn btn-primary" href="/care-plan/">See how the care plan works →</a>
         </div>
       </div>
@@ -655,10 +655,10 @@ soffits_body = f'''    <section class="page-hero">
               <tr><th>Home</th><th>Fascias only</th><th>Fascias + windows</th></tr>
             </thead>
             <tbody>
-              <tr><td>Small</td><td class="price">£49</td><td class="price">£69</td></tr>
-              <tr class="highlight"><td>Medium</td><td class="price">£79</td><td class="price">£104</td></tr>
-              <tr><td>Large</td><td class="price">£119</td><td class="price">£154</td></tr>
-              <tr><td>XL</td><td class="price">£169</td><td class="price">£224</td></tr>
+              <tr><td>Small</td><td class="price">£54</td><td class="price">£74</td></tr>
+              <tr class="highlight"><td>Medium</td><td class="price">£84</td><td class="price">£109</td></tr>
+              <tr><td>Large</td><td class="price">£124</td><td class="price">£159</td></tr>
+              <tr><td>XL</td><td class="price">£174</td><td class="price">£229</td></tr>
             </tbody>
           </table>
         </div>
@@ -677,7 +677,7 @@ soffits_body = f'''    <section class="page-hero">
 
 write("soffits-fascias/index.html", page(
     "Soffits & fascias Sheffield | Dimension Exterior Cleaning",
-    "Usually done with the gutters. Optional windows on the same visit. Guide prices from £49.",
+    "Usually done with the gutters. Optional windows on the same visit. Guide prices from £54.",
     "soffits-fascias",
     soffits_body,
     schema=True,
@@ -812,7 +812,7 @@ write("roof-cleaning/index.html", page(
 care_body = f'''    <section class="page-hero">
       <div class="container">
         <h1>Pay once. Two gutter visits. 15% off other services.</h1>
-        <p class="sub">Annual care plan timed around spring growth and autumn leaf fall. From <strong>£69 a year</strong>. Most semis £111.</p>
+        <p class="sub">Annual care plan timed around spring growth and autumn leaf fall. From <strong>£76 a year</strong>. Most semis £118.</p>
         <p class="mt-2"><a class="btn btn-primary btn-lg" href="/contact/">Ask to join the care plan</a></p>
       </div>
     </section>
@@ -838,10 +838,10 @@ care_body = f'''    <section class="page-hero">
           <table class="pricing">
             <thead><tr><th>Home</th><th>Care plan / year</th></tr></thead>
             <tbody>
-              <tr><td>Small</td><td class="price">£69</td></tr>
-              <tr class="highlight"><td>Medium</td><td class="price">£111</td></tr>
-              <tr><td>Large</td><td class="price">£167</td></tr>
-              <tr><td>XL</td><td class="price">£237</td></tr>
+              <tr><td>Small</td><td class="price">£76</td></tr>
+              <tr class="highlight"><td>Medium</td><td class="price">£118</td></tr>
+              <tr><td>Large</td><td class="price">£174</td></tr>
+              <tr><td>XL</td><td class="price">£244</td></tr>
             </tbody>
           </table>
         </div>
@@ -859,10 +859,10 @@ care_body = f'''    <section class="page-hero">
           <table class="pricing">
             <thead><tr><th>Home</th><th>Top-up on the day</th><th>One-off to care plan</th></tr></thead>
             <tbody>
-              <tr><td>Small</td><td class="price">+£15</td><td>£54 to £69</td></tr>
-              <tr class="highlight"><td>Medium</td><td class="price">+£27</td><td>£84 to £111</td></tr>
-              <tr><td>Large</td><td class="price">+£43</td><td>£124 to £167</td></tr>
-              <tr><td>XL</td><td class="price">+£63</td><td>£174 to £237</td></tr>
+              <tr><td>Small</td><td class="price">+£22</td><td>£54 to £76</td></tr>
+              <tr class="highlight"><td>Medium</td><td class="price">+£34</td><td>£84 to £118</td></tr>
+              <tr><td>Large</td><td class="price">+£50</td><td>£124 to £174</td></tr>
+              <tr><td>XL</td><td class="price">+£70</td><td>£174 to £244</td></tr>
             </tbody>
           </table>
         </div>
@@ -887,7 +887,7 @@ care_body = f'''    <section class="page-hero">
 
 write("care-plan/index.html", page(
     "Care plan Sheffield | Dimension Exterior Cleaning",
-    "Pay once. Two gutter visits. 15% off other services. From £69 a year, most semis £111.",
+    "Pay once. Two gutter visits. 15% off other services. From £76 a year, most semis £118.",
     "care-plan",
     care_body,
     schema=True,
@@ -1118,7 +1118,7 @@ faq_items = [
     ("Do you cover my area?",
      'Sheffield and nearby South Yorks / North Notts. See <a href="/areas/">Areas</a>, or send your postcode if you are unsure.'),
     ("What’s the care plan again?",
-     "Pay once for the year. Two gutter visits. 15% off other exterior work while you’re on the plan. From £69 a year for small homes. Medium homes usually £111. The conservatory or extension add-on (+£15) applies at the same price, added to the yearly price."),
+     "Pay once for the year. Two gutter visits. 15% off other exterior work while you’re on the plan. From £76 a year for small homes. Medium homes usually £118. The conservatory or extension add-on (+£15) applies at the same price, added to the yearly price."),
 ]
 faq_html = "\n".join(
     f'        <div class="faq-item">\n          <h3>{q}</h3>\n          <p>{a}</p>\n        </div>'
@@ -1407,7 +1407,7 @@ write("get-a-quote/index.html", page(
     schema=True,
     canonical="/get-a-quote/",
     crumb="Get a quote",
-    extra_scripts='  <script src="/assets/js/quote-builder.js?v=commercial1" defer></script>\n',
+    extra_scripts='  <script src="/assets/js/quote-builder.js?v=care2" defer></script>\n',
 ))
 
 # —— PRIVACY ——
@@ -1584,10 +1584,10 @@ gutter_round_body = f'''    <section class="page-hero">
           <table class="pricing">
             <thead><tr><th>Home</th><th>Top-up on the day</th><th>One-off to care plan</th></tr></thead>
             <tbody>
-              <tr><td>Small</td><td class="price">+£15</td><td>£54 to £69</td></tr>
-              <tr class="highlight"><td>Medium</td><td class="price">+£27</td><td>£84 to £111</td></tr>
-              <tr><td>Large</td><td class="price">+£43</td><td>£124 to £167</td></tr>
-              <tr><td>XL</td><td class="price">+£63</td><td>£174 to £237</td></tr>
+              <tr><td>Small</td><td class="price">+£22</td><td>£54 to £76</td></tr>
+              <tr class="highlight"><td>Medium</td><td class="price">+£34</td><td>£84 to £118</td></tr>
+              <tr><td>Large</td><td class="price">+£50</td><td>£124 to £174</td></tr>
+              <tr><td>XL</td><td class="price">+£70</td><td>£174 to £244</td></tr>
             </tbody>
           </table>
         </div>

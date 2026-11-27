@@ -5,9 +5,9 @@
   var JOE_EMAIL = 'joe@dimensioncleaning.co.uk';
 
   var GUTTER = { small: 54, medium: 84, large: 124, xl: 174 };
-  var CARE = { small: 69, medium: 111, large: 167, xl: 237 };
-  var FASCIAS = { small: 49, medium: 79, large: 119, xl: 169 };
-  var FASCIAS_WIN = { small: 69, medium: 104, large: 154, xl: 224 };
+  var CARE = { small: 76, medium: 118, large: 174, xl: 244 };
+  var FASCIAS = { small: 54, medium: 84, large: 124, xl: 174 };
+  var FASCIAS_WIN = { small: 74, medium: 109, large: 159, xl: 229 };
   var WINDOWS = { small: 20, medium: 25, large: 35, xl: 55 };
 
   var WASH_FLOOR = 200;
