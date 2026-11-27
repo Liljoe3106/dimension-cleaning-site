@@ -1062,7 +1062,7 @@ for town in AREA_TOWNS:
 # —— ABOUT ——
 about_body = f'''    <section class="page-hero">
       <div class="container">
-        <h1>Local exterior cleaning. One proper job day at a time.</h1>
+        <h1>Local gutter and exterior cleaning in Sheffield, done properly.</h1>
       </div>
     </section>
 
