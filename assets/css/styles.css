@@ -919,6 +919,130 @@ table.pricing .highlight .price { color: var(--teal-dark); }
   }
 }
 
+/* Compact before/after grid (replaces per-category sliders) */
+.gallery-browse {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.gallery-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+.gallery-chip {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.2;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--gray-100);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--navy);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.gallery-chip:hover {
+  border-color: var(--teal);
+  color: var(--teal-dark);
+}
+.gallery-chip.is-active,
+.gallery-chip[aria-pressed="true"] {
+  background: var(--navy);
+  color: var(--white);
+  border-color: var(--navy);
+}
+.gallery-chip.is-active:hover,
+.gallery-chip[aria-pressed="true"]:hover {
+  background: var(--navy-dark);
+  color: var(--white);
+  border-color: var(--navy-dark);
+}
+.gallery-chip:focus-visible {
+  outline: 3px solid rgba(13, 148, 136, 0.45);
+  outline-offset: 2px;
+}
+.gallery-browse__meta {
+  margin: 0;
+}
+.gallery-browse__meta a {
+  font-weight: 600;
+  text-decoration: none;
+}
+.gallery-browse__meta a:hover {
+  text-decoration: underline;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  align-items: start;
+}
+@media (min-width: 641px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+}
+@media (min-width: 900px) {
+  .gallery-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.gallery-grid__item {
+  min-width: 0;
+}
+.gallery-grid .gallery-card {
+  height: 100%;
+  margin: 0;
+}
+.gallery-grid .gallery-card--photo figcaption {
+  padding: 0.4rem 0.55rem 0.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.3;
+}
+@media (max-width: 640px) {
+  .gallery-grid .gallery-card--photo figcaption {
+    padding: 0.35rem 0.4rem 0.45rem;
+    font-size: 0.75rem;
+  }
+}
+/* Keep every cover square, including before/after pairs (stacked so each half stays readable at small sizes).
+   Higher specificity so later .gallery-card--pair .gallery-zoom .pair-grid (2-col) does not win. */
+.gallery-grid .gallery-card--pair .gallery-zoom .pair-grid,
+.gallery-grid .gallery-card--pair .pair-grid {
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  gap: 2px;
+}
+.gallery-grid .gallery-card--pair .gallery-zoom .pair-grid picture,
+.gallery-grid .gallery-card--pair .gallery-zoom .pair-grid img,
+.gallery-grid .gallery-card--pair .pair-grid picture,
+.gallery-grid .gallery-card--pair .pair-grid img {
+  aspect-ratio: auto;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-height: none;
+  object-fit: cover;
+  object-position: center;
+}
+.gallery-grid .gallery-card--pair-tall .pair-grid picture,
+.gallery-grid .gallery-card--pair-tall .pair-grid img {
+  aspect-ratio: auto;
+}
+.gallery-more {
+  align-self: center;
+  margin-top: 0.35rem;
+  min-width: 12rem;
+}
+.gallery-more[hidden] {
+  display: none;
+}
+
 /* Labeled proof figure (single prominent image) */
 .proof-figure {
   margin: 0 auto;

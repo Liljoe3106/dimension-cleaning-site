@@ -427,8 +427,124 @@
     });
   }
 
+
+  // Compact before/after grid: category chips + Show more
+  function initGalleryBrowse() {
+    var desktopMq = window.matchMedia('(min-width: 641px)');
+
+    document.querySelectorAll('[data-gallery-browse]').forEach(function (root) {
+      var items = Array.prototype.slice.call(root.querySelectorAll('.gallery-grid__item'));
+      var chips = Array.prototype.slice.call(root.querySelectorAll('.gallery-chip'));
+      var moreBtn = root.querySelector('[data-gallery-more]');
+      var meta = root.querySelector('[data-gallery-meta]');
+      if (!items.length) return;
+
+      var filter = 'all';
+      var expanded = false;
+
+      function limit() {
+        var desktop = desktopMq.matches;
+        var raw = desktop ? root.getAttribute('data-visible-desktop') : root.getAttribute('data-visible-mobile');
+        var n = parseInt(raw, 10);
+        return n > 0 ? n : (desktop ? 8 : 6);
+      }
+
+      function matchedItems() {
+        if (filter === 'all') return items.slice();
+        return items.filter(function (item) {
+          return item.getAttribute('data-category') === filter;
+        });
+      }
+
+      function updateMeta() {
+        if (!meta) return;
+        var active = chips.filter(function (c) {
+          return c.getAttribute('data-filter') === filter;
+        })[0];
+        if (!active || filter === 'all') {
+          meta.hidden = true;
+          meta.innerHTML = '';
+          return;
+        }
+        var blurb = active.getAttribute('data-blurb') || '';
+        var href = active.getAttribute('data-href') || '';
+        var link = active.getAttribute('data-link') || '';
+        var bits = [];
+        if (blurb) bits.push(blurb);
+        if (href && link) {
+          var a = document.createElement('a');
+          a.href = href;
+          a.textContent = link;
+          bits.push(a.outerHTML);
+        }
+        if (!bits.length) {
+          meta.hidden = true;
+          meta.innerHTML = '';
+          return;
+        }
+        meta.innerHTML = bits.join(' · ');
+        meta.hidden = false;
+      }
+
+      function apply() {
+        var matched = matchedItems();
+        var max = expanded ? matched.length : limit();
+        items.forEach(function (item) {
+          item.hidden = true;
+        });
+        matched.forEach(function (item, i) {
+          item.hidden = i >= max;
+        });
+        if (moreBtn) {
+          var needs = matched.length > limit();
+          moreBtn.hidden = !needs;
+          moreBtn.textContent = expanded ? 'Show fewer photos' : 'Show more photos';
+        }
+        updateMeta();
+      }
+
+      chips.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          filter = chip.getAttribute('data-filter') || 'all';
+          expanded = false;
+          chips.forEach(function (c) {
+            var on = c === chip;
+            c.classList.toggle('is-active', on);
+            c.setAttribute('aria-pressed', on ? 'true' : 'false');
+          });
+          apply();
+        });
+      });
+
+      if (moreBtn) {
+        moreBtn.addEventListener('click', function () {
+          expanded = !expanded;
+          apply();
+          if (!expanded) {
+            root.scrollIntoView({ block: 'nearest' });
+          }
+        });
+      }
+
+      var resizeTimer = null;
+      function onResize() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(apply, 120);
+      }
+      window.addEventListener('resize', onResize);
+      if (typeof desktopMq.addEventListener === 'function') {
+        desktopMq.addEventListener('change', apply);
+      } else if (typeof desktopMq.addListener === 'function') {
+        desktopMq.addListener(apply);
+      }
+
+      apply();
+    });
+  }
+
   function boot() {
     initGallerySliders();
+    initGalleryBrowse();
     initGalleryLightbox();
   }
 
